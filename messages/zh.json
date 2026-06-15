@@ -276,5 +276,59 @@
   },
   "language": {
     "switchLabel": "语言"
+  },
+  "events": {
+    "pageTitle": "事件",
+    "pageDesc": "Webhook 投递历史。",
+    "filters": {
+      "status": "状态",
+      "statusAll": "全部状态",
+      "destinationId": "目标",
+      "destinationPlaceholder": "按目标ID筛选...",
+      "from": "从",
+      "to": "至",
+      "clearFilters": "清除筛选"
+    },
+    "table": {
+      "eventId": "事件ID",
+      "destination": "目标",
+      "status": "状态",
+      "attempts": "尝试次数",
+      "received": "接收时间",
+      "delivered": "投递时间",
+      "actions": "操作",
+      "view": "查看",
+      "replay": "重放",
+      "empty": "未找到事件。"
+    },
+    "replay": {
+      "button": "重新处理事件",
+      "confirmTitle": "重新处理事件？",
+      "confirmDesc": "事件将以重试计数器重置的状态返回处理队列。",
+      "confirmLabel": "重新处理"
+    },
+    "detail": {
+      "pageTitle": "事件",
+      "back": "返回事件列表",
+      "notFound": "未找到事件。",
+      "infoTitle": "事件信息",
+      "id": "ID",
+      "destination": "目标",
+      "status": "状态",
+      "idempotencyKey": "幂等键",
+      "attempts": "尝试次数",
+      "nextAttempt": "下次尝试",
+      "receivedAt": "接收时间",
+      "deliveredAt": "投递时间",
+      "payloadTitle": "载荷",
+      "logsTitle": "投递日志",
+      "logsMessage": "每次投递尝试的详细日志可在 Grafana/Loki 中查看。",
+      "openGrafana": "在 Grafana 中打开"
+    }
+  },
+  "pagination": {
+    "showing": "显示第 {from}–{to} 条，共 {total} 条",
+    "previous": "上一页",
+    "next": "下一页"
   }
 }

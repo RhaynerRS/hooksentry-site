@@ -276,5 +276,59 @@
   },
   "language": {
     "switchLabel": "Langue"
+  },
+  "events": {
+    "pageTitle": "Événements",
+    "pageDesc": "Historique de livraison des webhooks.",
+    "filters": {
+      "status": "Statut",
+      "statusAll": "Tous les statuts",
+      "destinationId": "Destination",
+      "destinationPlaceholder": "Filtrer par ID de destination...",
+      "from": "Du",
+      "to": "Au",
+      "clearFilters": "Effacer les filtres"
+    },
+    "table": {
+      "eventId": "ID d'événement",
+      "destination": "Destination",
+      "status": "Statut",
+      "attempts": "Tentatives",
+      "received": "Reçu le",
+      "delivered": "Livré le",
+      "actions": "Actions",
+      "view": "Voir",
+      "replay": "Rejouer",
+      "empty": "Aucun événement trouvé."
+    },
+    "replay": {
+      "button": "Retraiter l'événement",
+      "confirmTitle": "Retraiter l'événement ?",
+      "confirmDesc": "L'événement retournera dans la file de traitement avec le compteur de tentatives réinitialisé.",
+      "confirmLabel": "Retraiter"
+    },
+    "detail": {
+      "pageTitle": "Événement",
+      "back": "Retour aux événements",
+      "notFound": "Événement introuvable.",
+      "infoTitle": "Informations sur l'événement",
+      "id": "ID",
+      "destination": "Destination",
+      "status": "Statut",
+      "idempotencyKey": "Clé d'idempotence",
+      "attempts": "Tentatives",
+      "nextAttempt": "Prochaine tentative",
+      "receivedAt": "Reçu le",
+      "deliveredAt": "Livré le",
+      "payloadTitle": "Charge utile",
+      "logsTitle": "Journaux de livraison",
+      "logsMessage": "Les journaux détaillés de chaque tentative de livraison sont disponibles dans Grafana/Loki.",
+      "openGrafana": "Ouvrir dans Grafana"
+    }
+  },
+  "pagination": {
+    "showing": "{from}–{to} sur {total} résultats",
+    "previous": "Précédent",
+    "next": "Suivant"
   }
 }

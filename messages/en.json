@@ -276,5 +276,59 @@
   },
   "language": {
     "switchLabel": "Language"
+  },
+  "events": {
+    "pageTitle": "Events",
+    "pageDesc": "Webhook delivery history.",
+    "filters": {
+      "status": "Status",
+      "statusAll": "All statuses",
+      "destinationId": "Destination",
+      "destinationPlaceholder": "Filter by destination ID...",
+      "from": "From",
+      "to": "To",
+      "clearFilters": "Clear Filters"
+    },
+    "table": {
+      "eventId": "Event ID",
+      "destination": "Destination",
+      "status": "Status",
+      "attempts": "Attempts",
+      "received": "Received at",
+      "delivered": "Delivered at",
+      "actions": "Actions",
+      "view": "View",
+      "replay": "Replay",
+      "empty": "No events found."
+    },
+    "replay": {
+      "button": "Reprocess Event",
+      "confirmTitle": "Reprocess event?",
+      "confirmDesc": "The event will return to the processing queue with the retry counter reset.",
+      "confirmLabel": "Reprocess"
+    },
+    "detail": {
+      "pageTitle": "Event",
+      "back": "Back to Events",
+      "notFound": "Event not found.",
+      "infoTitle": "Event Information",
+      "id": "ID",
+      "destination": "Destination",
+      "status": "Status",
+      "idempotencyKey": "Idempotency Key",
+      "attempts": "Attempts",
+      "nextAttempt": "Next Attempt",
+      "receivedAt": "Received at",
+      "deliveredAt": "Delivered at",
+      "payloadTitle": "Payload",
+      "logsTitle": "Delivery Logs",
+      "logsMessage": "Detailed delivery attempt logs are available in Grafana/Loki.",
+      "openGrafana": "Open in Grafana"
+    }
+  },
+  "pagination": {
+    "showing": "Showing {from}–{to} of {total}",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

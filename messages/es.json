@@ -276,5 +276,59 @@
   },
   "language": {
     "switchLabel": "Idioma"
+  },
+  "events": {
+    "pageTitle": "Eventos",
+    "pageDesc": "Historial de entrega de webhooks.",
+    "filters": {
+      "status": "Estado",
+      "statusAll": "Todos los estados",
+      "destinationId": "Destino",
+      "destinationPlaceholder": "Filtrar por ID de destino...",
+      "from": "Desde",
+      "to": "Hasta",
+      "clearFilters": "Limpiar Filtros"
+    },
+    "table": {
+      "eventId": "ID del Evento",
+      "destination": "Destino",
+      "status": "Estado",
+      "attempts": "Intentos",
+      "received": "Recibido",
+      "delivered": "Entregado",
+      "actions": "Acciones",
+      "view": "Ver",
+      "replay": "Replay",
+      "empty": "No se encontraron eventos."
+    },
+    "replay": {
+      "button": "Reprocesar Evento",
+      "confirmTitle": "¿Reprocesar evento?",
+      "confirmDesc": "El evento volverá a la cola de procesamiento con el contador de reintentos en cero.",
+      "confirmLabel": "Reprocesar"
+    },
+    "detail": {
+      "pageTitle": "Evento",
+      "back": "Volver a Eventos",
+      "notFound": "Evento no encontrado.",
+      "infoTitle": "Información del Evento",
+      "id": "ID",
+      "destination": "Destino",
+      "status": "Estado",
+      "idempotencyKey": "Clave de Idempotencia",
+      "attempts": "Intentos",
+      "nextAttempt": "Próximo Intento",
+      "receivedAt": "Recibido",
+      "deliveredAt": "Entregado",
+      "payloadTitle": "Payload",
+      "logsTitle": "Logs de Entrega",
+      "logsMessage": "Los logs detallados de cada intento de entrega están disponibles en Grafana/Loki.",
+      "openGrafana": "Abrir en Grafana"
+    }
+  },
+  "pagination": {
+    "showing": "Mostrando {from}–{to} de {total}",
+    "previous": "Anterior",
+    "next": "Siguiente"
   }
 }

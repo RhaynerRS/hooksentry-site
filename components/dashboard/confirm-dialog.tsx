@@ -19,7 +19,8 @@ interface ConfirmDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   destructive?: boolean;
-  onConfirm: () => void;
+  loading?: boolean;
+  onConfirm: () => void | Promise<void>;
 }
 
 export function ConfirmDialog({
@@ -30,27 +31,39 @@ export function ConfirmDialog({
   confirmLabel,
   cancelLabel,
   destructive = false,
+  loading,
   onConfirm,
 }: ConfirmDialogProps) {
   const tc = useTranslations('common');
   const resolvedConfirm = confirmLabel ?? tc('confirm');
   const resolvedCancel = cancelLabel ?? tc('cancel');
+
+  const handleConfirm = () => {
+    if (loading !== undefined) {
+      onConfirm();
+    } else {
+      onConfirm();
+      onOpenChange(false);
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={loading === true ? () => {} : onOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={loading}>
             {resolvedCancel}
           </Button>
           <Button
             variant={destructive ? 'destructive' : 'default'}
-            onClick={() => { onConfirm(); onOpenChange(false); }}
+            onClick={handleConfirm}
+            disabled={loading}
           >
-            {resolvedConfirm}
+            {loading ? tc('saving') : resolvedConfirm}
           </Button>
         </DialogFooter>
       </DialogContent>

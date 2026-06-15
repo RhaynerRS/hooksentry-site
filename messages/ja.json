@@ -276,5 +276,59 @@
   },
   "language": {
     "switchLabel": "言語"
+  },
+  "events": {
+    "pageTitle": "イベント",
+    "pageDesc": "Webhookの配信履歴。",
+    "filters": {
+      "status": "ステータス",
+      "statusAll": "すべてのステータス",
+      "destinationId": "送信先",
+      "destinationPlaceholder": "送信先IDで絞り込み...",
+      "from": "開始日",
+      "to": "終了日",
+      "clearFilters": "フィルターをクリア"
+    },
+    "table": {
+      "eventId": "イベントID",
+      "destination": "送信先",
+      "status": "ステータス",
+      "attempts": "試行回数",
+      "received": "受信日時",
+      "delivered": "配信日時",
+      "actions": "操作",
+      "view": "詳細",
+      "replay": "再送",
+      "empty": "イベントが見つかりません。"
+    },
+    "replay": {
+      "button": "イベントを再処理",
+      "confirmTitle": "イベントを再処理しますか？",
+      "confirmDesc": "イベントは再試行カウンターをリセットして処理キューに戻ります。",
+      "confirmLabel": "再処理"
+    },
+    "detail": {
+      "pageTitle": "イベント",
+      "back": "イベント一覧に戻る",
+      "notFound": "イベントが見つかりません。",
+      "infoTitle": "イベント情報",
+      "id": "ID",
+      "destination": "送信先",
+      "status": "ステータス",
+      "idempotencyKey": "冪等性キー",
+      "attempts": "試行回数",
+      "nextAttempt": "次回試行",
+      "receivedAt": "受信日時",
+      "deliveredAt": "配信日時",
+      "payloadTitle": "ペイロード",
+      "logsTitle": "配信ログ",
+      "logsMessage": "各配信試行の詳細ログはGrafana/Lokiで確認できます。",
+      "openGrafana": "Grafanaで開く"
+    }
+  },
+  "pagination": {
+    "showing": "{total}件中 {from}–{to}件を表示",
+    "previous": "前へ",
+    "next": "次へ"
   }
 }

@@ -10,9 +10,10 @@ interface JsonViewerProps {
 export function JsonViewer({ value, className }: JsonViewerProps) {
   let formatted: string;
   try {
-    formatted = JSON.stringify(value, null, 2);
+    const parsed = typeof value === 'string' ? JSON.parse(value) : value;
+    formatted = JSON.stringify(parsed, null, 2);
   } catch {
-    formatted = String(value);
+    formatted = typeof value === 'string' ? value : String(value);
   }
 
   return (
