@@ -1,0 +1,136 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { useAuth } from '@/lib/auth/auth-context';
+import { AuthUser } from '@/lib/types/auth';
+import { Logo } from '@/components/logo';
+import { Breadcrumbs } from '@/components/dashboard/breadcrumbs';
+import { ColorModeSwitcher } from '@/components/color-mode-switcher';
+import {
+  LayoutDashboard, Webhook, Zap, Radio, Key, Users, Settings, LogOut, Menu,
+} from 'lucide-react';
+
+interface NavItem {
+  label: string;
+  href: string;
+  icon: React.ElementType;
+  adminOnly?: boolean;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  { label: 'Visão Geral',   href: '/dashboard',              icon: LayoutDashboard },
+  { label: 'Destinos',      href: '/dashboard/destinations',  icon: Webhook },
+  { label: 'Eventos',       href: '/dashboard/events',        icon: Zap },
+  { label: 'Senders',       href: '/dashboard/senders',       icon: Radio },
+  { label: 'API Keys',      href: '/dashboard/api-keys',      icon: Key },
+  { label: 'Usuários',      href: '/dashboard/users',         icon: Users, adminOnly: true },
+  { label: 'Configurações', href: '/dashboard/settings',      icon: Settings },
+];
+
+export function DashboardShell({
+  children,
+  user,
+}: {
+  children: React.ReactNode;
+  user: AuthUser | null;
+}) {
+  const pathname = usePathname();
+  const { logout } = useAuth();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const visibleItems = NAV_ITEMS.filter(
+    item => !item.adminOnly || user?.role === 'Admin',
+  );
+
+  const sidebar = (
+    <nav className="flex flex-col h-full">
+      <div className="px-4 py-6 border-b">
+        <Logo />
+      </div>
+      <ul className="flex-1 py-4 space-y-1 px-2">
+        {visibleItems.map(item => {
+          const isActive =
+            pathname === item.href ||
+            (item.href !== '/dashboard' && pathname.startsWith(item.href));
+          return (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                  isActive
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+                )}
+              >
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="border-t px-4 py-4">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium truncate">{user?.email}</p>
+            <p className="text-xs text-muted-foreground">{user?.role}</p>
+          </div>
+        </div>
+        <button
+          onClick={logout}
+          className="flex w-full items-center gap-2 text-sm text-muted-foreground hover:text-destructive transition-colors"
+        >
+          <LogOut className="h-4 w-4" />
+          Sair
+        </button>
+      </div>
+    </nav>
+  );
+
+  return (
+    <div className="flex h-screen overflow-hidden">
+      {/* Sidebar desktop */}
+      <aside className="hidden md:flex w-60 flex-shrink-0 border-r bg-background flex-col">
+        {sidebar}
+      </aside>
+
+      {/* Drawer mobile */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
+          <aside className="absolute left-0 top-0 bottom-0 w-60 bg-background border-r">
+            {sidebar}
+          </aside>
+        </div>
+      )}
+
+      {/* Conteúdo principal */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Topbar */}
+        <header className="h-14 border-b flex items-center px-4 gap-3 flex-shrink-0">
+          <button
+            className="md:hidden"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Abrir menu"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <Breadcrumbs />
+          <div className="ml-auto">
+            <ColorModeSwitcher />
+          </div>
+        </header>
+
+        {/* Área de conteúdo */}
+        <main className="flex-1 overflow-auto p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}

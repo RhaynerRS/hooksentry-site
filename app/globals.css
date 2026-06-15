@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --color-success: #22c55e;
+    --color-warning: #f97316;
+    --color-destructive: #ef4444;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;

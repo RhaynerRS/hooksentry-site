@@ -1,4 +1,4 @@
-import { api } from './client';
+import { api, ApiClientError } from './client';
 import type {
   Destination, CreateDestinationRequest, UpdateDestinationRequest,
   IngestTokenResponse, PaginatedResponse, PaginationParams,
@@ -10,8 +10,14 @@ export const destinationsApi = {
       `/destinations?Qt=${params?.pageSize ?? 20}&Pg=${params?.page ?? 1}&CpOrd=id&TpOrd=Desc`
     ),
 
-  get: (id: string) =>
-    api.get<Destination>(`/destinations/${id}`),
+  get: async (id: string) => {
+    const { items } = await api.get<PaginatedResponse<Destination>>(
+      `/destinations?Qt=200&Pg=1&CpOrd=id&TpOrd=Desc`
+    );
+    const dest = items.find(d => d.id === id);
+    if (!dest) throw new ApiClientError(404, 'Destino não encontrado');
+    return dest;
+  },
 
   create: (body: CreateDestinationRequest) =>
     api.post<Destination>('/destinations', body),
@@ -21,4 +27,7 @@ export const destinationsApi = {
 
   rotateIngestToken: (id: string) =>
     api.post<IngestTokenResponse>(`/destinations/${id}/ingest-token`),
+
+  purgeQueue: (id: string) =>
+    api.delete(`/queues/${id}`),
 };

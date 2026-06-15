@@ -32,7 +32,7 @@ export interface Destination {
 export interface CreateDestinationRequest {
   url: string;
   serverRateLimit?: number;
-  authType?: number | null;
+  authType?: AuthType | null;
   credentials?: Record<string, string> | null;
 }
 
@@ -40,8 +40,9 @@ export interface UpdateDestinationRequest {
   url?: string;
   serverRateLimit?: number;
   status?: 'Active' | 'Inactive';
-  authType?: number | null;
+  authType?: AuthType | null;
   credentials?: Record<string, string> | null;
+  removeAuth?: boolean;
 }
 
 export interface IngestTokenResponse {
