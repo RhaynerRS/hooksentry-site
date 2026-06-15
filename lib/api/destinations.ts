@@ -1,7 +1,7 @@
 import { api, ApiClientError } from './client';
 import type {
   Destination, CreateDestinationRequest, UpdateDestinationRequest,
-  IngestTokenResponse, PaginatedResponse, PaginationParams,
+  CreateDestinationResponse, IngestTokenResponse, PaginatedResponse, PaginationParams,
 } from './types';
 
 export const destinationsApi = {
@@ -20,7 +20,7 @@ export const destinationsApi = {
   },
 
   create: (body: CreateDestinationRequest) =>
-    api.post<Destination>('/destinations', body),
+    api.post<CreateDestinationResponse>('/destinations', body),
 
   update: (id: string, body: UpdateDestinationRequest) =>
     api.patch<Destination>(`/destinations/${id}`, body),

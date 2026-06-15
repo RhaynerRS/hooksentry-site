@@ -66,6 +66,7 @@ export default function NewDestinationPage() {
         authType: authType || null,
         credentials: authType ? creds : null,
       });
+      sessionStorage.setItem(`hs_new_token_${dest.id}`, dest.ingestToken);
       router.push(`/dashboard/destinations/${dest.id}`);
     } catch (err) {
       if (err instanceof ApiClientError) {

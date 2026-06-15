@@ -18,11 +18,18 @@ import Link from 'next/link';
 export default function DestinationDetailPage() {
   const { id } = useParams<{ id: string }>();
   const [dest, setDest] = useState<Destination | null>(null);
+  const [newToken, setNewToken] = useState<string | undefined>(undefined);
   const [senders, setSenders] = useState<Sender[]>([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
+    const stored = sessionStorage.getItem(`hs_new_token_${id}`);
+    if (stored) {
+      setNewToken(stored);
+      sessionStorage.removeItem(`hs_new_token_${id}`);
+    }
+
     Promise.all([
       destinationsApi.get(id).catch(() => null),
       sendersApi.listByDestination(id, { pageSize: 50 }).catch(() => ({ items: [] as Sender[] })),
@@ -71,7 +78,7 @@ export default function DestinationDetailPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <DestinationInfoCard destination={dest} onUpdated={setDest} />
-        <IngestTokenCard destinationId={dest.id} />
+        <IngestTokenCard destinationId={dest.id} initialToken={newToken ?? undefined} />
         <CircuitBreakerCard destination={dest} />
       </div>
 

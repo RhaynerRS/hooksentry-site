@@ -7,9 +7,9 @@ import { SecretDisplay } from '@/components/dashboard/secret-display';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle } from 'lucide-react';
 
-export function IngestTokenCard({ destinationId }: { destinationId: string }) {
-  const [step, setStep] = useState<'idle' | 'confirming' | 'done'>('idle');
-  const [newToken, setNewToken] = useState<string | null>(null);
+export function IngestTokenCard({ destinationId, initialToken }: { destinationId: string; initialToken?: string }) {
+  const [step, setStep] = useState<'idle' | 'confirming' | 'done'>(initialToken ? 'done' : 'idle');
+  const [newToken, setNewToken] = useState<string | null>(initialToken ?? null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 

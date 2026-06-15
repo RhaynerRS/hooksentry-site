@@ -49,6 +49,10 @@ export interface IngestTokenResponse {
   ingestToken: string;
 }
 
+export interface CreateDestinationResponse extends Destination {
+  ingestToken: string;
+}
+
 // ─── Eventos ──────────────────────────────────────────────────────────────────
 export type EventStatus =
   | 'Pending'
