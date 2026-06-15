@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { UserButton } from "@stackframe/stack";
-import { LucideIcon, Menu } from "lucide-react";
+import { useAuth } from "@/lib/auth/auth-context";
+import { LucideIcon, LogOut, Menu, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -141,6 +141,30 @@ function HeaderBreadcrumb(props: { items: SidebarItem[], baseBreadcrumb?: Header
   );
 }
 
+function UserMenu({ colorModeToggle }: { colorModeToggle: () => void }) {
+  const { user, logout } = useAuth();
+  const { resolvedTheme } = useTheme();
+  return (
+    <div className="flex items-center gap-2">
+      <button
+        onClick={colorModeToggle}
+        className="rounded-md p-1 hover:bg-muted"
+        aria-label="Toggle theme"
+      >
+        {resolvedTheme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+      </button>
+      <span className="text-sm text-muted-foreground hidden lg:block">{user?.email}</span>
+      <button
+        onClick={logout}
+        className="rounded-md p-1 hover:bg-muted text-muted-foreground"
+        aria-label="Sair"
+      >
+        <LogOut className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
+
 export default function SidebarLayout(props: {
   children?: React.ReactNode;
   baseBreadcrumb?: HeaderBreadcrumbItem[];
@@ -185,11 +209,7 @@ export default function SidebarLayout(props: {
             </div>
           </div>
 
-          <UserButton
-            colorModeToggle={() =>
-              setTheme(resolvedTheme === "light" ? "dark" : "light")
-            }
-          />
+          <UserMenu colorModeToggle={() => setTheme(resolvedTheme === "light" ? "dark" : "light")} />
         </div>
         <div className="flex-grow">{props.children}</div>
       </div>

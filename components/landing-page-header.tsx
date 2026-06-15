@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useStackApp, useUser } from "@stackframe/stack";
+import { useAuth } from "@/lib/auth/auth-context";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -19,49 +19,26 @@ interface NavProps {
   }[];
 }
 
-function SignInSignUpButtons() {
-  const app = useStackApp();
-  return (
-    <>
-      <Link
-        href={app.urls.signIn}
-        className={buttonVariants({ variant: "secondary" })}
-      >
-        Sign In
-      </Link>
-
-      <Link
-        href={app.urls.signUp}
-        className={buttonVariants({ variant: "default" })}
-      >
-        Sign Up
-      </Link>
-    </>
-  );
-}
-
-function AuthButtonsInner() {
-  const user = useUser();
+function AuthButtons() {
+  const { user } = useAuth();
 
   if (user) {
     return (
-      <Link
-        href="/dashboard"
-        className={buttonVariants({ variant: "default" })}
-      >
+      <Link href="/dashboard" className={buttonVariants({ variant: "default" })}>
         Dashboard
       </Link>
     );
-  } else {
-    return <SignInSignUpButtons />;
   }
-}
 
-function AuthButtons() {
   return (
-    <React.Suspense fallback={<SignInSignUpButtons />}>
-      <AuthButtonsInner />
-    </React.Suspense>
+    <>
+      <Link href="/login" className={buttonVariants({ variant: "secondary" })}>
+        Entrar
+      </Link>
+      <Link href="/register" className={buttonVariants({ variant: "default" })}>
+        Criar conta
+      </Link>
+    </>
   );
 }
 

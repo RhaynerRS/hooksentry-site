@@ -1,9 +1,10 @@
 'use client';
 
 import SidebarLayout, { SidebarItem } from "@/components/sidebar-layout";
-import { SelectedTeamSwitcher, useUser } from "@stackframe/stack";
+import { useAuth } from "@/lib/auth/auth-context";
 import { BadgePercent, BarChart4, Columns3, Globe, Locate, Settings2, ShoppingBag, ShoppingCart, Users } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const navigationItems: SidebarItem[] = [
   {
@@ -76,26 +77,27 @@ const navigationItems: SidebarItem[] = [
 
 export default function Layout(props: { children: React.ReactNode }) {
   const params = useParams<{ teamId: string }>();
-  const user = useUser({ or: 'redirect' });
-  const team = user.useTeam(params.teamId);
+  const { user } = useAuth();
   const router = useRouter();
 
-  if (!team) {
-    router.push('/dashboard');
-    return null;
-  }
+  useEffect(() => {
+    if (user && user.tenantId !== params.teamId) {
+      router.replace(`/dashboard/${user.tenantId}`);
+    }
+  }, [user, params.teamId, router]);
 
   return (
-    <SidebarLayout 
+    <SidebarLayout
       items={navigationItems}
-      basePath={`/dashboard/${team.id}`}
-      sidebarTop={<SelectedTeamSwitcher 
-        selectedTeam={team}
-        urlMap={(team) => `/dashboard/${team.id}`}
-      />}
+      basePath={`/dashboard/${params.teamId}`}
+      sidebarTop={
+        <span className="text-sm font-semibold truncate px-2">
+          {user?.email ?? ''}
+        </span>
+      }
       baseBreadcrumb={[{
-        title: team.displayName,
-        href: `/dashboard/${team.id}`,
+        title: user?.email ?? 'Dashboard',
+        href: `/dashboard/${params.teamId}`,
       }]}
     >
       {props.children}
