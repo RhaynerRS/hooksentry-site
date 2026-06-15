@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { Destination } from '@/lib/api/types';
 import { DestinationStatusBadge, CircuitBreakerBadge } from '@/components/dashboard/status-badge';
 import { EmptyState } from '@/components/dashboard/empty-state';
@@ -15,19 +16,19 @@ interface DestinationsTableProps {
 }
 
 export function DestinationsTable({ destinations, loading }: DestinationsTableProps) {
-  if (loading) {
-    return <Skeleton className="h-48 rounded-md" />;
-  }
+  const t = useTranslations('destinations');
+
+  if (loading) return <Skeleton className="h-48 rounded-md" />;
 
   if (destinations.length === 0) {
     return (
       <EmptyState
         icon={Webhook}
-        title="Nenhum destino cadastrado"
-        description="Crie seu primeiro destino para começar a receber webhooks."
+        title={t('empty.title')}
+        description={t('empty.description')}
         action={
           <Button asChild>
-            <Link href="/dashboard/destinations/new">Criar Destino</Link>
+            <Link href="/dashboard/destinations/new">{t('empty.action')}</Link>
           </Button>
         }
       />
@@ -39,11 +40,11 @@ export function DestinationsTable({ destinations, loading }: DestinationsTablePr
       <table className="w-full text-sm">
         <thead className="border-b bg-muted/50">
           <tr>
-            <th className="px-4 py-3 text-left font-medium">URL</th>
-            <th className="px-4 py-3 text-left font-medium">Status</th>
-            <th className="px-4 py-3 text-left font-medium">Circuit Breaker</th>
-            <th className="px-4 py-3 text-left font-medium">Rate Limit</th>
-            <th className="px-4 py-3 text-left font-medium">Auth</th>
+            <th className="px-4 py-3 text-left font-medium">{t('table.url')}</th>
+            <th className="px-4 py-3 text-left font-medium">{t('table.status')}</th>
+            <th className="px-4 py-3 text-left font-medium">{t('table.circuitBreaker')}</th>
+            <th className="px-4 py-3 text-left font-medium">{t('table.rateLimit')}</th>
+            <th className="px-4 py-3 text-left font-medium">{t('table.auth')}</th>
             <th className="px-4 py-3" />
           </tr>
         </thead>
@@ -59,7 +60,7 @@ export function DestinationsTable({ destinations, loading }: DestinationsTablePr
                   <CircuitBreakerBadge state={dest.circuitBreakerState} />
                   {(dest.circuitBreakerState === 'Open' || dest.circuitBreakerState === 'HalfOpen') && (
                     <span className="text-xs text-muted-foreground">
-                      {dest.circuitBreakerFailures} falha(s)
+                      {t('table.failures', { count: dest.circuitBreakerFailures })}
                     </span>
                   )}
                 </div>
@@ -68,7 +69,7 @@ export function DestinationsTable({ destinations, loading }: DestinationsTablePr
               <td className="px-4 py-3 text-muted-foreground">{dest.authType ?? '—'}</td>
               <td className="px-4 py-3 text-right">
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href={`/dashboard/destinations/${dest.id}`}>Detalhes</Link>
+                  <Link href={`/dashboard/destinations/${dest.id}`}>{t('table.details')}</Link>
                 </Button>
               </td>
             </tr>

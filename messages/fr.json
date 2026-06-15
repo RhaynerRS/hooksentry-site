@@ -1,0 +1,280 @@
+{
+  "nav": {
+    "overview": "Vue d'ensemble",
+    "destinations": "Destinations",
+    "events": "Événements",
+    "senders": "Expéditeurs",
+    "apiKeys": "Clés API",
+    "users": "Utilisateurs",
+    "settings": "Paramètres",
+    "signOut": "Se déconnecter"
+  },
+  "breadcrumbs": {
+    "dashboard": "Tableau de bord",
+    "destinations": "Destinations",
+    "events": "Événements",
+    "senders": "Expéditeurs",
+    "api-keys": "Clés API",
+    "users": "Utilisateurs",
+    "settings": "Paramètres",
+    "new": "Nouveau",
+    "edit": "Modifier",
+    "mapping": "Mappage"
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "remove": "Supprimer",
+    "details": "Détails",
+    "saving": "Enregistrement...",
+    "creating": "Création...",
+    "notFound": "Introuvable.",
+    "noData": "Aucune donnée",
+    "back": "Retour"
+  },
+  "auth": {
+    "login": {
+      "title": "Se connecter à HookSentry",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "submitting": "Connexion...",
+      "noAccount": "Pas de compte ?",
+      "createTenant": "Créer un Tenant",
+      "error": "E-mail ou mot de passe invalide."
+    },
+    "register": {
+      "title": "Créer un Tenant",
+      "tenantName": "Nom du Tenant",
+      "adminEmail": "E-mail de l'administrateur",
+      "adminPassword": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Créer un compte",
+      "submitting": "Création...",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter",
+      "passwordMismatch": "Les mots de passe ne correspondent pas.",
+      "error": "Erreur lors de la création du compte. Veuillez réessayer.",
+      "successTitle": "Compte créé avec succès !",
+      "successSecret": "Enregistrez ce secret — il ne sera plus affiché.",
+      "webhookSecretLabel": "Secret Webhook",
+      "goToLogin": "Aller à la connexion"
+    },
+    "invite": {
+      "title": "Créer votre compte",
+      "name": "Nom",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Créer un compte",
+      "submitting": "Inscription...",
+      "passwordMismatch": "Les mots de passe ne correspondent pas.",
+      "notFound": "Invitation introuvable.",
+      "expired": "Invitation expirée ou déjà utilisée.",
+      "error": "Erreur lors de l'inscription. Veuillez réessayer."
+    }
+  },
+  "overview": {
+    "deliveredToday": "Livrés aujourd'hui",
+    "failedToday": "Échecs aujourd'hui",
+    "retryToday": "En réessai aujourd'hui",
+    "criticalToday": "Échecs critiques",
+    "chartTitle": "Événements (7 derniers jours)",
+    "chartNoData": "Aucune donnée pour la période",
+    "delivered": "Livrés",
+    "criticalFailure": "Échec critique",
+    "retry": "Réessai",
+    "openCircuitBreakers": "Disjoncteurs ouverts",
+    "allClosed": "Tous les disjoncteurs sont fermés.",
+    "criticalEvents": "Événements critiques récents",
+    "events24h": "Événements (24h)",
+    "totalAccepted": "Total acceptés",
+    "successRate": "Taux de réussite",
+    "deliveredCount": "{count} livrés",
+    "awaitingReplay": "En attente de replay",
+    "pending": "En attente",
+    "inQueueNow": "Dans la file maintenant",
+    "viewAll": "Voir tout ({count})",
+    "eventId": "ID de l'événement",
+    "destination": "Destination",
+    "attempts": "Tentatives",
+    "received": "Reçu",
+    "view": "Voir"
+  },
+  "destinations": {
+    "pageTitle": "Destinations",
+    "pageDesc": "URLs de destination pour la livraison de webhooks.",
+    "newButton": "Nouvelle Destination",
+    "table": {
+      "url": "URL",
+      "status": "Statut",
+      "circuitBreaker": "Disjoncteur",
+      "rateLimit": "Débit",
+      "auth": "Auth",
+      "details": "Détails",
+      "failures": "{count} échec(s)"
+    },
+    "empty": {
+      "title": "Aucune destination enregistrée",
+      "description": "Créez votre première destination pour commencer à recevoir des webhooks.",
+      "action": "Créer une Destination"
+    },
+    "new": {
+      "pageTitle": "Nouvelle Destination",
+      "pageDesc": "Configurez une URL de destination pour la livraison de webhooks.",
+      "basicSection": "Configuration de base",
+      "urlLabel": "URL de livraison",
+      "urlPlaceholder": "https://votre-service.com/webhook",
+      "urlError": "L'URL doit commencer par https://",
+      "rateLimitLabel": "Limite de débit (req/s)",
+      "rateLimitError": "Doit être entre 1 et 100",
+      "authSection": "Authentification (optionnel)",
+      "authTypeLabel": "Type d'authentification",
+      "submit": "Créer la Destination",
+      "submitting": "Création..."
+    },
+    "edit": {
+      "pageTitle": "Modifier la Destination",
+      "notFound": "Destination introuvable.",
+      "statusLabel": "Statut",
+      "statusActive": "Actif",
+      "statusInactive": "Inactif",
+      "authSection": "Authentification",
+      "credNote": "Laissez les champs d'accréditation vides pour conserver la configuration actuelle.",
+      "submit": "Enregistrer",
+      "submitting": "Enregistrement...",
+      "cancel": "Annuler"
+    },
+    "detail": {
+      "pageTitle": "Destination",
+      "editButton": "Modifier",
+      "notFound": "Destination introuvable.",
+      "back": "Retour"
+    },
+    "info": {
+      "title": "Informations",
+      "urlLabel": "URL",
+      "statusLabel": "Statut",
+      "deactivate": "Désactiver",
+      "activate": "Activer",
+      "rateLimitLabel": "Limite de débit",
+      "authLabel": "Authentification",
+      "noAuth": "Aucune",
+      "createdAtLabel": "Créé le"
+    },
+    "ingestToken": {
+      "title": "Token d'ingestion",
+      "activeMessage": "Le token actuel est configuré et actif. Régénérer le token invalidera immédiatement le précédent.",
+      "regenerate": "Régénérer le Token",
+      "confirmTitle": "Régénérer le Token d'ingestion",
+      "confirmDesc": "Le token précédent sera immédiatement invalidé. Cette action est irréversible.",
+      "confirmLabel": "Régénérer",
+      "newTokenLabel": "Nouveau Token d'ingestion",
+      "warning": "Enregistrez ce token maintenant. Pour des raisons de sécurité, il ne sera plus affiché. Mettez à jour votre service externe avant de fermer cette fenêtre.",
+      "error": "Échec de la régénération du token. Veuillez réessayer."
+    },
+    "circuitBreaker": {
+      "title": "Disjoncteur",
+      "stateLabel": "État actuel",
+      "failuresLabel": "Échecs consécutifs",
+      "thresholdLabel": "Seuil",
+      "thresholdValue": "5 échecs",
+      "nextCheckLabel": "Prochain contrôle"
+    },
+    "dangerZone": {
+      "title": "Zone de Danger",
+      "purgeTitle": "Vider la file",
+      "purgeDesc": "Annule définitivement tous les événements EN ATTENTE et EN ATTENTE DE RÉESSAI pour cette destination. Cette opération est irréversible.",
+      "purgeButton": "Vider la file",
+      "dialogTitle": "Vider la file de destination",
+      "dialogDesc": "Cette action annulera définitivement tous les événements EN ATTENTE et EN ATTENTE DE RÉESSAI pour cette destination. Cette opération est irréversible.",
+      "confirmWord": "VIDER",
+      "confirmInputLabel": "Saisissez {word} pour confirmer",
+      "confirmButton": "Vider la file",
+      "purging": "Vidage...",
+      "success": "File vidée avec succès.",
+      "cancel": "Annuler"
+    },
+    "auth": {
+      "none": "Aucune (supprimer l'auth actuelle)",
+      "noneCreate": "Aucune",
+      "ApiKey": "Clé API",
+      "BearerToken": "Bearer Token",
+      "JwtBearer": "JWT Bearer (OAuth2)",
+      "BasicAuth": "Auth de base",
+      "headerName": "Nom de l'en-tête",
+      "value": "Valeur",
+      "token": "Token",
+      "tokenEndpoint": "Endpoint du token",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scope": "Scope (optionnel)",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "headerNameError": "Uniquement lettres, chiffres, - et _",
+      "tokenEndpointError": "Doit commencer par https://"
+    }
+  },
+  "senders": {
+    "sectionTitle": "Expéditeurs",
+    "addButton": "Ajouter un Expéditeur",
+    "empty": "Aucun expéditeur enregistré pour cette destination.",
+    "table": {
+      "label": "Libellé",
+      "mapping": "Mappage",
+      "noName": "Sans nom",
+      "yes": "Oui",
+      "no": "Non",
+      "remove": "Supprimer"
+    },
+    "createDialog": {
+      "title": "Ajouter un Expéditeur",
+      "labelField": "Libellé (optionnel)",
+      "labelPlaceholder": "Mon service externe",
+      "submit": "Créer l'Expéditeur",
+      "submitting": "Création...",
+      "cancel": "Annuler"
+    },
+    "tokenDialog": {
+      "title": "Expéditeur créé",
+      "desc": "Utilisez le Token d'ingestion ci-dessous pour configurer l'envoi de webhooks. Pour des raisons de sécurité, il ne sera plus affiché.",
+      "close": "Fermer",
+      "tokenLabel": "Token d'ingestion"
+    },
+    "deleteDialog": {
+      "title": "Supprimer l'Expéditeur",
+      "desc": "Cette action est irréversible. L'expéditeur sera définitivement supprimé.",
+      "confirm": "Supprimer"
+    }
+  },
+  "status": {
+    "destination": {
+      "Active": "Actif",
+      "Inactive": "Inactif",
+      "Suspended": "Suspendu"
+    },
+    "circuitBreaker": {
+      "Closed": "Fermé",
+      "Open": "Ouvert",
+      "HalfOpen": "Semi-ouvert"
+    },
+    "event": {
+      "Pending": "En attente",
+      "Processing": "En cours",
+      "Succeeded": "Réussi",
+      "Failed": "Échoué",
+      "WaitingRetry": "Attente de réessai",
+      "CriticalFailure": "Échec critique",
+      "Cancelled": "Annulé",
+      "AuthenticationFailed": "Échec d'auth"
+    }
+  },
+  "secret": {
+    "defaultLabel": "Secret"
+  },
+  "language": {
+    "switchLabel": "Langue"
+  }
+}

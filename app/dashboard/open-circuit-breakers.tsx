@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { destinationsApi } from '@/lib/api/destinations';
 import { Destination } from '@/lib/api/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,6 +11,7 @@ import Link from 'next/link';
 import { ShieldAlert } from 'lucide-react';
 
 export function OpenCircuitBreakers() {
+  const t = useTranslations('overview');
   const [open, setOpen] = useState<Destination[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +29,7 @@ export function OpenCircuitBreakers() {
       <CardHeader>
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <ShieldAlert className="h-4 w-4" />
-          Circuit Breakers
+          {t('openCircuitBreakers')}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -37,7 +39,7 @@ export function OpenCircuitBreakers() {
             <Skeleton className="h-5 w-4/5" />
           </div>
         ) : open.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Todos os destinos operando normalmente.</p>
+          <p className="text-sm text-muted-foreground">{t('allClosed')}</p>
         ) : (
           <ul className="space-y-2">
             {open.map(dest => (

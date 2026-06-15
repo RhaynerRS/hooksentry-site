@@ -1,16 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { sendersApi } from '@/lib/api/senders';
 import { Sender } from '@/lib/api/types';
 import { SecretDisplay } from '@/components/dashboard/secret-display';
 import { ConfirmDialog } from '@/components/dashboard/confirm-dialog';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,6 +20,7 @@ interface Props {
 }
 
 export function SendersSection({ destinationId, initialSenders }: Props) {
+  const t = useTranslations('senders');
   const [senders, setSenders] = useState<Sender[]>(initialSenders);
   const [createOpen, setCreateOpen] = useState(false);
   const [label, setLabel] = useState('');
@@ -55,32 +53,36 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold">Senders</h3>
+        <h3 className="font-semibold">{t('sectionTitle')}</h3>
         <Button variant="outline" size="sm" onClick={() => setCreateOpen(true)}>
           <Plus className="h-4 w-4 mr-1" />
-          Adicionar Sender
+          {t('addButton')}
         </Button>
       </div>
 
       {senders.length === 0 ? (
         <p className="text-sm text-muted-foreground py-4 text-center border rounded-md">
-          Nenhum sender cadastrado para este destino.
+          {t('empty')}
         </p>
       ) : (
         <div className="rounded-md border">
           <table className="w-full text-sm">
             <thead className="border-b bg-muted/50">
               <tr>
-                <th className="px-4 py-3 text-left font-medium">Label</th>
-                <th className="px-4 py-3 text-left font-medium">Mapeamento</th>
+                <th className="px-4 py-3 text-left font-medium">{t('table.label')}</th>
+                <th className="px-4 py-3 text-left font-medium">{t('table.mapping')}</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
             <tbody>
               {senders.map(sender => (
                 <tr key={sender.id} className="border-b last:border-0">
-                  <td className="px-4 py-3">{sender.label ?? <span className="text-muted-foreground">Sem nome</span>}</td>
-                  <td className="px-4 py-3">{sender.hasMapping ? 'Sim' : 'Não'}</td>
+                  <td className="px-4 py-3">
+                    {sender.label ?? <span className="text-muted-foreground">{t('table.noName')}</span>}
+                  </td>
+                  <td className="px-4 py-3">
+                    {sender.hasMapping ? t('table.yes') : t('table.no')}
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <Button
                       variant="ghost"
@@ -88,7 +90,7 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
                       className="text-destructive hover:text-destructive"
                       onClick={() => setDeleteId(sender.id)}
                     >
-                      Remover
+                      {t('table.remove')}
                     </Button>
                   </td>
                 </tr>
@@ -98,60 +100,56 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
         </div>
       )}
 
-      {/* Create dialog */}
       <Dialog open={createOpen} onOpenChange={setCreateOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Adicionar Sender</DialogTitle>
+            <DialogTitle>{t('createDialog.title')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 py-2">
             <div className="space-y-1">
-              <Label htmlFor="senderLabel">Label (opcional)</Label>
+              <Label htmlFor="senderLabel">{t('createDialog.labelField')}</Label>
               <Input
                 id="senderLabel"
                 value={label}
                 onChange={e => setLabel(e.target.value)}
-                placeholder="Meu serviço externo"
+                placeholder={t('createDialog.labelPlaceholder')}
               />
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setCreateOpen(false)}>Cancelar</Button>
+            <Button variant="outline" onClick={() => setCreateOpen(false)}>
+              {t('createDialog.cancel')}
+            </Button>
             <Button onClick={handleCreate} disabled={creating}>
-              {creating ? 'Criando...' : 'Criar Sender'}
+              {creating ? t('createDialog.submitting') : t('createDialog.submit')}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      {/* Ingest token display after create */}
       <Dialog open={tokenDialogOpen} onOpenChange={setTokenDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Sender criado</DialogTitle>
+            <DialogTitle>{t('tokenDialog.title')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 py-2">
-            <p className="text-sm text-muted-foreground">
-              Use o Ingest Token abaixo para configurar o envio de webhooks.
-              Por segurança, ele não será exibido novamente.
-            </p>
+            <p className="text-sm text-muted-foreground">{t('tokenDialog.desc')}</p>
             {newIngestToken && (
-              <SecretDisplay value={newIngestToken} label="Ingest Token" />
+              <SecretDisplay value={newIngestToken} label={t('tokenDialog.tokenLabel')} />
             )}
           </div>
           <DialogFooter>
-            <Button onClick={() => setTokenDialogOpen(false)}>Fechar</Button>
+            <Button onClick={() => setTokenDialogOpen(false)}>{t('tokenDialog.close')}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      {/* Delete confirm */}
       <ConfirmDialog
         open={!!deleteId}
         onOpenChange={open => { if (!open) setDeleteId(null); }}
-        title="Remover Sender"
-        description="Esta ação é irreversível. O sender será removido permanentemente."
-        confirmLabel="Remover"
+        title={t('deleteDialog.title')}
+        description={t('deleteDialog.desc')}
+        confirmLabel={t('deleteDialog.confirm')}
         destructive
         onConfirm={handleDelete}
       />

@@ -1,0 +1,280 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "destinations": "Destinations",
+    "events": "Events",
+    "senders": "Senders",
+    "apiKeys": "API Keys",
+    "users": "Users",
+    "settings": "Settings",
+    "signOut": "Sign out"
+  },
+  "breadcrumbs": {
+    "dashboard": "Dashboard",
+    "destinations": "Destinations",
+    "events": "Events",
+    "senders": "Senders",
+    "api-keys": "API Keys",
+    "users": "Users",
+    "settings": "Settings",
+    "new": "New",
+    "edit": "Edit",
+    "mapping": "Mapping"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "remove": "Remove",
+    "details": "Details",
+    "saving": "Saving...",
+    "creating": "Creating...",
+    "notFound": "Not found.",
+    "noData": "No data",
+    "back": "Back"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to HookSentry",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "createTenant": "Create Tenant",
+      "error": "Invalid email or password."
+    },
+    "register": {
+      "title": "Create Tenant",
+      "tenantName": "Tenant Name",
+      "adminEmail": "Admin Email",
+      "adminPassword": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create Account",
+      "submitting": "Creating...",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "passwordMismatch": "Passwords do not match.",
+      "error": "Error creating account. Please try again.",
+      "successTitle": "Account created!",
+      "successSecret": "Save this secret — it will not be shown again.",
+      "webhookSecretLabel": "Webhook Secret",
+      "goToLogin": "Go to login"
+    },
+    "invite": {
+      "title": "Create your account",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create account",
+      "submitting": "Registering...",
+      "passwordMismatch": "Passwords do not match.",
+      "notFound": "Invite not found.",
+      "expired": "Invite expired or already used.",
+      "error": "Error registering. Please try again."
+    }
+  },
+  "overview": {
+    "deliveredToday": "Delivered Today",
+    "failedToday": "Failed Today",
+    "retryToday": "Retrying Today",
+    "criticalToday": "Critical Failures",
+    "chartTitle": "Events (Last 7 Days)",
+    "chartNoData": "No data for the period",
+    "delivered": "Delivered",
+    "criticalFailure": "Critical Failure",
+    "retry": "Retry",
+    "openCircuitBreakers": "Open Circuit Breakers",
+    "allClosed": "All circuit breakers are closed.",
+    "criticalEvents": "Recent Critical Events",
+    "events24h": "Events (24h)",
+    "totalAccepted": "Total accepted",
+    "successRate": "Success Rate",
+    "deliveredCount": "{count} delivered",
+    "awaitingReplay": "Awaiting replay",
+    "pending": "Pending",
+    "inQueueNow": "In queue now",
+    "viewAll": "View all ({count})",
+    "eventId": "Event ID",
+    "destination": "Destination",
+    "attempts": "Attempts",
+    "received": "Received",
+    "view": "View"
+  },
+  "destinations": {
+    "pageTitle": "Destinations",
+    "pageDesc": "Destination URLs for webhook delivery.",
+    "newButton": "New Destination",
+    "table": {
+      "url": "URL",
+      "status": "Status",
+      "circuitBreaker": "Circuit Breaker",
+      "rateLimit": "Rate Limit",
+      "auth": "Auth",
+      "details": "Details",
+      "failures": "{count} failure(s)"
+    },
+    "empty": {
+      "title": "No destinations registered",
+      "description": "Create your first destination to start receiving webhooks.",
+      "action": "Create Destination"
+    },
+    "new": {
+      "pageTitle": "New Destination",
+      "pageDesc": "Configure a destination URL for webhook delivery.",
+      "basicSection": "Basic Configuration",
+      "urlLabel": "Delivery URL",
+      "urlPlaceholder": "https://your-service.com/webhook",
+      "urlError": "URL must start with https://",
+      "rateLimitLabel": "Rate limit (req/s)",
+      "rateLimitError": "Must be between 1 and 100",
+      "authSection": "Authentication (optional)",
+      "authTypeLabel": "Authentication type",
+      "submit": "Create Destination",
+      "submitting": "Creating..."
+    },
+    "edit": {
+      "pageTitle": "Edit Destination",
+      "notFound": "Destination not found.",
+      "statusLabel": "Status",
+      "statusActive": "Active",
+      "statusInactive": "Inactive",
+      "authSection": "Authentication",
+      "credNote": "Leave credential fields empty to keep the current configuration.",
+      "submit": "Save",
+      "submitting": "Saving...",
+      "cancel": "Cancel"
+    },
+    "detail": {
+      "pageTitle": "Destination",
+      "editButton": "Edit",
+      "notFound": "Destination not found.",
+      "back": "Back"
+    },
+    "info": {
+      "title": "Information",
+      "urlLabel": "URL",
+      "statusLabel": "Status",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "rateLimitLabel": "Rate Limit",
+      "authLabel": "Authentication",
+      "noAuth": "None",
+      "createdAtLabel": "Created at"
+    },
+    "ingestToken": {
+      "title": "Ingest Token",
+      "activeMessage": "The current token is configured and active. Regenerating the token will immediately invalidate the previous one.",
+      "regenerate": "Regenerate Token",
+      "confirmTitle": "Regenerate Ingest Token",
+      "confirmDesc": "The previous token will be immediately invalidated. This action cannot be undone.",
+      "confirmLabel": "Regenerate",
+      "newTokenLabel": "New Ingest Token",
+      "warning": "Save this token now. For security, it will not be shown again. Update your external service before closing this window.",
+      "error": "Failed to regenerate the token. Please try again."
+    },
+    "circuitBreaker": {
+      "title": "Circuit Breaker",
+      "stateLabel": "Current state",
+      "failuresLabel": "Consecutive failures",
+      "thresholdLabel": "Threshold",
+      "thresholdValue": "5 failures",
+      "nextCheckLabel": "Next check"
+    },
+    "dangerZone": {
+      "title": "Danger Zone",
+      "purgeTitle": "Purge queue",
+      "purgeDesc": "Permanently cancels all PENDING and WAITING_RETRY events for this destination. This operation is irreversible.",
+      "purgeButton": "Purge Queue",
+      "dialogTitle": "Purge destination queue",
+      "dialogDesc": "This action will permanently cancel all PENDING and WAITING_RETRY events for this destination. This operation is irreversible.",
+      "confirmWord": "PURGE",
+      "confirmInputLabel": "Type {word} to confirm",
+      "confirmButton": "Purge Queue",
+      "purging": "Purging...",
+      "success": "Queue purged successfully.",
+      "cancel": "Cancel"
+    },
+    "auth": {
+      "none": "None (remove current auth)",
+      "noneCreate": "None",
+      "ApiKey": "API Key",
+      "BearerToken": "Bearer Token",
+      "JwtBearer": "JWT Bearer (OAuth2)",
+      "BasicAuth": "Basic Auth",
+      "headerName": "Header Name",
+      "value": "Value",
+      "token": "Token",
+      "tokenEndpoint": "Token Endpoint",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scope": "Scope (optional)",
+      "username": "Username",
+      "password": "Password",
+      "headerNameError": "Only letters, numbers, - and _",
+      "tokenEndpointError": "Must start with https://"
+    }
+  },
+  "senders": {
+    "sectionTitle": "Senders",
+    "addButton": "Add Sender",
+    "empty": "No senders registered for this destination.",
+    "table": {
+      "label": "Label",
+      "mapping": "Mapping",
+      "noName": "No name",
+      "yes": "Yes",
+      "no": "No",
+      "remove": "Remove"
+    },
+    "createDialog": {
+      "title": "Add Sender",
+      "labelField": "Label (optional)",
+      "labelPlaceholder": "My external service",
+      "submit": "Create Sender",
+      "submitting": "Creating...",
+      "cancel": "Cancel"
+    },
+    "tokenDialog": {
+      "title": "Sender created",
+      "desc": "Use the Ingest Token below to configure webhook sending. For security, it will not be shown again.",
+      "close": "Close",
+      "tokenLabel": "Ingest Token"
+    },
+    "deleteDialog": {
+      "title": "Remove Sender",
+      "desc": "This action is irreversible. The sender will be permanently removed.",
+      "confirm": "Remove"
+    }
+  },
+  "status": {
+    "destination": {
+      "Active": "Active",
+      "Inactive": "Inactive",
+      "Suspended": "Suspended"
+    },
+    "circuitBreaker": {
+      "Closed": "Closed",
+      "Open": "Open",
+      "HalfOpen": "Half-Open"
+    },
+    "event": {
+      "Pending": "Pending",
+      "Processing": "Processing",
+      "Succeeded": "Succeeded",
+      "Failed": "Failed",
+      "WaitingRetry": "Waiting Retry",
+      "CriticalFailure": "Critical Failure",
+      "Cancelled": "Cancelled",
+      "AuthenticationFailed": "Auth Failed"
+    }
+  },
+  "secret": {
+    "defaultLabel": "Secret"
+  },
+  "language": {
+    "switchLabel": "Language"
+  }
+}

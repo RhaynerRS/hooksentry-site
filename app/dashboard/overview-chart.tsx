@@ -1,20 +1,19 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { eventsApi } from '@/lib/api/events';
 
-interface DayData {
-  date: string;
-  Entregues: number;
-  'Falha Crítica': number;
-  Retentativa: number;
-}
-
 export function OverviewChart() {
-  const [data, setData] = useState<DayData[]>([]);
+  const t = useTranslations('overview');
+  const [data, setData] = useState<Record<string, string | number>[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const deliveredLabel = t('delivered');
+  const criticalLabel = t('criticalFailure');
+  const retryLabel = t('retry');
 
   useEffect(() => {
     async function load() {
@@ -36,10 +35,10 @@ export function OverviewChart() {
           ]);
 
           return {
-            date: d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }),
-            Entregues: succeeded.total,
-            'Falha Crítica': critical.total,
-            Retentativa: waiting.total,
+            date: d.toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' }),
+            [deliveredLabel]: succeeded.total,
+            [criticalLabel]: critical.total,
+            [retryLabel]: waiting.total,
           };
         }),
       );
@@ -49,18 +48,19 @@ export function OverviewChart() {
     }
 
     load().catch(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium">Eventos nos últimos 7 dias</CardTitle>
+        <CardTitle className="text-sm font-medium">{t('chartTitle')}</CardTitle>
       </CardHeader>
       <CardContent>
         {loading ? (
           <div className="h-48 animate-pulse bg-muted rounded" />
         ) : data.length === 0 ? (
-          <p className="text-sm text-muted-foreground text-center py-12">Sem dados no período.</p>
+          <p className="text-sm text-muted-foreground text-center py-12">{t('chartNoData')}</p>
         ) : (
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data} barSize={14}>
@@ -68,9 +68,9 @@ export function OverviewChart() {
               <YAxis tick={{ fontSize: 12 }} allowDecimals={false} />
               <Tooltip />
               <Legend wrapperStyle={{ fontSize: 12 }} />
-              <Bar dataKey="Entregues"     fill="var(--color-success)"     stackId="a" />
-              <Bar dataKey="Falha Crítica" fill="var(--color-destructive)" stackId="a" />
-              <Bar dataKey="Retentativa"   fill="var(--color-warning)"     stackId="a" />
+              <Bar dataKey={deliveredLabel} fill="var(--color-success)"     stackId="a" />
+              <Bar dataKey={criticalLabel}  fill="var(--color-destructive)" stackId="a" />
+              <Bar dataKey={retryLabel}     fill="var(--color-warning)"     stackId="a" />
             </BarChart>
           </ResponsiveContainer>
         )}

@@ -1,0 +1,280 @@
+{
+  "nav": {
+    "overview": "概览",
+    "destinations": "目标",
+    "events": "事件",
+    "senders": "发送者",
+    "apiKeys": "API密钥",
+    "users": "用户",
+    "settings": "设置",
+    "signOut": "退出登录"
+  },
+  "breadcrumbs": {
+    "dashboard": "仪表盘",
+    "destinations": "目标",
+    "events": "事件",
+    "senders": "发送者",
+    "api-keys": "API密钥",
+    "users": "用户",
+    "settings": "设置",
+    "new": "新建",
+    "edit": "编辑",
+    "mapping": "映射"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "close": "关闭",
+    "remove": "删除",
+    "details": "详情",
+    "saving": "保存中...",
+    "creating": "创建中...",
+    "notFound": "未找到。",
+    "noData": "无数据",
+    "back": "返回"
+  },
+  "auth": {
+    "login": {
+      "title": "登录 HookSentry",
+      "email": "邮箱",
+      "password": "密码",
+      "submit": "登录",
+      "submitting": "登录中...",
+      "noAccount": "没有账户？",
+      "createTenant": "创建租户",
+      "error": "邮箱或密码无效。"
+    },
+    "register": {
+      "title": "创建租户",
+      "tenantName": "租户名称",
+      "adminEmail": "管理员邮箱",
+      "adminPassword": "密码",
+      "confirmPassword": "确认密码",
+      "submit": "创建账户",
+      "submitting": "创建中...",
+      "hasAccount": "已有账户？",
+      "signIn": "登录",
+      "passwordMismatch": "密码不匹配。",
+      "error": "创建账户失败，请重试。",
+      "successTitle": "账户创建成功！",
+      "successSecret": "请保存此密钥——它不会再次显示。",
+      "webhookSecretLabel": "Webhook密钥",
+      "goToLogin": "前往登录"
+    },
+    "invite": {
+      "title": "创建您的账户",
+      "name": "姓名",
+      "email": "邮箱",
+      "password": "密码",
+      "confirmPassword": "确认密码",
+      "submit": "创建账户",
+      "submitting": "注册中...",
+      "passwordMismatch": "密码不匹配。",
+      "notFound": "邀请不存在。",
+      "expired": "邀请已过期或已使用。",
+      "error": "注册失败，请重试。"
+    }
+  },
+  "overview": {
+    "deliveredToday": "今日送达",
+    "failedToday": "今日失败",
+    "retryToday": "今日重试中",
+    "criticalToday": "严重失败",
+    "chartTitle": "事件（过去7天）",
+    "chartNoData": "该期间无数据",
+    "delivered": "已送达",
+    "criticalFailure": "严重失败",
+    "retry": "重试",
+    "openCircuitBreakers": "断开的熔断器",
+    "allClosed": "所有熔断器均已关闭。",
+    "criticalEvents": "最近的严重事件",
+    "events24h": "事件（24小时）",
+    "totalAccepted": "总接收",
+    "successRate": "成功率",
+    "deliveredCount": "已送达{count}条",
+    "awaitingReplay": "等待重放",
+    "pending": "待处理",
+    "inQueueNow": "当前在队列中",
+    "viewAll": "查看全部（{count}条）",
+    "eventId": "事件ID",
+    "destination": "目标",
+    "attempts": "重试次数",
+    "received": "接收时间",
+    "view": "查看"
+  },
+  "destinations": {
+    "pageTitle": "目标",
+    "pageDesc": "Webhook交付的目标URL。",
+    "newButton": "新建目标",
+    "table": {
+      "url": "URL",
+      "status": "状态",
+      "circuitBreaker": "熔断器",
+      "rateLimit": "速率",
+      "auth": "认证",
+      "details": "详情",
+      "failures": "{count}次失败"
+    },
+    "empty": {
+      "title": "暂无目标",
+      "description": "创建您的第一个目标以开始接收Webhook。",
+      "action": "创建目标"
+    },
+    "new": {
+      "pageTitle": "新建目标",
+      "pageDesc": "配置Webhook交付的目标URL。",
+      "basicSection": "基本配置",
+      "urlLabel": "传递URL",
+      "urlPlaceholder": "https://your-service.com/webhook",
+      "urlError": "URL必须以https://开头",
+      "rateLimitLabel": "速率限制（请求/秒）",
+      "rateLimitError": "必须在1到100之间",
+      "authSection": "认证（可选）",
+      "authTypeLabel": "认证类型",
+      "submit": "创建目标",
+      "submitting": "创建中..."
+    },
+    "edit": {
+      "pageTitle": "编辑目标",
+      "notFound": "目标不存在。",
+      "statusLabel": "状态",
+      "statusActive": "活跃",
+      "statusInactive": "不活跃",
+      "authSection": "认证",
+      "credNote": "保留凭据字段为空以保持当前配置。",
+      "submit": "保存",
+      "submitting": "保存中...",
+      "cancel": "取消"
+    },
+    "detail": {
+      "pageTitle": "目标",
+      "editButton": "编辑",
+      "notFound": "目标不存在。",
+      "back": "返回"
+    },
+    "info": {
+      "title": "信息",
+      "urlLabel": "URL",
+      "statusLabel": "状态",
+      "deactivate": "停用",
+      "activate": "启用",
+      "rateLimitLabel": "速率限制",
+      "authLabel": "认证",
+      "noAuth": "无",
+      "createdAtLabel": "创建时间"
+    },
+    "ingestToken": {
+      "title": "采集令牌",
+      "activeMessage": "当前令牌已配置并处于活跃状态。重新生成令牌将立即使之前的令牌失效。",
+      "regenerate": "重新生成令牌",
+      "confirmTitle": "重新生成采集令牌",
+      "confirmDesc": "之前的令牌将立即失效。此操作无法撤销。",
+      "confirmLabel": "重新生成",
+      "newTokenLabel": "新采集令牌",
+      "warning": "请立即保存此令牌。出于安全原因，它不会再次显示。在关闭此窗口之前，请更新您的外部服务配置。",
+      "error": "令牌重新生成失败，请重试。"
+    },
+    "circuitBreaker": {
+      "title": "熔断器",
+      "stateLabel": "当前状态",
+      "failuresLabel": "连续失败次数",
+      "thresholdLabel": "阈值",
+      "thresholdValue": "5次",
+      "nextCheckLabel": "下次检查时间"
+    },
+    "dangerZone": {
+      "title": "危险区域",
+      "purgeTitle": "清空队列",
+      "purgeDesc": "永久取消此目标的所有待处理和等待重试的事件。此操作不可逆。",
+      "purgeButton": "清空队列",
+      "dialogTitle": "清空目标队列",
+      "dialogDesc": "此操作将永久取消此目标的所有待处理和等待重试的事件。此操作不可逆。",
+      "confirmWord": "清空",
+      "confirmInputLabel": "输入{word}以确认",
+      "confirmButton": "清空队列",
+      "purging": "清空中...",
+      "success": "队列已成功清空。",
+      "cancel": "取消"
+    },
+    "auth": {
+      "none": "无（删除当前认证）",
+      "noneCreate": "无",
+      "ApiKey": "API密钥",
+      "BearerToken": "Bearer Token",
+      "JwtBearer": "JWT Bearer (OAuth2)",
+      "BasicAuth": "基本认证",
+      "headerName": "请求头名称",
+      "value": "值",
+      "token": "令牌",
+      "tokenEndpoint": "令牌端点",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scope": "范围（可选）",
+      "username": "用户名",
+      "password": "密码",
+      "headerNameError": "仅允许字母、数字、-和_",
+      "tokenEndpointError": "必须以https://开头"
+    }
+  },
+  "senders": {
+    "sectionTitle": "发送者",
+    "addButton": "添加发送者",
+    "empty": "此目标暂无注册发送者。",
+    "table": {
+      "label": "标签",
+      "mapping": "映射",
+      "noName": "无名称",
+      "yes": "是",
+      "no": "否",
+      "remove": "删除"
+    },
+    "createDialog": {
+      "title": "添加发送者",
+      "labelField": "标签（可选）",
+      "labelPlaceholder": "我的外部服务",
+      "submit": "创建发送者",
+      "submitting": "创建中...",
+      "cancel": "取消"
+    },
+    "tokenDialog": {
+      "title": "发送者已创建",
+      "desc": "使用以下采集令牌配置Webhook发送。出于安全原因，它不会再次显示。",
+      "close": "关闭",
+      "tokenLabel": "采集令牌"
+    },
+    "deleteDialog": {
+      "title": "删除发送者",
+      "desc": "此操作不可逆。发送者将被永久删除。",
+      "confirm": "删除"
+    }
+  },
+  "status": {
+    "destination": {
+      "Active": "活跃",
+      "Inactive": "不活跃",
+      "Suspended": "已暂停"
+    },
+    "circuitBreaker": {
+      "Closed": "关闭",
+      "Open": "断开",
+      "HalfOpen": "半开"
+    },
+    "event": {
+      "Pending": "待处理",
+      "Processing": "处理中",
+      "Succeeded": "成功",
+      "Failed": "失败",
+      "WaitingRetry": "等待重试",
+      "CriticalFailure": "严重失败",
+      "Cancelled": "已取消",
+      "AuthenticationFailed": "认证失败"
+    }
+  },
+  "secret": {
+    "defaultLabel": "密钥"
+  },
+  "language": {
+    "switchLabel": "语言"
+  }
+}

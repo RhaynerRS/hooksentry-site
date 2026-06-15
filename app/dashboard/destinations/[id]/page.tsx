@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { destinationsApi } from '@/lib/api/destinations';
 import { sendersApi } from '@/lib/api/senders';
 import { Destination, Sender } from '@/lib/api/types';
@@ -16,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function DestinationDetailPage() {
+  const t = useTranslations('destinations.detail');
   const { id } = useParams<{ id: string }>();
   const [dest, setDest] = useState<Destination | null>(null);
   const [newToken, setNewToken] = useState<string | undefined>(undefined);
@@ -56,9 +58,9 @@ export default function DestinationDetailPage() {
   if (notFound || !dest) {
     return (
       <div className="space-y-4">
-        <p className="text-muted-foreground">Destino não encontrado.</p>
+        <p className="text-muted-foreground">{t('notFound')}</p>
         <Button asChild variant="outline">
-          <Link href="/dashboard/destinations">Voltar</Link>
+          <Link href="/dashboard/destinations">{t('back')}</Link>
         </Button>
       </div>
     );
@@ -67,11 +69,11 @@ export default function DestinationDetailPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Destino"
+        title={t('pageTitle')}
         description={dest.url}
         action={
           <Button variant="outline" asChild>
-            <Link href={`/dashboard/destinations/${id}/edit`}>Editar</Link>
+            <Link href={`/dashboard/destinations/${id}/edit`}>{t('editButton')}</Link>
           </Button>
         }
       />

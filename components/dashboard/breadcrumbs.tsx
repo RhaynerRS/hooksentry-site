@@ -1,27 +1,24 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-const SEGMENT_LABELS: Record<string, string> = {
-  dashboard: 'Dashboard',
-  destinations: 'Destinos',
-  events: 'Eventos',
-  senders: 'Senders',
-  'api-keys': 'API Keys',
-  users: 'Usuários',
-  settings: 'Configurações',
-  new: 'Novo',
-  edit: 'Editar',
-  mapping: 'Mapeamento',
-};
+const KNOWN = new Set([
+  'dashboard', 'destinations', 'events', 'senders',
+  'api-keys', 'users', 'settings', 'new', 'edit', 'mapping',
+]);
 
 export function Breadcrumbs() {
+  const t = useTranslations('breadcrumbs');
   const pathname = usePathname();
   const segments = pathname.split('/').filter(Boolean);
 
+  const getLabel = (seg: string) =>
+    KNOWN.has(seg) ? t(seg as Parameters<typeof t>[0]) : seg;
+
   const crumbs = segments.map((seg, i) => ({
-    label: SEGMENT_LABELS[seg] ?? seg,
+    label: getLabel(seg),
     href: '/' + segments.slice(0, i + 1).join('/'),
     isLast: i === segments.length - 1,
   }));

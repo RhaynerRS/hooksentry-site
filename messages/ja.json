@@ -1,0 +1,280 @@
+{
+  "nav": {
+    "overview": "概要",
+    "destinations": "送信先",
+    "events": "イベント",
+    "senders": "センダー",
+    "apiKeys": "APIキー",
+    "users": "ユーザー",
+    "settings": "設定",
+    "signOut": "ログアウト"
+  },
+  "breadcrumbs": {
+    "dashboard": "ダッシュボード",
+    "destinations": "送信先",
+    "events": "イベント",
+    "senders": "センダー",
+    "api-keys": "APIキー",
+    "users": "ユーザー",
+    "settings": "設定",
+    "new": "新規",
+    "edit": "編集",
+    "mapping": "マッピング"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "close": "閉じる",
+    "remove": "削除",
+    "details": "詳細",
+    "saving": "保存中...",
+    "creating": "作成中...",
+    "notFound": "見つかりません。",
+    "noData": "データなし",
+    "back": "戻る"
+  },
+  "auth": {
+    "login": {
+      "title": "HookSentryにサインイン",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "submit": "サインイン",
+      "submitting": "サインイン中...",
+      "noAccount": "アカウントをお持ちでない方",
+      "createTenant": "テナントを作成",
+      "error": "メールアドレスまたはパスワードが無効です。"
+    },
+    "register": {
+      "title": "テナントを作成",
+      "tenantName": "テナント名",
+      "adminEmail": "管理者メールアドレス",
+      "adminPassword": "パスワード",
+      "confirmPassword": "パスワード確認",
+      "submit": "アカウント作成",
+      "submitting": "作成中...",
+      "hasAccount": "すでにアカウントをお持ちの方",
+      "signIn": "サインイン",
+      "passwordMismatch": "パスワードが一致しません。",
+      "error": "アカウントの作成に失敗しました。もう一度お試しください。",
+      "successTitle": "アカウントが作成されました！",
+      "successSecret": "このシークレットを保存してください — 再表示されません。",
+      "webhookSecretLabel": "Webhookシークレット",
+      "goToLogin": "ログインへ"
+    },
+    "invite": {
+      "title": "アカウントを作成",
+      "name": "名前",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "confirmPassword": "パスワード確認",
+      "submit": "アカウント作成",
+      "submitting": "登録中...",
+      "passwordMismatch": "パスワードが一致しません。",
+      "notFound": "招待が見つかりません。",
+      "expired": "招待の有効期限が切れているか、すでに使用されています。",
+      "error": "登録に失敗しました。もう一度お試しください。"
+    }
+  },
+  "overview": {
+    "deliveredToday": "本日配信済み",
+    "failedToday": "本日失敗",
+    "retryToday": "本日再試行中",
+    "criticalToday": "重大な失敗",
+    "chartTitle": "イベント（過去7日間）",
+    "chartNoData": "期間中のデータなし",
+    "delivered": "配信済み",
+    "criticalFailure": "重大な失敗",
+    "retry": "再試行",
+    "openCircuitBreakers": "オープンサーキットブレーカー",
+    "allClosed": "すべてのサーキットブレーカーが閉じています。",
+    "criticalEvents": "最近の重大イベント",
+    "events24h": "イベント（24時間）",
+    "totalAccepted": "合計受信",
+    "successRate": "成功率",
+    "deliveredCount": "{count}件配信済み",
+    "awaitingReplay": "リプレイ待ち",
+    "pending": "保留中",
+    "inQueueNow": "現在キュー内",
+    "viewAll": "すべて表示（{count}件）",
+    "eventId": "イベントID",
+    "destination": "送信先",
+    "attempts": "試行回数",
+    "received": "受信日時",
+    "view": "詳細"
+  },
+  "destinations": {
+    "pageTitle": "送信先",
+    "pageDesc": "Webhook配信のための送信先URL。",
+    "newButton": "新規送信先",
+    "table": {
+      "url": "URL",
+      "status": "ステータス",
+      "circuitBreaker": "サーキットブレーカー",
+      "rateLimit": "レート制限",
+      "auth": "認証",
+      "details": "詳細",
+      "failures": "{count}回の失敗"
+    },
+    "empty": {
+      "title": "送信先が登録されていません",
+      "description": "最初の送信先を作成して、Webhookの受信を開始しましょう。",
+      "action": "送信先を作成"
+    },
+    "new": {
+      "pageTitle": "新規送信先",
+      "pageDesc": "Webhook配信のための送信先URLを設定します。",
+      "basicSection": "基本設定",
+      "urlLabel": "配信URL",
+      "urlPlaceholder": "https://your-service.com/webhook",
+      "urlError": "URLはhttps://で始まる必要があります",
+      "rateLimitLabel": "レート制限（リクエスト/秒）",
+      "rateLimitError": "1から100の間である必要があります",
+      "authSection": "認証（オプション）",
+      "authTypeLabel": "認証タイプ",
+      "submit": "送信先を作成",
+      "submitting": "作成中..."
+    },
+    "edit": {
+      "pageTitle": "送信先を編集",
+      "notFound": "送信先が見つかりません。",
+      "statusLabel": "ステータス",
+      "statusActive": "有効",
+      "statusInactive": "無効",
+      "authSection": "認証",
+      "credNote": "認証情報フィールドを空にすると、現在の設定が維持されます。",
+      "submit": "保存",
+      "submitting": "保存中...",
+      "cancel": "キャンセル"
+    },
+    "detail": {
+      "pageTitle": "送信先",
+      "editButton": "編集",
+      "notFound": "送信先が見つかりません。",
+      "back": "戻る"
+    },
+    "info": {
+      "title": "情報",
+      "urlLabel": "URL",
+      "statusLabel": "ステータス",
+      "deactivate": "無効化",
+      "activate": "有効化",
+      "rateLimitLabel": "レート制限",
+      "authLabel": "認証",
+      "noAuth": "なし",
+      "createdAtLabel": "作成日時"
+    },
+    "ingestToken": {
+      "title": "インジェストトークン",
+      "activeMessage": "現在のトークンは設定済みで有効です。トークンを再生成すると、以前のトークンは即座に無効になります。",
+      "regenerate": "トークンを再生成",
+      "confirmTitle": "インジェストトークンを再生成",
+      "confirmDesc": "以前のトークンは即座に無効になります。この操作は元に戻せません。",
+      "confirmLabel": "再生成",
+      "newTokenLabel": "新しいインジェストトークン",
+      "warning": "今すぐこのトークンを保存してください。セキュリティ上の理由から、再表示されません。このウィンドウを閉じる前に外部サービスの設定を更新してください。",
+      "error": "トークンの再生成に失敗しました。もう一度お試しください。"
+    },
+    "circuitBreaker": {
+      "title": "サーキットブレーカー",
+      "stateLabel": "現在の状態",
+      "failuresLabel": "連続失敗回数",
+      "thresholdLabel": "しきい値",
+      "thresholdValue": "5回",
+      "nextCheckLabel": "次回チェック"
+    },
+    "dangerZone": {
+      "title": "危険ゾーン",
+      "purgeTitle": "キューをパージ",
+      "purgeDesc": "この送信先のすべての保留中および再試行待ちイベントを永続的にキャンセルします。この操作は元に戻せません。",
+      "purgeButton": "キューをパージ",
+      "dialogTitle": "送信先キューのパージ",
+      "dialogDesc": "この操作により、この送信先のすべての保留中および再試行待ちイベントが永続的にキャンセルされます。この操作は元に戻せません。",
+      "confirmWord": "PURGE",
+      "confirmInputLabel": "確認のために{word}と入力してください",
+      "confirmButton": "キューをパージ",
+      "purging": "パージ中...",
+      "success": "キューが正常にパージされました。",
+      "cancel": "キャンセル"
+    },
+    "auth": {
+      "none": "なし（現在の認証を削除）",
+      "noneCreate": "なし",
+      "ApiKey": "APIキー",
+      "BearerToken": "Bearer Token",
+      "JwtBearer": "JWT Bearer (OAuth2)",
+      "BasicAuth": "Basic認証",
+      "headerName": "ヘッダー名",
+      "value": "値",
+      "token": "トークン",
+      "tokenEndpoint": "トークンエンドポイント",
+      "clientId": "Client ID",
+      "clientSecret": "Client Secret",
+      "scope": "スコープ（オプション）",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "headerNameError": "英数字、-、_のみ使用できます",
+      "tokenEndpointError": "https://で始まる必要があります"
+    }
+  },
+  "senders": {
+    "sectionTitle": "センダー",
+    "addButton": "センダーを追加",
+    "empty": "このデスティネーションには登録されたセンダーがありません。",
+    "table": {
+      "label": "ラベル",
+      "mapping": "マッピング",
+      "noName": "名前なし",
+      "yes": "あり",
+      "no": "なし",
+      "remove": "削除"
+    },
+    "createDialog": {
+      "title": "センダーを追加",
+      "labelField": "ラベル（オプション）",
+      "labelPlaceholder": "外部サービス名",
+      "submit": "センダーを作成",
+      "submitting": "作成中...",
+      "cancel": "キャンセル"
+    },
+    "tokenDialog": {
+      "title": "センダーが作成されました",
+      "desc": "以下のインジェストトークンを使用してWebhook送信を設定してください。セキュリティ上の理由から、再表示されません。",
+      "close": "閉じる",
+      "tokenLabel": "インジェストトークン"
+    },
+    "deleteDialog": {
+      "title": "センダーを削除",
+      "desc": "この操作は元に戻せません。センダーは完全に削除されます。",
+      "confirm": "削除"
+    }
+  },
+  "status": {
+    "destination": {
+      "Active": "有効",
+      "Inactive": "無効",
+      "Suspended": "停止"
+    },
+    "circuitBreaker": {
+      "Closed": "クローズ",
+      "Open": "オープン",
+      "HalfOpen": "ハーフオープン"
+    },
+    "event": {
+      "Pending": "保留中",
+      "Processing": "処理中",
+      "Succeeded": "成功",
+      "Failed": "失敗",
+      "WaitingRetry": "再試行待ち",
+      "CriticalFailure": "重大な失敗",
+      "Cancelled": "キャンセル済み",
+      "AuthenticationFailed": "認証失敗"
+    }
+  },
+  "secret": {
+    "defaultLabel": "シークレット"
+  },
+  "language": {
+    "switchLabel": "言語"
+  }
+}

@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function RegisterPage() {
+  const t = useTranslations('auth.register');
   const router = useRouter();
 
   const [tenantName, setTenantName] = useState('');
@@ -23,7 +25,7 @@ export default function RegisterPage() {
     setError('');
 
     if (adminPassword !== confirmPassword) {
-      setError('As senhas não coincidem.');
+      setError(t('passwordMismatch'));
       return;
     }
 
@@ -37,7 +39,7 @@ export default function RegisterPage() {
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setError(data.message ?? 'Erro ao criar conta. Tente novamente.');
+      setError(data.message ?? t('error'));
       setLoading(false);
       return;
     }
@@ -57,18 +59,20 @@ export default function RegisterPage() {
       <div className="flex min-h-screen items-center justify-center">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle>Conta criada com sucesso!</CardTitle>
+            <CardTitle>{t('successTitle')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Guarde este segredo — não será exibido novamente.
-            </p>
+            <p className="text-sm text-muted-foreground">{t('successSecret')}</p>
             <div className="rounded-md border border-yellow-500 bg-yellow-50 p-4 dark:bg-yellow-950">
-              <p className="text-xs font-medium text-yellow-800 dark:text-yellow-200 mb-1">Webhook Secret</p>
-              <code className="break-all text-sm font-mono text-yellow-900 dark:text-yellow-100">{webhookSecret}</code>
+              <p className="text-xs font-medium text-yellow-800 dark:text-yellow-200 mb-1">
+                {t('webhookSecretLabel')}
+              </p>
+              <code className="break-all text-sm font-mono text-yellow-900 dark:text-yellow-100">
+                {webhookSecret}
+              </code>
             </div>
             <Button className="w-full" onClick={() => router.replace('/login?registered=1')}>
-              Ir para o login
+              {t('goToLogin')}
             </Button>
           </CardContent>
         </Card>
@@ -80,33 +84,34 @@ export default function RegisterPage() {
     <div className="flex min-h-screen items-center justify-center">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Criar Tenant</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1">
-              <Label htmlFor="tenantName">Nome do Tenant</Label>
+              <Label htmlFor="tenantName">{t('tenantName')}</Label>
               <Input id="tenantName" value={tenantName} onChange={e => setTenantName(e.target.value)} required />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="adminEmail">Email do administrador</Label>
+              <Label htmlFor="adminEmail">{t('adminEmail')}</Label>
               <Input id="adminEmail" type="email" value={adminEmail} onChange={e => setAdminEmail(e.target.value)} required />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="adminPassword">Senha</Label>
+              <Label htmlFor="adminPassword">{t('adminPassword')}</Label>
               <Input id="adminPassword" type="password" value={adminPassword} onChange={e => setAdminPassword(e.target.value)} required />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="confirmPassword">Confirmar senha</Label>
+              <Label htmlFor="confirmPassword">{t('confirmPassword')}</Label>
               <Input id="confirmPassword" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Criando...' : 'Criar conta'}
+              {loading ? t('submitting') : t('submit')}
             </Button>
           </form>
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            Já tem conta? <a href="/login" className="underline">Entrar</a>
+            {t('hasAccount')}{' '}
+            <a href="/login" className="underline">{t('signIn')}</a>
           </p>
         </CardContent>
       </Card>

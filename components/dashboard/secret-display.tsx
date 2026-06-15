@@ -1,11 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Eye, EyeOff, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export function SecretDisplay({ value, label = 'Segredo' }: { value: string; label?: string }) {
+export function SecretDisplay({ value, label }: { value: string; label?: string }) {
+  const t = useTranslations('secret');
+  label ??= t('defaultLabel');
   const [revealed, setRevealed] = useState(false);
   const [copied, setCopied] = useState(false);
 

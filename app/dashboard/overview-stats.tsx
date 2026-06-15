@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { eventsApi } from '@/lib/api/events';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -14,6 +15,7 @@ interface Stats {
 }
 
 export function OverviewStats() {
+  const t = useTranslations('overview');
   const [stats, setStats] = useState<Stats | null>(null);
 
   useEffect(() => {
@@ -52,31 +54,31 @@ export function OverviewStats() {
 
   const items = [
     {
-      label: 'Eventos (24h)',
-      value: stats.total.toLocaleString('pt-BR'),
+      label: t('events24h'),
+      value: stats.total.toLocaleString(),
       icon: Zap,
-      description: 'Total aceitos',
+      description: t('totalAccepted'),
       highlight: 'normal' as const,
     },
     {
-      label: 'Taxa de Sucesso',
+      label: t('successRate'),
       value: `${successRate}%`,
       icon: CheckCircle,
-      description: `${stats.succeeded.toLocaleString('pt-BR')} entregues`,
+      description: t('deliveredCount', { count: stats.succeeded.toLocaleString() }),
       highlight: successRate < 90 ? 'warning' : 'normal',
     },
     {
-      label: 'Falha Crítica',
-      value: stats.critical.toLocaleString('pt-BR'),
+      label: t('criticalFailure'),
+      value: stats.critical.toLocaleString(),
       icon: AlertTriangle,
-      description: 'Aguardando replay',
+      description: t('awaitingReplay'),
       highlight: stats.critical > 0 ? 'error' : 'normal',
     },
     {
-      label: 'Pendentes',
-      value: stats.pending.toLocaleString('pt-BR'),
+      label: t('pending'),
+      value: stats.pending.toLocaleString(),
       icon: Clock,
-      description: 'Na fila agora',
+      description: t('inQueueNow'),
       highlight: 'normal' as const,
     },
   ];

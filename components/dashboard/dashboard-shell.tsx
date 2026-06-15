@@ -3,31 +3,33 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/lib/auth/auth-context';
 import { AuthUser } from '@/lib/types/auth';
 import { Logo } from '@/components/logo';
 import { Breadcrumbs } from '@/components/dashboard/breadcrumbs';
 import { ColorModeSwitcher } from '@/components/color-mode-switcher';
+import { LanguageSwitcher } from '@/components/dashboard/language-switcher';
 import {
   LayoutDashboard, Webhook, Zap, Radio, Key, Users, Settings, LogOut, Menu,
 } from 'lucide-react';
 
 interface NavItem {
-  label: string;
+  labelKey: keyof ReturnType<typeof useTranslations<'nav'>>;
   href: string;
   icon: React.ElementType;
   adminOnly?: boolean;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Visão Geral',   href: '/dashboard',              icon: LayoutDashboard },
-  { label: 'Destinos',      href: '/dashboard/destinations',  icon: Webhook },
-  { label: 'Eventos',       href: '/dashboard/events',        icon: Zap },
-  { label: 'Senders',       href: '/dashboard/senders',       icon: Radio },
-  { label: 'API Keys',      href: '/dashboard/api-keys',      icon: Key },
-  { label: 'Usuários',      href: '/dashboard/users',         icon: Users, adminOnly: true },
-  { label: 'Configurações', href: '/dashboard/settings',      icon: Settings },
+  { labelKey: 'overview',      href: '/dashboard',              icon: LayoutDashboard },
+  { labelKey: 'destinations',  href: '/dashboard/destinations', icon: Webhook },
+  { labelKey: 'events',        href: '/dashboard/events',       icon: Zap },
+  { labelKey: 'senders',       href: '/dashboard/senders',      icon: Radio },
+  { labelKey: 'apiKeys',       href: '/dashboard/api-keys',     icon: Key },
+  { labelKey: 'users',         href: '/dashboard/users',        icon: Users, adminOnly: true },
+  { labelKey: 'settings',      href: '/dashboard/settings',     icon: Settings },
 ];
 
 export function DashboardShell({
@@ -37,6 +39,7 @@ export function DashboardShell({
   children: React.ReactNode;
   user: AuthUser | null;
 }) {
+  const t = useTranslations('nav');
   const pathname = usePathname();
   const { logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -68,7 +71,7 @@ export function DashboardShell({
                 )}
               >
                 <item.icon className="h-4 w-4" />
-                {item.label}
+                {t(item.labelKey as string)}
               </Link>
             </li>
           );
@@ -86,7 +89,7 @@ export function DashboardShell({
           className="flex w-full items-center gap-2 text-sm text-muted-foreground hover:text-destructive transition-colors"
         >
           <LogOut className="h-4 w-4" />
-          Sair
+          {t('signOut')}
         </button>
       </div>
     </nav>
@@ -94,12 +97,10 @@ export function DashboardShell({
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Sidebar desktop */}
       <aside className="hidden md:flex w-60 flex-shrink-0 border-r bg-background flex-col">
         {sidebar}
       </aside>
 
-      {/* Drawer mobile */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
@@ -109,24 +110,22 @@ export function DashboardShell({
         </div>
       )}
 
-      {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        {/* Topbar */}
         <header className="h-14 border-b flex items-center px-4 gap-3 flex-shrink-0">
           <button
             className="md:hidden"
             onClick={() => setMobileOpen(true)}
-            aria-label="Abrir menu"
+            aria-label="Menu"
           >
             <Menu className="h-5 w-5" />
           </button>
           <Breadcrumbs />
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-2">
+            <LanguageSwitcher />
             <ColorModeSwitcher />
           </div>
         </header>
 
-        {/* Área de conteúdo */}
         <main className="flex-1 overflow-auto p-6">
           {children}
         </main>
