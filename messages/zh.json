@@ -107,6 +107,11 @@
     "pageTitle": "目标",
     "pageDesc": "Webhook交付的目标URL。",
     "newButton": "新建目标",
+    "filters": {
+      "status": "状态",
+      "statusAll": "全部状态",
+      "clearFilters": "清除筛选"
+    },
     "table": {
       "url": "URL",
       "status": "状态",

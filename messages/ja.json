@@ -107,6 +107,11 @@
     "pageTitle": "送信先",
     "pageDesc": "Webhook配信のための送信先URL。",
     "newButton": "新規送信先",
+    "filters": {
+      "status": "ステータス",
+      "statusAll": "すべてのステータス",
+      "clearFilters": "フィルターをクリア"
+    },
     "table": {
       "url": "URL",
       "status": "ステータス",

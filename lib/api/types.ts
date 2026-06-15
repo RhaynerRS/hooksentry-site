@@ -78,6 +78,10 @@ export interface Event {
   deliveredAt: string | null;
 }
 
+export interface GetDestinationsParams extends PaginationParams {
+  status?: DestinationStatus;
+}
+
 export interface GetEventsParams extends PaginationParams {
   status?: EventStatus;
   destinationId?: string;

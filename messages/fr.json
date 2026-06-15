@@ -107,6 +107,11 @@
     "pageTitle": "Destinations",
     "pageDesc": "URLs de destination pour la livraison de webhooks.",
     "newButton": "Nouvelle Destination",
+    "filters": {
+      "status": "Statut",
+      "statusAll": "Tous les statuts",
+      "clearFilters": "Effacer les filtres"
+    },
     "table": {
       "url": "URL",
       "status": "Statut",

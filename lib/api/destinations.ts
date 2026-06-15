@@ -1,14 +1,19 @@
 import { api, ApiClientError } from './client';
 import type {
   Destination, CreateDestinationRequest, UpdateDestinationRequest,
-  CreateDestinationResponse, IngestTokenResponse, PaginatedResponse, PaginationParams,
+  CreateDestinationResponse, IngestTokenResponse, PaginatedResponse, GetDestinationsParams,
 } from './types';
 
 export const destinationsApi = {
-  list: (params?: PaginationParams) =>
-    api.get<PaginatedResponse<Destination>>(
-      `/destinations?Qt=${params?.pageSize ?? 20}&Pg=${params?.page ?? 1}&CpOrd=id&TpOrd=Desc`
-    ),
+  list: (params?: GetDestinationsParams) => {
+    const qs = new URLSearchParams();
+    qs.set('Qt', String(params?.pageSize ?? 20));
+    qs.set('Pg', String(params?.page ?? 1));
+    qs.set('CpOrd', 'id');
+    qs.set('TpOrd', 'Desc');
+    if (params?.status) qs.set('Status', params.status);
+    return api.get<PaginatedResponse<Destination>>(`/destinations?${qs}`);
+  },
 
   get: async (id: string) => {
     const { items } = await api.get<PaginatedResponse<Destination>>(

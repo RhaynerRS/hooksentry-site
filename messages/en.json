@@ -107,6 +107,11 @@
     "pageTitle": "Destinations",
     "pageDesc": "Destination URLs for webhook delivery.",
     "newButton": "New Destination",
+    "filters": {
+      "status": "Status",
+      "statusAll": "All statuses",
+      "clearFilters": "Clear Filters"
+    },
     "table": {
       "url": "URL",
       "status": "Status",
