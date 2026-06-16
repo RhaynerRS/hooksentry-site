@@ -30,14 +30,20 @@ export default function SenderDetailPage() {
     (async () => {
       try {
         const s = await sendersApi.get(id);
-        const [dest, mappingRes] = await Promise.all([
-          destinationsApi.get(s.destinationId),
-          sendersApi.getMapping(id),
-        ]);
+        const dest = await destinationsApi.get(s.destinationId);
+
+        let mappingData: Record<string, unknown> | null = null;
+        try {
+          const mappingRes = await sendersApi.getMapping(id);
+          mappingData = mappingRes.mapping;
+        } catch {
+          // 404 means no mapping configured — not an error
+        }
+
         if (!cancelled) {
           setSender(s);
           setDestination(dest);
-          setMapping(mappingRes.mapping);
+          setMapping(mappingData);
         }
       } catch {
         if (!cancelled) setNotFound(true);
