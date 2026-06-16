@@ -7,6 +7,7 @@ import { sendersApi } from '@/lib/api/senders';
 import { ConfirmDialog } from '@/components/dashboard/confirm-dialog';
 import { Pagination } from '@/components/dashboard/pagination';
 import { Skeleton } from '@/components/ui/skeleton';
+import { TruncatedText } from '@/components/ui/truncated-text';
 import { Button } from '@/components/ui/button';
 
 interface SenderRow {
@@ -86,8 +87,8 @@ export function SendersTable({ senders, total, page, pageSize, loading, onDelete
                   <td className="px-4 py-3">
                     {s.label ?? <span className="text-muted-foreground">{t('table.noName')}</span>}
                   </td>
-                  <td className="px-4 py-3 font-mono text-xs max-w-[220px] truncate text-muted-foreground" title={s.destinationUrl}>
-                    {s.destinationUrl}
+                  <td className="px-4 py-3 max-w-[220px]">
+                    <TruncatedText text={s.destinationUrl} className="font-mono text-xs text-muted-foreground" />
                   </td>
                   <td className="px-4 py-3">
                     {s.hasMapping ? t('table.yes') : t('table.no')}
@@ -95,15 +96,15 @@ export function SendersTable({ senders, total, page, pageSize, loading, onDelete
                   <td className="px-4 py-3 text-xs text-muted-foreground whitespace-nowrap">
                     {new Date(s.createdAt).toLocaleString()}
                   </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center justify-end gap-1">
-                      <Button asChild variant="ghost" size="sm">
+                  <td className="px-4 py-3 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      <Button asChild variant="outline" size="sm">
                         <Link href={`/dashboard/senders/${s.id}`}>{t('table.view')}</Link>
                       </Button>
                       <Button
-                        variant="ghost"
+                        variant="outline"
                         size="sm"
-                        className="text-destructive hover:text-destructive"
+                        className="text-destructive hover:text-destructive border-destructive/30 hover:border-destructive"
                         onClick={() => setDeleteId(s.id)}
                       >
                         {t('table.remove')}

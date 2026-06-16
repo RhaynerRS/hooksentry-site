@@ -39,8 +39,8 @@ export default function DashboardPage() {
             <OverviewChart />
           </Suspense>
         </div>
-        <div className="space-y-4">
-          <Suspense fallback={<Skeleton className="h-64 rounded-xl" />}>
+        <div className="h-full">
+          <Suspense fallback={<Skeleton className="h-full rounded-xl" />}>
             <OpenCircuitBreakers />
           </Suspense>
         </div>

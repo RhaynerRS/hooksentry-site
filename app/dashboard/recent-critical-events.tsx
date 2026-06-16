@@ -6,6 +6,7 @@ import { eventsApi } from '@/lib/api/events';
 import { Event } from '@/lib/api/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { TruncatedText } from '@/components/ui/truncated-text';
 import Link from 'next/link';
 
 export function RecentCriticalEvents() {
@@ -57,8 +58,12 @@ export function RecentCriticalEvents() {
             <tbody>
               {items.map(event => (
                 <tr key={event.id} className="border-b last:border-0">
-                  <td className="py-2 font-mono text-xs truncate max-w-[120px]">{event.id.slice(0, 8)}…</td>
-                  <td className="py-2 truncate max-w-[180px] text-muted-foreground">{event.destinationUrl}</td>
+                  <td className="py-2 max-w-[120px]">
+                    <TruncatedText text={event.id} className="font-mono text-xs" />
+                  </td>
+                  <td className="py-2 max-w-[180px]">
+                    <TruncatedText text={event.destinationUrl} className="text-muted-foreground text-xs" />
+                  </td>
                   <td className="py-2">{event.currentRetryCount}</td>
                   <td className="py-2 text-muted-foreground">
                     {new Date(event.acceptedAt).toLocaleString()}

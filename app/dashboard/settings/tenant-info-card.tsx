@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Tenant } from '@/lib/api/types';
 import { CopyButton } from '@/components/ui/copy-button';
 import { Badge } from '@/components/ui/badge';
+import { TruncatedText } from '@/components/ui/truncated-text';
 
 interface Props {
   tenant: Tenant | null;
@@ -29,7 +30,10 @@ export function TenantInfoCard({ tenant, isAdmin }: Props) {
         <div className="flex items-start justify-between gap-4">
           <dt className="text-muted-foreground shrink-0">{t('id')}</dt>
           <dd className="flex items-center gap-1.5 min-w-0">
-            <code className="text-xs font-mono truncate">{tenant?.id ?? '—'}</code>
+            {tenant?.id
+              ? <TruncatedText text={tenant.id} className="font-mono text-xs" />
+              : <span className="text-xs">—</span>
+            }
             {tenant?.id && <CopyButton value={tenant.id} />}
           </dd>
         </div>

@@ -108,6 +108,10 @@ export interface CreateSenderRequest {
   label?: string;
 }
 
+export interface CreateSenderResponse extends Sender {
+  ingestToken: string;
+}
+
 // ─── API Keys ─────────────────────────────────────────────────────────────────
 export interface ApiKey {
   id: string;

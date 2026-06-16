@@ -86,10 +86,10 @@ export function UserRow({ user, isSelf, onChange }: Props) {
         <td className="px-4 py-3 text-xs text-muted-foreground whitespace-nowrap">
           {new Date(user.createdAt).toLocaleDateString()}
         </td>
-        <td className="px-4 py-3">
-          <div className="flex items-center justify-end gap-1">
+        <td className="px-4 py-3 text-right">
+          <div className="flex items-center justify-end gap-2">
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               disabled={isSelf || updatingStatus}
               onClick={handleStatusToggle}
@@ -97,9 +97,9 @@ export function UserRow({ user, isSelf, onChange }: Props) {
               {user.status === 'Active' ? t('actions.deactivate') : t('actions.activate')}
             </Button>
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
-              className="text-destructive hover:text-destructive"
+              className="text-destructive hover:text-destructive border-destructive/30 hover:border-destructive"
               disabled={isSelf}
               onClick={() => setRemoveOpen(true)}
             >

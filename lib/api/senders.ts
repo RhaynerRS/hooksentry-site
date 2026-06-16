@@ -1,6 +1,6 @@
 import { api } from './client';
 import type {
-  Sender, SenderDetail, CreateSenderRequest,
+  Sender, SenderDetail, CreateSenderRequest, CreateSenderResponse,
   IngestTokenResponse, PaginatedResponse, PaginationParams,
 } from './types';
 
@@ -14,9 +14,7 @@ export const sendersApi = {
     api.get<SenderDetail>(`/senders/${id}`),
 
   create: (destinationId: string, body: CreateSenderRequest) =>
-    api.post<{ sender: Sender; ingestToken: string }>(
-      `/destinations/${destinationId}/senders`, body
-    ),
+    api.post<CreateSenderResponse>(`/destinations/${destinationId}/senders`, body),
 
   delete: (id: string) =>
     api.delete(`/senders/${id}`),

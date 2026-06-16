@@ -6,6 +6,11 @@ import { Event } from '@/lib/api/types';
 import { EventStatusBadge } from '@/components/dashboard/status-badge';
 import { CopyButton } from '@/components/ui/copy-button';
 
+function validDate(s: string | null | undefined): string | null {
+  if (!s) return null;
+  return new Date(s).getFullYear() > 1 ? s : null;
+}
+
 export function EventInfoCard({ event }: { event: Event }) {
   const t = useTranslations('events.detail');
 
@@ -51,10 +56,10 @@ export function EventInfoCard({ event }: { event: Event }) {
           <dd>{event.currentRetryCount}</dd>
         </div>
 
-        {event.nextAttemptAt && (
+        {validDate(event.nextAttemptAt) && (
           <div>
             <dt className="text-xs text-muted-foreground mb-1">{t('nextAttempt')}</dt>
-            <dd>{new Date(event.nextAttemptAt).toLocaleString()}</dd>
+            <dd>{new Date(event.nextAttemptAt!).toLocaleString()}</dd>
           </div>
         )}
 
@@ -63,10 +68,10 @@ export function EventInfoCard({ event }: { event: Event }) {
           <dd>{new Date(event.acceptedAt).toLocaleString()}</dd>
         </div>
 
-        {event.deliveredAt && (
+        {validDate(event.deliveredAt) && (
           <div>
             <dt className="text-xs text-muted-foreground mb-1">{t('deliveredAt')}</dt>
-            <dd>{new Date(event.deliveredAt).toLocaleString()}</dd>
+            <dd>{new Date(event.deliveredAt!).toLocaleString()}</dd>
           </div>
         )}
       </dl>

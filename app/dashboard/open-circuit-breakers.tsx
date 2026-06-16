@@ -7,8 +7,9 @@ import { Destination } from '@/lib/api/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CircuitBreakerBadge } from '@/components/dashboard/status-badge';
 import { Skeleton } from '@/components/ui/skeleton';
+import { TruncatedText } from '@/components/ui/truncated-text';
 import Link from 'next/link';
-import { ShieldAlert } from 'lucide-react';
+import { ShieldCheck, ShieldAlert } from 'lucide-react';
 
 export function OpenCircuitBreakers() {
   const t = useTranslations('overview');
@@ -25,30 +26,32 @@ export function OpenCircuitBreakers() {
   }, []);
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <ShieldAlert className="h-4 w-4" />
           {t('openCircuitBreakers')}
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1 flex flex-col">
         {loading ? (
           <div className="space-y-2">
             <Skeleton className="h-5 w-full" />
             <Skeleton className="h-5 w-4/5" />
           </div>
         ) : open.length === 0 ? (
-          <p className="text-sm text-muted-foreground">{t('allClosed')}</p>
+          <div className="flex-1 flex flex-col items-center justify-center gap-3 text-muted-foreground">
+            <div className="rounded-full bg-muted p-3">
+              <ShieldCheck className="h-5 w-5" />
+            </div>
+            <p className="text-sm">{t('allClosed')}</p>
+          </div>
         ) : (
           <ul className="space-y-2">
             {open.map(dest => (
-              <li key={dest.id} className="flex items-center justify-between text-sm">
-                <Link
-                  href={`/dashboard/destinations/${dest.id}`}
-                  className="truncate underline-offset-2 hover:underline max-w-[160px]"
-                >
-                  {dest.url}
+              <li key={dest.id} className="flex items-center justify-between gap-2 text-sm">
+                <Link href={`/dashboard/destinations/${dest.id}`} className="min-w-0 flex-1 hover:underline underline-offset-2">
+                  <TruncatedText text={dest.url} className="font-mono text-xs text-muted-foreground" />
                 </Link>
                 <CircuitBreakerBadge state={dest.circuitBreakerState} />
               </li>

@@ -8,6 +8,7 @@ import { EmptyState } from '@/components/dashboard/empty-state';
 import { Pagination } from '@/components/dashboard/pagination';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { TruncatedText } from '@/components/ui/truncated-text';
 import { Webhook } from 'lucide-react';
 
 interface DestinationsTableProps {
@@ -56,7 +57,9 @@ export function DestinationsTable({ destinations, total, page, pageSize, loading
           <tbody>
             {destinations.map(dest => (
               <tr key={dest.id} className="border-b last:border-0 hover:bg-muted/30">
-                <td className="px-4 py-3 font-mono text-xs max-w-[280px] truncate">{dest.url}</td>
+                <td className="px-4 py-3 max-w-[280px]">
+                  <TruncatedText text={dest.url} className="font-mono text-xs" />
+                </td>
                 <td className="px-4 py-3">
                   <DestinationStatusBadge status={dest.status} />
                 </td>
@@ -73,7 +76,7 @@ export function DestinationsTable({ destinations, total, page, pageSize, loading
                 <td className="px-4 py-3">{dest.serverRateLimit} req/s</td>
                 <td className="px-4 py-3 text-muted-foreground">{dest.authType ?? '—'}</td>
                 <td className="px-4 py-3 text-right">
-                  <Button variant="ghost" size="sm" asChild>
+                  <Button variant="outline" size="sm" asChild>
                     <Link href={`/dashboard/destinations/${dest.id}`}>{t('table.details')}</Link>
                   </Button>
                 </td>

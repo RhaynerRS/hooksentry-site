@@ -8,6 +8,7 @@ import { Event } from '@/lib/api/types';
 import { EventStatusBadge } from '@/components/dashboard/status-badge';
 import { ConfirmDialog } from '@/components/dashboard/confirm-dialog';
 import { Pagination } from '@/components/dashboard/pagination';
+import { TruncatedText } from '@/components/ui/truncated-text';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 
@@ -83,13 +84,11 @@ export function EventsTable({
           <tbody className="divide-y">
             {events.map(event => (
               <tr key={event.id} className="hover:bg-muted/30 transition-colors">
-                <td className="px-4 py-3 font-mono text-xs">
-                  <span title={event.id}>{event.id.slice(0, 8)}…</span>
+                <td className="px-4 py-3 max-w-[120px]">
+                  <TruncatedText text={event.id} className="font-mono text-xs" />
                 </td>
                 <td className="px-4 py-3 max-w-[200px]">
-                  <span className="truncate block text-xs text-muted-foreground" title={event.destinationUrl}>
-                    {event.destinationUrl}
-                  </span>
+                  <TruncatedText text={event.destinationUrl} className="text-xs text-muted-foreground" />
                 </td>
                 <td className="px-4 py-3">
                   <EventStatusBadge status={event.status} />
@@ -99,7 +98,9 @@ export function EventsTable({
                   {new Date(event.acceptedAt).toLocaleString()}
                 </td>
                 <td className="px-4 py-3 text-xs text-muted-foreground whitespace-nowrap">
-                  {event.deliveredAt ? new Date(event.deliveredAt).toLocaleString() : '—'}
+                  {event.deliveredAt && new Date(event.deliveredAt).getFullYear() > 1
+                    ? new Date(event.deliveredAt).toLocaleString()
+                    : '—'}
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">

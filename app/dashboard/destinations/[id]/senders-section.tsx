@@ -34,10 +34,10 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
   const handleCreate = async () => {
     setCreating(true);
     try {
-      const { sender, ingestToken } = await sendersApi.create(destinationId, { label: label || undefined });
-      setSenders(prev => [sender, ...prev]);
-      setNewIngestToken(ingestToken);
-      setNewSenderId(sender.id);
+      const result = await sendersApi.create(destinationId, { label: label || undefined });
+      setSenders(prev => [result, ...prev]);
+      setNewIngestToken(result.ingestToken);
+      setNewSenderId(result.id);
       setCreateOpen(false);
       setLabel('');
       setTokenDialogOpen(true);
