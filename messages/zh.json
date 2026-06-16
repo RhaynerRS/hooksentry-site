@@ -226,13 +226,20 @@
     "sectionTitle": "发送者",
     "addButton": "添加发送者",
     "empty": "此目标暂无注册发送者。",
+    "pageTitle": "发送者",
+    "pageDesc": "与目标URL关联的Webhook源。",
     "table": {
       "label": "标签",
+      "destination": "目标",
       "mapping": "映射",
+      "createdAt": "创建时间",
       "noName": "无名称",
       "yes": "是",
       "no": "否",
-      "remove": "删除"
+      "view": "查看",
+      "remove": "删除",
+      "empty": "未配置发送者。",
+      "emptyHint": "从目标创建发送者"
     },
     "createDialog": {
       "title": "添加发送者",
@@ -246,12 +253,66 @@
       "title": "发送者已创建",
       "desc": "使用以下采集令牌配置Webhook发送。出于安全原因，它不会再次显示。",
       "close": "关闭",
-      "tokenLabel": "采集令牌"
+      "tokenLabel": "采集令牌",
+      "viewDetail": "查看完整配置"
     },
     "deleteDialog": {
       "title": "删除发送者",
       "desc": "此操作不可逆。发送者将被永久删除。",
       "confirm": "删除"
+    },
+    "detail": {
+      "back": "返回发送者列表",
+      "notFound": "未找到发送者。"
+    },
+    "info": {
+      "title": "信息",
+      "id": "ID",
+      "labelField": "标签",
+      "noLabel": "无名称",
+      "destination": "目标",
+      "createdAt": "创建时间"
+    },
+    "ingestToken": {
+      "title": "采集令牌",
+      "activeMessage": "当前令牌已配置并处于活跃状态。重新生成令牌将立即使之前的令牌失效。",
+      "regenerate": "重新生成令牌",
+      "confirmTitle": "重新生成采集令牌",
+      "confirmDesc": "之前的令牌将立即失效。此操作无法撤销。",
+      "confirmLabel": "重新生成",
+      "newTokenLabel": "新采集令牌",
+      "configUrlLabel": "在外部服务中配置此URL：",
+      "warning": "请立即保存此令牌。出于安全原因，它不会再次显示。在关闭此窗口之前，请更新您的外部服务配置。",
+      "error": "令牌重新生成失败，请重试。"
+    },
+    "mapping": {
+      "title": "映射DSL",
+      "emptyTitle": "未配置映射",
+      "emptyDesc": "无映射时，原始载荷将直接投递至目标。",
+      "configureButton": "配置映射",
+      "editButton": "编辑",
+      "removeButton": "删除",
+      "footer": "载荷在入队前会被规范化。",
+      "editorTitle": "映射定义",
+      "save": "保存",
+      "cancel": "取消",
+      "saving": "保存中...",
+      "jsonError": "无效的JSON：{detail}",
+      "removeConfirmTitle": "删除映射",
+      "removeConfirmDesc": "原始载荷将在不进行转换的情况下投递。",
+      "removeConfirmLabel": "删除",
+      "dslTitle": "DSL参考",
+      "dslDesc": "JSON，每个键为输出字段，值为路径表达式。"
+    },
+    "dangerZone": {
+      "title": "危险区域",
+      "removeTitle": "删除发送者",
+      "removeDesc": "采集令牌将立即失效。使用此令牌发送的请求将被拒绝。",
+      "removeButton": "删除发送者",
+      "confirmTitle": "删除发送者？",
+      "confirmDesc": "采集令牌将立即失效。此操作不可逆。",
+      "confirmLabel": "删除",
+      "removing": "删除中..."
     }
   },
   "status": {
@@ -329,6 +390,171 @@
       "logsTitle": "投递日志",
       "logsMessage": "每次投递尝试的详细日志可在 Grafana/Loki 中查看。",
       "openGrafana": "在 Grafana 中打开"
+    }
+  },
+  "apiKeys": {
+    "pageTitle": "API密钥",
+    "pageDesc": "通过API进行事件采集的凭证。",
+    "newButton": "新建API密钥",
+    "showInactive": "显示已撤销密钥",
+    "count": "找到{count}个密钥",
+    "table": {
+      "name": "名称",
+      "status": "状态",
+      "createdAt": "创建时间",
+      "revokedAt": "撤销时间",
+      "revoke": "撤销",
+      "active": "有效",
+      "revoked": "已撤销",
+      "empty": "暂无API密钥。"
+    },
+    "revokeDialog": {
+      "title": "撤销\"{name}\"？",
+      "desc": "使用此密钥的请求将立即被拒绝。",
+      "confirm": "撤销"
+    },
+    "createDialog": {
+      "title": "新建API密钥",
+      "titleReveal": "API密钥已创建",
+      "nameLabel": "名称",
+      "namePlaceholder": "例：生产环境、GitHub Actions、测试环境",
+      "nameHint": "用于在仪表盘中识别密钥的描述性标识符。",
+      "nameRequired": "名称不能为空",
+      "submit": "创建密钥",
+      "submitting": "创建中...",
+      "cancel": "取消",
+      "done": "完成",
+      "warningTitle": "请立即保存此密钥",
+      "warningDesc": "出于安全原因，关闭此窗口后密钥将不再显示。",
+      "keyLabel": "API密钥",
+      "usageTitle": "使用方法：",
+      "error": "创建API密钥时出错"
+    }
+  },
+  "settings": {
+    "pageTitle": "设置",
+    "pageDesc": "租户参数与集成指南。",
+    "tenantInfo": {
+      "title": "租户信息",
+      "name": "名称",
+      "id": "租户ID",
+      "plan": "套餐",
+      "planValue": "MVP",
+      "createdAt": "创建时间",
+      "adminBadge": "管理员"
+    },
+    "webhookSecret": {
+      "title": "Webhook 密钥",
+      "desc": "您的客户端应使用此密钥验证 webhook 是否由 HookSentry 发送（X-HookSentry-Signature 请求头）。",
+      "codeTitle": "验证代码示例",
+      "nodeLabel": "Node.js",
+      "pythonLabel": "Python"
+    },
+    "resilience": {
+      "title": "弹性参数",
+      "maxTrys": "最大重试次数",
+      "maxTrysDesc": "达到此限制的事件将移至死信队列。",
+      "timer": "熔断器计时器",
+      "timerDesc": "（{minutes} 分钟）— 连续5次失败后 OPEN 状态的持续时间。",
+      "backoffTitle": "退避计划（仅供参考）",
+      "attempt": "次数",
+      "delay": "延迟",
+      "supportNote": "如需更改这些参数，请联系支持团队。"
+    },
+    "integration": {
+      "title": "集成指南",
+      "expand": "查看指南",
+      "collapse": "隐藏指南",
+      "ingestEndpoint": {
+        "title": "摄取端点",
+        "desc": "通过 POST 将 webhook 事件发送到此端点：",
+        "tenantIdLabel": "您的租户ID：",
+        "tokenLabel": "在目标/发送方配置中生成的 dst_ 或 sndr_ 令牌。"
+      },
+      "headers": {
+        "title": "必需请求头",
+        "desc": "在每个摄取请求中包含以下请求头："
+      },
+      "idempotency": {
+        "title": "幂等性（可选）",
+        "desc": "使用相同键的重发将返回 200 和原始事件，而不会重新处理。"
+      },
+      "signature": {
+        "title": "验证签名（在您的服务器上）",
+        "desc": "使用 Webhook 密钥验证交付到您端点的事件中的 X-HookSentry-Signature 请求头。"
+      }
+    }
+  },
+  "users": {
+    "pageTitle": "用户与邀请",
+    "pageDesc": "管理团队成员和邀请链接。",
+    "tabs": {
+      "members": "成员",
+      "invites": "邀请"
+    },
+    "table": {
+      "email": "邮箱",
+      "role": "角色",
+      "status": "状态",
+      "memberSince": "加入时间"
+    },
+    "role": {
+      "Developer": "开发者",
+      "Admin": "管理员"
+    },
+    "userStatus": {
+      "Active": "活跃",
+      "Inactive": "未激活"
+    },
+    "actions": {
+      "activate": "激活",
+      "deactivate": "停用",
+      "remove": "移除"
+    },
+    "removeDialog": {
+      "title": "移除用户？",
+      "desc": "此操作将永久从租户中移除该用户。",
+      "confirm": "移除"
+    },
+    "toast": {
+      "roleUpdated": "角色已更新为 {role}",
+      "statusUpdated": "状态已更新。",
+      "removed": "用户已移除。"
+    },
+    "invites": {
+      "generateButton": "生成邀请",
+      "empty": "尚未生成邀请链接。",
+      "copyLink": "复制链接",
+      "inviteStatus": {
+        "Pending": "待使用",
+        "Used": "已使用",
+        "Expired": "已过期"
+      },
+      "table": {
+        "status": "状态",
+        "expiresAt": "过期时间",
+        "createdAt": "创建时间",
+        "usedAt": "使用时间"
+      },
+      "createDialog": {
+        "title": "生成邀请链接",
+        "titleReveal": "邀请链接已创建",
+        "validityLabel": "有效期",
+        "days1": "1天",
+        "days3": "3天",
+        "days7": "7天",
+        "days14": "14天",
+        "days30": "30天",
+        "cancel": "取消",
+        "submit": "生成",
+        "submitting": "生成中...",
+        "error": "生成邀请时出错",
+        "desc": "将此链接分享给您想邀请的人。每个链接只能使用一次。",
+        "expiry": "将在 {days} 天后过期。",
+        "warning": "请立即复制此链接。关闭此窗口后将不再显示。",
+        "linkLabel": "邀请链接",
+        "done": "完成"
+      }
     }
   },
   "pagination": {

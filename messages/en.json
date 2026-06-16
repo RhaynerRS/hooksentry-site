@@ -226,13 +226,20 @@
     "sectionTitle": "Senders",
     "addButton": "Add Sender",
     "empty": "No senders registered for this destination.",
+    "pageTitle": "Senders",
+    "pageDesc": "Webhook sources linked to destination URLs.",
     "table": {
       "label": "Label",
+      "destination": "Destination",
       "mapping": "Mapping",
+      "createdAt": "Created at",
       "noName": "No name",
       "yes": "Yes",
       "no": "No",
-      "remove": "Remove"
+      "view": "View",
+      "remove": "Remove",
+      "empty": "No senders configured.",
+      "emptyHint": "Create a sender from a destination"
     },
     "createDialog": {
       "title": "Add Sender",
@@ -246,12 +253,66 @@
       "title": "Sender created",
       "desc": "Use the Ingest Token below to configure webhook sending. For security, it will not be shown again.",
       "close": "Close",
-      "tokenLabel": "Ingest Token"
+      "tokenLabel": "Ingest Token",
+      "viewDetail": "View full configuration"
     },
     "deleteDialog": {
       "title": "Remove Sender",
       "desc": "This action is irreversible. The sender will be permanently removed.",
       "confirm": "Remove"
+    },
+    "detail": {
+      "back": "Back to Senders",
+      "notFound": "Sender not found."
+    },
+    "info": {
+      "title": "Information",
+      "id": "ID",
+      "labelField": "Label",
+      "noLabel": "No name",
+      "destination": "Destination",
+      "createdAt": "Created at"
+    },
+    "ingestToken": {
+      "title": "Ingest Token",
+      "activeMessage": "The current token is configured and active. Regenerating the token will immediately invalidate the previous one.",
+      "regenerate": "Regenerate Token",
+      "confirmTitle": "Regenerate Ingest Token",
+      "confirmDesc": "The previous token will be immediately invalidated. This action cannot be undone.",
+      "confirmLabel": "Regenerate",
+      "newTokenLabel": "New Ingest Token",
+      "configUrlLabel": "Configure this URL in your external service:",
+      "warning": "Save this token now. For security, it will not be shown again. Update your external service before closing this window.",
+      "error": "Failed to regenerate the token. Please try again."
+    },
+    "mapping": {
+      "title": "Mapping DSL",
+      "emptyTitle": "No mapping configured",
+      "emptyDesc": "Without a mapping, the raw payload is delivered directly to the destination.",
+      "configureButton": "Configure Mapping",
+      "editButton": "Edit",
+      "removeButton": "Remove",
+      "footer": "Payload is normalized before being queued.",
+      "editorTitle": "Mapping Definition",
+      "save": "Save",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "jsonError": "Invalid JSON: {detail}",
+      "removeConfirmTitle": "Remove Mapping",
+      "removeConfirmDesc": "The raw payload will be delivered without transformation.",
+      "removeConfirmLabel": "Remove",
+      "dslTitle": "DSL Reference",
+      "dslDesc": "JSON where each key is an output field and the value is a path expression."
+    },
+    "dangerZone": {
+      "title": "Danger Zone",
+      "removeTitle": "Remove Sender",
+      "removeDesc": "The ingest token will be immediately invalidated. Requests sent with this token will be rejected.",
+      "removeButton": "Remove Sender",
+      "confirmTitle": "Remove sender?",
+      "confirmDesc": "The ingest token will be immediately invalidated. This action is irreversible.",
+      "confirmLabel": "Remove",
+      "removing": "Removing..."
     }
   },
   "status": {
@@ -329,6 +390,171 @@
       "logsTitle": "Delivery Logs",
       "logsMessage": "Detailed delivery attempt logs are available in Grafana/Loki.",
       "openGrafana": "Open in Grafana"
+    }
+  },
+  "apiKeys": {
+    "pageTitle": "API Keys",
+    "pageDesc": "Credentials for event ingestion via API.",
+    "newButton": "New API Key",
+    "showInactive": "Show revoked keys",
+    "count": "{count} key(s) found",
+    "table": {
+      "name": "Name",
+      "status": "Status",
+      "createdAt": "Created at",
+      "revokedAt": "Revoked at",
+      "revoke": "Revoke",
+      "active": "Active",
+      "revoked": "Revoked",
+      "empty": "No API Keys registered."
+    },
+    "revokeDialog": {
+      "title": "Revoke \"{name}\"?",
+      "desc": "Requests using this key will be immediately rejected.",
+      "confirm": "Revoke"
+    },
+    "createDialog": {
+      "title": "New API Key",
+      "titleReveal": "API Key created",
+      "nameLabel": "Name",
+      "namePlaceholder": "e.g. Production, GitHub Actions, Staging",
+      "nameHint": "Descriptive identifier to recognize the key in the dashboard.",
+      "nameRequired": "Name is required",
+      "submit": "Create Key",
+      "submitting": "Creating...",
+      "cancel": "Cancel",
+      "done": "Done",
+      "warningTitle": "Save this key now",
+      "warningDesc": "For security, this key will not be shown again after closing this window.",
+      "keyLabel": "API Key",
+      "usageTitle": "How to use:",
+      "error": "Error creating API Key"
+    }
+  },
+  "settings": {
+    "pageTitle": "Settings",
+    "pageDesc": "Tenant parameters and integration guide.",
+    "tenantInfo": {
+      "title": "Tenant Information",
+      "name": "Name",
+      "id": "Tenant ID",
+      "plan": "Plan",
+      "planValue": "MVP",
+      "createdAt": "Created at",
+      "adminBadge": "Admin"
+    },
+    "webhookSecret": {
+      "title": "Webhook Secret",
+      "desc": "Your clients should use this secret to verify that webhooks were sent by HookSentry (X-HookSentry-Signature header).",
+      "codeTitle": "Validation code examples",
+      "nodeLabel": "Node.js",
+      "pythonLabel": "Python"
+    },
+    "resilience": {
+      "title": "Resilience Parameters",
+      "maxTrys": "Max Retries",
+      "maxTrysDesc": "Events reaching this limit are moved to the Dead Letter Queue.",
+      "timer": "Circuit Breaker Timer",
+      "timerDesc": "({minutes} minutes) — duration of the OPEN state after 5 consecutive failures.",
+      "backoffTitle": "Backoff schedule (informational)",
+      "attempt": "Attempt",
+      "delay": "Delay",
+      "supportNote": "To change these parameters, contact support."
+    },
+    "integration": {
+      "title": "Integration Guide",
+      "expand": "View Guide",
+      "collapse": "Hide Guide",
+      "ingestEndpoint": {
+        "title": "Ingestion Endpoint",
+        "desc": "Send webhook events via POST to this endpoint:",
+        "tenantIdLabel": "your Tenant ID:",
+        "tokenLabel": "dst_ or sndr_ token generated in the destination/sender configuration."
+      },
+      "headers": {
+        "title": "Required Headers",
+        "desc": "Include these headers in every ingestion request:"
+      },
+      "idempotency": {
+        "title": "Idempotency (optional)",
+        "desc": "Resends with the same key return 200 with the original event without reprocessing."
+      },
+      "signature": {
+        "title": "Verify Signature (on your server)",
+        "desc": "Use the Webhook Secret above to verify the X-HookSentry-Signature header on events delivered to your endpoints."
+      }
+    }
+  },
+  "users": {
+    "pageTitle": "Users & Invites",
+    "pageDesc": "Manage team members and invite links.",
+    "tabs": {
+      "members": "Members",
+      "invites": "Invites"
+    },
+    "table": {
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "memberSince": "Member since"
+    },
+    "role": {
+      "Developer": "Developer",
+      "Admin": "Admin"
+    },
+    "userStatus": {
+      "Active": "Active",
+      "Inactive": "Inactive"
+    },
+    "actions": {
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "remove": "Remove"
+    },
+    "removeDialog": {
+      "title": "Remove user?",
+      "desc": "This action will permanently remove the user from the tenant.",
+      "confirm": "Remove"
+    },
+    "toast": {
+      "roleUpdated": "Role updated to {role}",
+      "statusUpdated": "Status updated.",
+      "removed": "User removed."
+    },
+    "invites": {
+      "generateButton": "Generate Invite",
+      "empty": "No invite links generated yet.",
+      "copyLink": "Copy Link",
+      "inviteStatus": {
+        "Pending": "Pending",
+        "Used": "Used",
+        "Expired": "Expired"
+      },
+      "table": {
+        "status": "Status",
+        "expiresAt": "Expires at",
+        "createdAt": "Created at",
+        "usedAt": "Used at"
+      },
+      "createDialog": {
+        "title": "Generate Invite Link",
+        "titleReveal": "Invite link created",
+        "validityLabel": "Validity",
+        "days1": "1 day",
+        "days3": "3 days",
+        "days7": "7 days",
+        "days14": "14 days",
+        "days30": "30 days",
+        "cancel": "Cancel",
+        "submit": "Generate",
+        "submitting": "Generating...",
+        "error": "Error generating invite",
+        "desc": "Share this link with the person you want to invite. Each link can only be used once.",
+        "expiry": "Expires in {days} day(s).",
+        "warning": "Copy this link now. It will not be shown again after closing this window.",
+        "linkLabel": "Invite Link",
+        "done": "Done"
+      }
     }
   },
   "pagination": {

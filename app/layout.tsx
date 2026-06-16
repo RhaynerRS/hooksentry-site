@@ -7,6 +7,7 @@ import "./globals.css";
 import { Provider } from "./provider";
 import { AuthProvider } from "@/lib/auth/auth-context";
 import { decodeJwtPayload } from "@/lib/auth/jwt";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default async function RootLayout({
           <Provider>
             <AuthProvider initialUser={user}>
               {children}
+              <Toaster />
             </AuthProvider>
           </Provider>
         </NextIntlClientProvider>

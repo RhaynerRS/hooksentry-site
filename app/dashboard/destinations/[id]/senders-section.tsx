@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { sendersApi } from '@/lib/api/senders';
 import { Sender } from '@/lib/api/types';
@@ -26,6 +27,7 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
   const [label, setLabel] = useState('');
   const [creating, setCreating] = useState(false);
   const [newIngestToken, setNewIngestToken] = useState<string | null>(null);
+  const [newSenderId, setNewSenderId] = useState<string | null>(null);
   const [tokenDialogOpen, setTokenDialogOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
@@ -35,6 +37,7 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
       const { sender, ingestToken } = await sendersApi.create(destinationId, { label: label || undefined });
       setSenders(prev => [sender, ...prev]);
       setNewIngestToken(ingestToken);
+      setNewSenderId(sender.id);
       setCreateOpen(false);
       setLabel('');
       setTokenDialogOpen(true);
@@ -84,14 +87,19 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
                     {sender.hasMapping ? t('table.yes') : t('table.no')}
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-destructive hover:text-destructive"
-                      onClick={() => setDeleteId(sender.id)}
-                    >
-                      {t('table.remove')}
-                    </Button>
+                    <div className="flex items-center justify-end gap-1">
+                      <Button asChild variant="ghost" size="sm">
+                        <Link href={`/dashboard/senders/${sender.id}`}>{t('table.view')}</Link>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-destructive hover:text-destructive"
+                        onClick={() => setDeleteId(sender.id)}
+                      >
+                        {t('table.remove')}
+                      </Button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -136,6 +144,16 @@ export function SendersSection({ destinationId, initialSenders }: Props) {
             <p className="text-sm text-muted-foreground">{t('tokenDialog.desc')}</p>
             {newIngestToken && (
               <SecretDisplay value={newIngestToken} label={t('tokenDialog.tokenLabel')} />
+            )}
+            {newSenderId && (
+              <p className="text-sm">
+                <Link
+                  href={`/dashboard/senders/${newSenderId}`}
+                  className="text-primary underline-offset-4 hover:underline"
+                >
+                  {t('tokenDialog.viewDetail')}
+                </Link>
+              </p>
             )}
           </div>
           <DialogFooter>

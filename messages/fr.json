@@ -226,13 +226,20 @@
     "sectionTitle": "Expéditeurs",
     "addButton": "Ajouter un Expéditeur",
     "empty": "Aucun expéditeur enregistré pour cette destination.",
+    "pageTitle": "Expéditeurs",
+    "pageDesc": "Sources de webhook liées aux URLs de destination.",
     "table": {
       "label": "Libellé",
+      "destination": "Destination",
       "mapping": "Mappage",
+      "createdAt": "Créé le",
       "noName": "Sans nom",
       "yes": "Oui",
       "no": "Non",
-      "remove": "Supprimer"
+      "view": "Voir",
+      "remove": "Supprimer",
+      "empty": "Aucun expéditeur configuré.",
+      "emptyHint": "Créez un expéditeur depuis une destination"
     },
     "createDialog": {
       "title": "Ajouter un Expéditeur",
@@ -246,12 +253,66 @@
       "title": "Expéditeur créé",
       "desc": "Utilisez le Token d'ingestion ci-dessous pour configurer l'envoi de webhooks. Pour des raisons de sécurité, il ne sera plus affiché.",
       "close": "Fermer",
-      "tokenLabel": "Token d'ingestion"
+      "tokenLabel": "Token d'ingestion",
+      "viewDetail": "Voir la configuration complète"
     },
     "deleteDialog": {
       "title": "Supprimer l'Expéditeur",
       "desc": "Cette action est irréversible. L'expéditeur sera définitivement supprimé.",
       "confirm": "Supprimer"
+    },
+    "detail": {
+      "back": "Retour aux Expéditeurs",
+      "notFound": "Expéditeur introuvable."
+    },
+    "info": {
+      "title": "Informations",
+      "id": "ID",
+      "labelField": "Libellé",
+      "noLabel": "Sans nom",
+      "destination": "Destination",
+      "createdAt": "Créé le"
+    },
+    "ingestToken": {
+      "title": "Token d'ingestion",
+      "activeMessage": "Le token actuel est configuré et actif. La régénération du token invalidera immédiatement le précédent.",
+      "regenerate": "Régénérer le Token",
+      "confirmTitle": "Régénérer le Token d'ingestion",
+      "confirmDesc": "Le token précédent sera immédiatement invalidé. Cette action est irréversible.",
+      "confirmLabel": "Régénérer",
+      "newTokenLabel": "Nouveau Token d'ingestion",
+      "configUrlLabel": "Configurez cette URL dans votre service externe :",
+      "warning": "Sauvegardez ce token maintenant. Pour des raisons de sécurité, il ne sera plus affiché. Mettez à jour votre service externe avant de fermer cette fenêtre.",
+      "error": "Échec de la régénération du token. Veuillez réessayer."
+    },
+    "mapping": {
+      "title": "Mappage DSL",
+      "emptyTitle": "Aucun mappage configuré",
+      "emptyDesc": "Sans mappage, le payload brut est livré directement à la destination.",
+      "configureButton": "Configurer le Mappage",
+      "editButton": "Modifier",
+      "removeButton": "Supprimer",
+      "footer": "Le payload est normalisé avant d'être mis en file d'attente.",
+      "editorTitle": "Définition du Mappage",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "saving": "Enregistrement...",
+      "jsonError": "JSON invalide : {detail}",
+      "removeConfirmTitle": "Supprimer le Mappage",
+      "removeConfirmDesc": "Le payload brut sera livré sans transformation.",
+      "removeConfirmLabel": "Supprimer",
+      "dslTitle": "Référence DSL",
+      "dslDesc": "JSON où chaque clé est le champ de sortie et la valeur est une expression de chemin."
+    },
+    "dangerZone": {
+      "title": "Zone de Danger",
+      "removeTitle": "Supprimer l'Expéditeur",
+      "removeDesc": "Le token d'ingestion sera immédiatement invalidé. Les requêtes envoyées avec ce token seront rejetées.",
+      "removeButton": "Supprimer l'Expéditeur",
+      "confirmTitle": "Supprimer l'expéditeur ?",
+      "confirmDesc": "Le token d'ingestion sera immédiatement invalidé. Cette action est irréversible.",
+      "confirmLabel": "Supprimer",
+      "removing": "Suppression..."
     }
   },
   "status": {
@@ -329,6 +390,171 @@
       "logsTitle": "Journaux de livraison",
       "logsMessage": "Les journaux détaillés de chaque tentative de livraison sont disponibles dans Grafana/Loki.",
       "openGrafana": "Ouvrir dans Grafana"
+    }
+  },
+  "apiKeys": {
+    "pageTitle": "Clés API",
+    "pageDesc": "Identifiants pour l'ingestion d'événements via l'API.",
+    "newButton": "Nouvelle Clé API",
+    "showInactive": "Afficher les clés révoquées",
+    "count": "{count} clé(s) trouvée(s)",
+    "table": {
+      "name": "Nom",
+      "status": "Statut",
+      "createdAt": "Créée le",
+      "revokedAt": "Révoquée le",
+      "revoke": "Révoquer",
+      "active": "Active",
+      "revoked": "Révoquée",
+      "empty": "Aucune clé API enregistrée."
+    },
+    "revokeDialog": {
+      "title": "Révoquer \"{name}\" ?",
+      "desc": "Les requêtes utilisant cette clé seront immédiatement rejetées.",
+      "confirm": "Révoquer"
+    },
+    "createDialog": {
+      "title": "Nouvelle Clé API",
+      "titleReveal": "Clé API créée",
+      "nameLabel": "Nom",
+      "namePlaceholder": "ex : Production, GitHub Actions, Staging",
+      "nameHint": "Identifiant descriptif pour reconnaître la clé dans le tableau de bord.",
+      "nameRequired": "Le nom est obligatoire",
+      "submit": "Créer la Clé",
+      "submitting": "Création...",
+      "cancel": "Annuler",
+      "done": "Terminer",
+      "warningTitle": "Sauvegardez cette clé maintenant",
+      "warningDesc": "Pour des raisons de sécurité, cette clé ne sera plus affichée après la fermeture de cette fenêtre.",
+      "keyLabel": "Clé API",
+      "usageTitle": "Comment utiliser :",
+      "error": "Erreur lors de la création de la clé API"
+    }
+  },
+  "settings": {
+    "pageTitle": "Paramètres",
+    "pageDesc": "Paramètres du tenant et guide d'intégration.",
+    "tenantInfo": {
+      "title": "Informations du Tenant",
+      "name": "Nom",
+      "id": "ID du Tenant",
+      "plan": "Plan",
+      "planValue": "MVP",
+      "createdAt": "Créé le",
+      "adminBadge": "Admin"
+    },
+    "webhookSecret": {
+      "title": "Webhook Secret",
+      "desc": "Vos clients doivent utiliser ce secret pour vérifier que les webhooks ont été envoyés par HookSentry (header X-HookSentry-Signature).",
+      "codeTitle": "Exemples de code de validation",
+      "nodeLabel": "Node.js",
+      "pythonLabel": "Python"
+    },
+    "resilience": {
+      "title": "Paramètres de Résilience",
+      "maxTrys": "Nombre max. de tentatives",
+      "maxTrysDesc": "Les événements atteignant cette limite sont déplacés vers la Dead Letter Queue.",
+      "timer": "Minuterie du Circuit Breaker",
+      "timerDesc": "({minutes} minutes) — durée de l'état OPEN après 5 échecs consécutifs.",
+      "backoffTitle": "Table de backoff (informative)",
+      "attempt": "Tentative",
+      "delay": "Délai",
+      "supportNote": "Pour modifier ces paramètres, contactez le support."
+    },
+    "integration": {
+      "title": "Guide d'intégration",
+      "expand": "Voir le guide",
+      "collapse": "Masquer le guide",
+      "ingestEndpoint": {
+        "title": "Endpoint d'ingestion",
+        "desc": "Envoyez des événements webhook via POST à cet endpoint :",
+        "tenantIdLabel": "votre ID Tenant :",
+        "tokenLabel": "token dst_ ou sndr_ généré dans la configuration de la destination/sender."
+      },
+      "headers": {
+        "title": "Headers obligatoires",
+        "desc": "Incluez ces headers dans chaque requête d'ingestion :"
+      },
+      "idempotency": {
+        "title": "Idempotence (optionnel)",
+        "desc": "Les renvois avec la même clé renvoient 200 avec l'événement original sans retraitement."
+      },
+      "signature": {
+        "title": "Vérifier la signature (sur votre serveur)",
+        "desc": "Utilisez le Webhook Secret pour vérifier le header X-HookSentry-Signature sur les événements livrés à vos endpoints."
+      }
+    }
+  },
+  "users": {
+    "pageTitle": "Utilisateurs & Invitations",
+    "pageDesc": "Gérez les membres de l'équipe et les liens d'invitation.",
+    "tabs": {
+      "members": "Membres",
+      "invites": "Invitations"
+    },
+    "table": {
+      "email": "E-mail",
+      "role": "Rôle",
+      "status": "Statut",
+      "memberSince": "Membre depuis"
+    },
+    "role": {
+      "Developer": "Développeur",
+      "Admin": "Administrateur"
+    },
+    "userStatus": {
+      "Active": "Actif",
+      "Inactive": "Inactif"
+    },
+    "actions": {
+      "activate": "Activer",
+      "deactivate": "Désactiver",
+      "remove": "Supprimer"
+    },
+    "removeDialog": {
+      "title": "Supprimer l'utilisateur ?",
+      "desc": "Cette action supprimera définitivement l'utilisateur du tenant.",
+      "confirm": "Supprimer"
+    },
+    "toast": {
+      "roleUpdated": "Rôle mis à jour : {role}",
+      "statusUpdated": "Statut mis à jour.",
+      "removed": "Utilisateur supprimé."
+    },
+    "invites": {
+      "generateButton": "Générer une invitation",
+      "empty": "Aucun lien d'invitation généré pour l'instant.",
+      "copyLink": "Copier le lien",
+      "inviteStatus": {
+        "Pending": "En attente",
+        "Used": "Utilisé",
+        "Expired": "Expiré"
+      },
+      "table": {
+        "status": "Statut",
+        "expiresAt": "Expire le",
+        "createdAt": "Créé le",
+        "usedAt": "Utilisé le"
+      },
+      "createDialog": {
+        "title": "Générer un lien d'invitation",
+        "titleReveal": "Lien d'invitation créé",
+        "validityLabel": "Validité",
+        "days1": "1 jour",
+        "days3": "3 jours",
+        "days7": "7 jours",
+        "days14": "14 jours",
+        "days30": "30 jours",
+        "cancel": "Annuler",
+        "submit": "Générer",
+        "submitting": "Génération...",
+        "error": "Erreur lors de la génération de l'invitation",
+        "desc": "Partagez ce lien avec la personne que vous souhaitez inviter. Chaque lien ne peut être utilisé qu'une seule fois.",
+        "expiry": "Expire dans {days} jour(s).",
+        "warning": "Copiez ce lien maintenant. Il ne sera plus affiché après la fermeture de cette fenêtre.",
+        "linkLabel": "Lien d'invitation",
+        "done": "Terminé"
+      }
     }
   },
   "pagination": {

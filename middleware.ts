@@ -18,7 +18,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isPublic && hasSession && pathname !== '/') {
+  if (isPublic && hasSession && pathname !== '/' && !pathname.startsWith('/invite/')) {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 

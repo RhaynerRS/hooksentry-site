@@ -226,13 +226,20 @@
     "sectionTitle": "Senders",
     "addButton": "Adicionar Sender",
     "empty": "Nenhum sender cadastrado para este destino.",
+    "pageTitle": "Senders",
+    "pageDesc": "Fontes de webhook vinculadas a URLs de destino.",
     "table": {
       "label": "Label",
+      "destination": "Destino",
       "mapping": "Mapeamento",
+      "createdAt": "Criado em",
       "noName": "Sem nome",
       "yes": "Sim",
       "no": "Não",
-      "remove": "Remover"
+      "view": "Ver",
+      "remove": "Remover",
+      "empty": "Nenhum sender configurado.",
+      "emptyHint": "Crie um sender a partir de um destino"
     },
     "createDialog": {
       "title": "Adicionar Sender",
@@ -246,12 +253,66 @@
       "title": "Sender criado",
       "desc": "Use o Ingest Token abaixo para configurar o envio de webhooks. Por segurança, ele não será exibido novamente.",
       "close": "Fechar",
-      "tokenLabel": "Ingest Token"
+      "tokenLabel": "Ingest Token",
+      "viewDetail": "Ver configuração completa"
     },
     "deleteDialog": {
       "title": "Remover Sender",
       "desc": "Esta ação é irreversível. O sender será removido permanentemente.",
       "confirm": "Remover"
+    },
+    "detail": {
+      "back": "Voltar para Senders",
+      "notFound": "Sender não encontrado."
+    },
+    "info": {
+      "title": "Informações",
+      "id": "ID",
+      "labelField": "Label",
+      "noLabel": "Sem nome",
+      "destination": "Destino",
+      "createdAt": "Criado em"
+    },
+    "ingestToken": {
+      "title": "Ingest Token",
+      "activeMessage": "O token atual foi configurado e está ativo. Regenerar o token invalidará imediatamente o token anterior.",
+      "regenerate": "Regenerar Token",
+      "confirmTitle": "Regenerar Ingest Token",
+      "confirmDesc": "O token anterior será invalidado imediatamente. Esta ação não pode ser desfeita.",
+      "confirmLabel": "Regenerar",
+      "newTokenLabel": "Novo Ingest Token",
+      "configUrlLabel": "Configure esta URL no serviço externo:",
+      "warning": "Guarde este token agora. Por segurança, ele não será exibido novamente. Atualize a configuração no serviço externo antes de fechar esta janela.",
+      "error": "Falha ao regenerar o token. Tente novamente."
+    },
+    "mapping": {
+      "title": "Mapeamento DSL",
+      "emptyTitle": "Nenhum mapeamento configurado",
+      "emptyDesc": "Sem mapeamento, o payload bruto é entregue diretamente ao destino.",
+      "configureButton": "Configurar Mapeamento",
+      "editButton": "Editar",
+      "removeButton": "Remover",
+      "footer": "Payload normalizado antes de ser enfileirado.",
+      "editorTitle": "Definição do Mapeamento",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "saving": "Salvando...",
+      "jsonError": "JSON inválido: {detail}",
+      "removeConfirmTitle": "Remover Mapeamento",
+      "removeConfirmDesc": "O payload bruto será entregue sem transformação.",
+      "removeConfirmLabel": "Remover",
+      "dslTitle": "Referência da DSL",
+      "dslDesc": "JSON onde cada chave é o campo de saída e o valor é uma expressão de caminho."
+    },
+    "dangerZone": {
+      "title": "Zona de Perigo",
+      "removeTitle": "Remover Sender",
+      "removeDesc": "O ingest token será invalidado imediatamente. Requisições enviadas com este token serão rejeitadas.",
+      "removeButton": "Remover Sender",
+      "confirmTitle": "Remover sender?",
+      "confirmDesc": "O ingest token será invalidado imediatamente. Esta ação é irreversível.",
+      "confirmLabel": "Remover",
+      "removing": "Removendo..."
     }
   },
   "status": {
@@ -329,6 +390,171 @@
       "logsTitle": "Logs de Entrega",
       "logsMessage": "Os logs detalhados de cada tentativa de entrega ficam disponíveis no Grafana/Loki.",
       "openGrafana": "Abrir no Grafana"
+    }
+  },
+  "apiKeys": {
+    "pageTitle": "API Keys",
+    "pageDesc": "Credenciais para ingestão de eventos via API.",
+    "newButton": "Nova API Key",
+    "showInactive": "Exibir keys revogadas",
+    "count": "{count} chave(s) encontrada(s)",
+    "table": {
+      "name": "Nome",
+      "status": "Status",
+      "createdAt": "Criada em",
+      "revokedAt": "Revogada em",
+      "revoke": "Revogar",
+      "active": "Ativa",
+      "revoked": "Revogada",
+      "empty": "Nenhuma API Key cadastrada."
+    },
+    "revokeDialog": {
+      "title": "Revogar \"{name}\"?",
+      "desc": "Requisições usando esta key serão imediatamente rejeitadas.",
+      "confirm": "Revogar"
+    },
+    "createDialog": {
+      "title": "Nova API Key",
+      "titleReveal": "API Key criada",
+      "nameLabel": "Nome",
+      "namePlaceholder": "ex: Produção, GitHub Actions, Staging",
+      "nameHint": "Identificador descritivo para reconhecer a key no dashboard.",
+      "nameRequired": "Nome é obrigatório",
+      "submit": "Criar Key",
+      "submitting": "Criando...",
+      "cancel": "Cancelar",
+      "done": "Concluído",
+      "warningTitle": "Guarde esta chave agora",
+      "warningDesc": "Por segurança, esta chave não será exibida novamente após fechar esta janela.",
+      "keyLabel": "API Key",
+      "usageTitle": "Como usar:",
+      "error": "Erro ao criar API Key"
+    }
+  },
+  "settings": {
+    "pageTitle": "Configurações",
+    "pageDesc": "Parâmetros do tenant e guia de integração.",
+    "tenantInfo": {
+      "title": "Informações do Tenant",
+      "name": "Nome",
+      "id": "ID do Tenant",
+      "plan": "Plano",
+      "planValue": "MVP",
+      "createdAt": "Criado em",
+      "adminBadge": "Admin"
+    },
+    "webhookSecret": {
+      "title": "Webhook Secret",
+      "desc": "Seus clientes devem usar este segredo para verificar que os webhooks foram enviados pelo HookSentry (header X-HookSentry-Signature).",
+      "codeTitle": "Exemplos de código de validação",
+      "nodeLabel": "Node.js",
+      "pythonLabel": "Python"
+    },
+    "resilience": {
+      "title": "Parâmetros de Resiliência",
+      "maxTrys": "Máximo de Tentativas",
+      "maxTrysDesc": "Eventos que atingem este limite são movidos para a Dead Letter Queue.",
+      "timer": "Timer do Circuit Breaker",
+      "timerDesc": "({minutes} minutos) — duração do estado OPEN após 5 falhas consecutivas.",
+      "backoffTitle": "Tabela de backoff (informativa)",
+      "attempt": "Tentativa",
+      "delay": "Atraso",
+      "supportNote": "Para alterar estes parâmetros, entre em contato com o suporte."
+    },
+    "integration": {
+      "title": "Guia de Integração",
+      "expand": "Ver Guia",
+      "collapse": "Ocultar Guia",
+      "ingestEndpoint": {
+        "title": "Endpoint de Ingestão",
+        "desc": "Envie eventos de webhook via POST para este endpoint:",
+        "tenantIdLabel": "seu Tenant ID:",
+        "tokenLabel": "token dst_ ou sndr_ gerado na configuração do destino/sender."
+      },
+      "headers": {
+        "title": "Headers Obrigatórios",
+        "desc": "Inclua estes headers em todas as requisições de ingestão:"
+      },
+      "idempotency": {
+        "title": "Idempotência (opcional)",
+        "desc": "Reenvios com a mesma key retornam 200 com o evento original sem reprocessar."
+      },
+      "signature": {
+        "title": "Verificar Assinatura (no seu servidor)",
+        "desc": "Use o Webhook Secret acima para verificar o header X-HookSentry-Signature nos eventos entregues aos seus endpoints."
+      }
+    }
+  },
+  "users": {
+    "pageTitle": "Usuários & Convites",
+    "pageDesc": "Gerencie membros da equipe e links de convite.",
+    "tabs": {
+      "members": "Membros",
+      "invites": "Convites"
+    },
+    "table": {
+      "email": "E-mail",
+      "role": "Função",
+      "status": "Status",
+      "memberSince": "Membro desde"
+    },
+    "role": {
+      "Developer": "Desenvolvedor",
+      "Admin": "Administrador"
+    },
+    "userStatus": {
+      "Active": "Ativo",
+      "Inactive": "Inativo"
+    },
+    "actions": {
+      "activate": "Ativar",
+      "deactivate": "Desativar",
+      "remove": "Remover"
+    },
+    "removeDialog": {
+      "title": "Remover usuário?",
+      "desc": "Esta ação removerá permanentemente o usuário do tenant.",
+      "confirm": "Remover"
+    },
+    "toast": {
+      "roleUpdated": "Função atualizada para {role}",
+      "statusUpdated": "Status atualizado.",
+      "removed": "Usuário removido."
+    },
+    "invites": {
+      "generateButton": "Gerar Convite",
+      "empty": "Nenhum link de convite gerado ainda.",
+      "copyLink": "Copiar Link",
+      "inviteStatus": {
+        "Pending": "Pendente",
+        "Used": "Utilizado",
+        "Expired": "Expirado"
+      },
+      "table": {
+        "status": "Status",
+        "expiresAt": "Expira em",
+        "createdAt": "Criado em",
+        "usedAt": "Utilizado em"
+      },
+      "createDialog": {
+        "title": "Gerar Link de Convite",
+        "titleReveal": "Link de convite criado",
+        "validityLabel": "Validade",
+        "days1": "1 dia",
+        "days3": "3 dias",
+        "days7": "7 dias",
+        "days14": "14 dias",
+        "days30": "30 dias",
+        "cancel": "Cancelar",
+        "submit": "Gerar",
+        "submitting": "Gerando...",
+        "error": "Erro ao gerar convite",
+        "desc": "Compartilhe este link com a pessoa que deseja convidar. Cada link só pode ser usado uma vez.",
+        "expiry": "Expira em {days} dia(s).",
+        "warning": "Copie este link agora. Ele não será exibido novamente após fechar esta janela.",
+        "linkLabel": "Link de Convite",
+        "done": "Concluído"
+      }
     }
   },
   "pagination": {

@@ -226,13 +226,20 @@
     "sectionTitle": "センダー",
     "addButton": "センダーを追加",
     "empty": "このデスティネーションには登録されたセンダーがありません。",
+    "pageTitle": "センダー",
+    "pageDesc": "送信先URLに紐付いたWebhookソース。",
     "table": {
       "label": "ラベル",
+      "destination": "送信先",
       "mapping": "マッピング",
+      "createdAt": "作成日時",
       "noName": "名前なし",
       "yes": "あり",
       "no": "なし",
-      "remove": "削除"
+      "view": "詳細",
+      "remove": "削除",
+      "empty": "センダーが設定されていません。",
+      "emptyHint": "送信先からセンダーを作成してください"
     },
     "createDialog": {
       "title": "センダーを追加",
@@ -246,12 +253,66 @@
       "title": "センダーが作成されました",
       "desc": "以下のインジェストトークンを使用してWebhook送信を設定してください。セキュリティ上の理由から、再表示されません。",
       "close": "閉じる",
-      "tokenLabel": "インジェストトークン"
+      "tokenLabel": "インジェストトークン",
+      "viewDetail": "完全な設定を表示"
     },
     "deleteDialog": {
       "title": "センダーを削除",
       "desc": "この操作は元に戻せません。センダーは完全に削除されます。",
       "confirm": "削除"
+    },
+    "detail": {
+      "back": "センダー一覧に戻る",
+      "notFound": "センダーが見つかりません。"
+    },
+    "info": {
+      "title": "情報",
+      "id": "ID",
+      "labelField": "ラベル",
+      "noLabel": "名前なし",
+      "destination": "送信先",
+      "createdAt": "作成日時"
+    },
+    "ingestToken": {
+      "title": "インジェストトークン",
+      "activeMessage": "現在のトークンは設定済みで有効です。トークンを再生成すると、以前のトークンは即座に無効になります。",
+      "regenerate": "トークンを再生成",
+      "confirmTitle": "インジェストトークンを再生成",
+      "confirmDesc": "以前のトークンは即座に無効になります。この操作は元に戻せません。",
+      "confirmLabel": "再生成",
+      "newTokenLabel": "新しいインジェストトークン",
+      "configUrlLabel": "外部サービスにこのURLを設定してください：",
+      "warning": "今すぐこのトークンを保存してください。セキュリティ上の理由から、再表示されません。このウィンドウを閉じる前に外部サービスの設定を更新してください。",
+      "error": "トークンの再生成に失敗しました。もう一度お試しください。"
+    },
+    "mapping": {
+      "title": "マッピングDSL",
+      "emptyTitle": "マッピングが設定されていません",
+      "emptyDesc": "マッピングなしの場合、生のペイロードが直接送信先に配信されます。",
+      "configureButton": "マッピングを設定",
+      "editButton": "編集",
+      "removeButton": "削除",
+      "footer": "ペイロードはキューに入れられる前に正規化されます。",
+      "editorTitle": "マッピング定義",
+      "save": "保存",
+      "cancel": "キャンセル",
+      "saving": "保存中...",
+      "jsonError": "無効なJSON: {detail}",
+      "removeConfirmTitle": "マッピングを削除",
+      "removeConfirmDesc": "生のペイロードが変換なしで配信されます。",
+      "removeConfirmLabel": "削除",
+      "dslTitle": "DSLリファレンス",
+      "dslDesc": "JSONで各キーが出力フィールド、値がパス式です。"
+    },
+    "dangerZone": {
+      "title": "危険ゾーン",
+      "removeTitle": "センダーを削除",
+      "removeDesc": "インジェストトークンは即座に無効になります。このトークンで送信されたリクエストは拒否されます。",
+      "removeButton": "センダーを削除",
+      "confirmTitle": "センダーを削除しますか？",
+      "confirmDesc": "インジェストトークンは即座に無効になります。この操作は元に戻せません。",
+      "confirmLabel": "削除",
+      "removing": "削除中..."
     }
   },
   "status": {
@@ -329,6 +390,171 @@
       "logsTitle": "配信ログ",
       "logsMessage": "各配信試行の詳細ログはGrafana/Lokiで確認できます。",
       "openGrafana": "Grafanaで開く"
+    }
+  },
+  "apiKeys": {
+    "pageTitle": "APIキー",
+    "pageDesc": "API経由のイベント取り込みのための認証情報。",
+    "newButton": "新規APIキー",
+    "showInactive": "失効したキーを表示",
+    "count": "{count}件のキーが見つかりました",
+    "table": {
+      "name": "名前",
+      "status": "ステータス",
+      "createdAt": "作成日時",
+      "revokedAt": "失効日時",
+      "revoke": "失効",
+      "active": "有効",
+      "revoked": "失効済み",
+      "empty": "APIキーが登録されていません。"
+    },
+    "revokeDialog": {
+      "title": "\"{name}\" を失効させますか？",
+      "desc": "このキーを使用したリクエストは即座に拒否されます。",
+      "confirm": "失効"
+    },
+    "createDialog": {
+      "title": "新規APIキー",
+      "titleReveal": "APIキーが作成されました",
+      "nameLabel": "名前",
+      "namePlaceholder": "例：本番環境、GitHub Actions、ステージング",
+      "nameHint": "ダッシュボードでキーを識別するための説明的な識別子。",
+      "nameRequired": "名前は必須です",
+      "submit": "キーを作成",
+      "submitting": "作成中...",
+      "cancel": "キャンセル",
+      "done": "完了",
+      "warningTitle": "今すぐこのキーを保存してください",
+      "warningDesc": "セキュリティ上の理由から、このウィンドウを閉じた後はキーが表示されません。",
+      "keyLabel": "APIキー",
+      "usageTitle": "使用方法：",
+      "error": "APIキーの作成中にエラーが発生しました"
+    }
+  },
+  "settings": {
+    "pageTitle": "設定",
+    "pageDesc": "テナントのパラメータとインテグレーションガイド。",
+    "tenantInfo": {
+      "title": "テナント情報",
+      "name": "名前",
+      "id": "テナントID",
+      "plan": "プラン",
+      "planValue": "MVP",
+      "createdAt": "作成日",
+      "adminBadge": "管理者"
+    },
+    "webhookSecret": {
+      "title": "Webhook シークレット",
+      "desc": "クライアントはこのシークレットを使用して、webhookがHookSentryから送信されたことを確認する必要があります（X-HookSentry-Signatureヘッダー）。",
+      "codeTitle": "検証コードの例",
+      "nodeLabel": "Node.js",
+      "pythonLabel": "Python"
+    },
+    "resilience": {
+      "title": "レジリエンスパラメータ",
+      "maxTrys": "最大リトライ回数",
+      "maxTrysDesc": "この上限に達したイベントはデッドレターキューに移動されます。",
+      "timer": "サーキットブレーカータイマー",
+      "timerDesc": "（{minutes}分）— 5回連続失敗後のOPEN状態の持続時間。",
+      "backoffTitle": "バックオフスケジュール（情報提供）",
+      "attempt": "試行",
+      "delay": "遅延",
+      "supportNote": "これらのパラメータを変更するには、サポートにお問い合わせください。"
+    },
+    "integration": {
+      "title": "インテグレーションガイド",
+      "expand": "ガイドを表示",
+      "collapse": "ガイドを非表示",
+      "ingestEndpoint": {
+        "title": "インジェストエンドポイント",
+        "desc": "このエンドポイントにPOSTでwebhookイベントを送信:",
+        "tenantIdLabel": "あなたのテナントID:",
+        "tokenLabel": "宛先/センダー設定で生成したdst_またはsndr_トークン。"
+      },
+      "headers": {
+        "title": "必須ヘッダー",
+        "desc": "すべてのインジェストリクエストにこれらのヘッダーを含めてください:"
+      },
+      "idempotency": {
+        "title": "冪等性（オプション）",
+        "desc": "同じキーでの再送は、再処理せずに元のイベントで200を返します。"
+      },
+      "signature": {
+        "title": "署名を検証（サーバー側）",
+        "desc": "Webhookシークレットを使用して、エンドポイントに配信されたイベントのX-HookSentry-Signatureヘッダーを検証してください。"
+      }
+    }
+  },
+  "users": {
+    "pageTitle": "ユーザー & 招待",
+    "pageDesc": "チームメンバーと招待リンクを管理します。",
+    "tabs": {
+      "members": "メンバー",
+      "invites": "招待"
+    },
+    "table": {
+      "email": "メールアドレス",
+      "role": "ロール",
+      "status": "ステータス",
+      "memberSince": "参加日"
+    },
+    "role": {
+      "Developer": "開発者",
+      "Admin": "管理者"
+    },
+    "userStatus": {
+      "Active": "有効",
+      "Inactive": "無効"
+    },
+    "actions": {
+      "activate": "有効化",
+      "deactivate": "無効化",
+      "remove": "削除"
+    },
+    "removeDialog": {
+      "title": "ユーザーを削除しますか？",
+      "desc": "この操作によりユーザーがテナントから完全に削除されます。",
+      "confirm": "削除"
+    },
+    "toast": {
+      "roleUpdated": "ロールを {role} に更新しました",
+      "statusUpdated": "ステータスを更新しました。",
+      "removed": "ユーザーを削除しました。"
+    },
+    "invites": {
+      "generateButton": "招待を生成",
+      "empty": "招待リンクがまだありません。",
+      "copyLink": "リンクをコピー",
+      "inviteStatus": {
+        "Pending": "保留中",
+        "Used": "使用済み",
+        "Expired": "期限切れ"
+      },
+      "table": {
+        "status": "ステータス",
+        "expiresAt": "有効期限",
+        "createdAt": "作成日時",
+        "usedAt": "使用日時"
+      },
+      "createDialog": {
+        "title": "招待リンクを生成",
+        "titleReveal": "招待リンクが作成されました",
+        "validityLabel": "有効期間",
+        "days1": "1日",
+        "days3": "3日",
+        "days7": "7日",
+        "days14": "14日",
+        "days30": "30日",
+        "cancel": "キャンセル",
+        "submit": "生成",
+        "submitting": "生成中...",
+        "error": "招待の生成中にエラーが発生しました",
+        "desc": "このリンクを招待したい人に共有してください。各リンクは1回のみ使用できます。",
+        "expiry": "{days}日後に期限切れになります。",
+        "warning": "このリンクを今すぐコピーしてください。ウィンドウを閉じると再表示されません。",
+        "linkLabel": "招待リンク",
+        "done": "完了"
+      }
     }
   },
   "pagination": {

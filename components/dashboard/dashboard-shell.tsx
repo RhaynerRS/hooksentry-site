@@ -50,7 +50,7 @@ export function DashboardShell({
 
   const sidebar = (
     <nav className="flex flex-col h-full">
-      <div className="px-4 py-6 border-b">
+      <div className="px-4 py-4 h-14 border-b">
         <Logo />
       </div>
       <ul className="flex-1 py-4 space-y-1 px-2">

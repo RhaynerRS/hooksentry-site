@@ -117,8 +117,11 @@ export interface ApiKey {
   revokedAt: string | null;
 }
 
-export interface CreateApiKeyResponse extends ApiKey {
-  rawKey: string;
+export interface CreateApiKeyResponse {
+  id: string;
+  name: string;
+  key: string;
+  createdAt: string;
 }
 
 // ─── Usuários ─────────────────────────────────────────────────────────────────
