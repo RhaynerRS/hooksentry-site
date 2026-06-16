@@ -445,10 +445,18 @@
     },
     "webhookSecret": {
       "title": "Webhook シークレット",
-      "desc": "クライアントはこのシークレットを使用して、webhookがHookSentryから送信されたことを確認する必要があります（X-HookSentry-Signatureヘッダー）。",
+      "desc": "HookSentryは、このシークレット（HMAC-SHA256）を使用して、配信先URLに配信するすべてのwebhookに署名します。配信先サーバーはX-HookSentry-Signatureヘッダーを検証して真正性を確認してください。",
       "codeTitle": "検証コードの例",
       "nodeLabel": "Node.js",
-      "pythonLabel": "Python"
+      "pythonLabel": "Python",
+      "rotateButton": "再生成",
+      "rotateSuccess": "Webhookシークレットを再生成しました。",
+      "rotateError": "シークレットの再生成に失敗しました。",
+      "rotateDialog": {
+        "title": "Webhookシークレットを再生成しますか？",
+        "desc": "現在のシークレットを使用しているすべての配信先サーバーは、新しい値に更新するまで署名の検証ができなくなります。この操作は取り消せません。",
+        "confirm": "再生成"
+      }
     },
     "resilience": {
       "title": "レジリエンスパラメータ",
@@ -481,7 +489,9 @@
       },
       "signature": {
         "title": "署名を検証（サーバー側）",
-        "desc": "Webhookシークレットを使用して、エンドポイントに配信されたイベントのX-HookSentry-Signatureヘッダーを検証してください。"
+        "desc": "HookSentryが配信先URLにwebhookを配信する際、Webhookシークレット（HMAC-SHA256）で署名されたX-HookSentry-Signatureヘッダーが付加されます。サーバー側でこれを検証し、リクエストがHookSentryからのものであることを確認してください。",
+        "nodeLabel": "Node.js",
+        "pythonLabel": "Python"
       }
     }
   },

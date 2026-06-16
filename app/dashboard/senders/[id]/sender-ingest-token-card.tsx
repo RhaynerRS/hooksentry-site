@@ -2,19 +2,14 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useAuth } from '@/lib/auth/auth-context';
 import { sendersApi } from '@/lib/api/senders';
 import { SecretDisplay } from '@/components/dashboard/secret-display';
-import { CopyButton } from '@/components/ui/copy-button';
 import { ConfirmDialog } from '@/components/dashboard/confirm-dialog';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle } from 'lucide-react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
-
 export function SenderIngestTokenCard({ senderId }: { senderId: string }) {
   const t = useTranslations('senders.ingestToken');
-  const { user } = useAuth();
   const [step, setStep] = useState<'idle' | 'confirming' | 'done'>('idle');
   const [newToken, setNewToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -34,10 +29,6 @@ export function SenderIngestTokenCard({ senderId }: { senderId: string }) {
       setLoading(false);
     }
   };
-
-  const configUrl = newToken && user
-    ? `${API_URL}/api/v1/ingest/${user.tenantId}/${newToken}`
-    : null;
 
   return (
     <div className="rounded-lg border p-5 space-y-4">
@@ -60,15 +51,6 @@ export function SenderIngestTokenCard({ senderId }: { senderId: string }) {
             <p>{t('warning')}</p>
           </div>
           <SecretDisplay value={newToken} label={t('newTokenLabel')} />
-          {configUrl && (
-            <div className="space-y-1">
-              <p className="text-xs text-muted-foreground">{t('configUrlLabel')}</p>
-              <div className="flex items-center gap-2 rounded-md bg-muted p-2">
-                <code className="text-xs break-all flex-1">{configUrl}</code>
-                <CopyButton value={configUrl} />
-              </div>
-            </div>
-          )}
         </>
       )}
 

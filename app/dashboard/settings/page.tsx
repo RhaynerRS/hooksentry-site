@@ -16,13 +16,18 @@ export default function SettingsPage() {
   const t = useTranslations('settings');
   const { user } = useAuth();
   const [tenant, setTenant] = useState<Tenant | null>(null);
+  const [webhookSecret, setWebhookSecret] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user?.tenantId) return;
-    tenantApi.get(user.tenantId)
-      .then(setTenant)
-      .finally(() => setLoading(false));
+    Promise.all([
+      tenantApi.get(user.tenantId),
+      tenantApi.getWebhookSecret(user.tenantId),
+    ]).then(([t, s]) => {
+      setTenant(t);
+      setWebhookSecret(s.webhookSecret);
+    }).finally(() => setLoading(false));
   }, [user?.tenantId]);
 
   if (loading) {
@@ -46,7 +51,7 @@ export default function SettingsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <TenantInfoCard tenant={tenant} isAdmin={isAdmin} />
-        <WebhookSecretCard secret={tenant?.webhookSecret ?? ''} />
+        <WebhookSecretCard tenantId={tenant?.id ?? ''} secret={webhookSecret} />
       </div>
 
       <ResilienceSettingsCard

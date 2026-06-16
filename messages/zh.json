@@ -445,10 +445,18 @@
     },
     "webhookSecret": {
       "title": "Webhook 密钥",
-      "desc": "您的客户端应使用此密钥验证 webhook 是否由 HookSentry 发送（X-HookSentry-Signature 请求头）。",
+      "desc": "HookSentry 使用此密钥（HMAC-SHA256）对发送到您的目标 URL 的每个 webhook 进行签名。您的目标服务器应验证 X-HookSentry-Signature 请求头以确认真实性。",
       "codeTitle": "验证代码示例",
       "nodeLabel": "Node.js",
-      "pythonLabel": "Python"
+      "pythonLabel": "Python",
+      "rotateButton": "重新生成",
+      "rotateSuccess": "Webhook 密钥已重新生成。",
+      "rotateError": "重新生成密钥失败。",
+      "rotateDialog": {
+        "title": "重新生成 Webhook 密钥？",
+        "desc": "使用当前密钥的所有目标服务器将无法验证签名，直到更新为新值。此操作不可撤销。",
+        "confirm": "重新生成"
+      }
     },
     "resilience": {
       "title": "弹性参数",
@@ -481,7 +489,9 @@
       },
       "signature": {
         "title": "验证签名（在您的服务器上）",
-        "desc": "使用 Webhook 密钥验证交付到您端点的事件中的 X-HookSentry-Signature 请求头。"
+        "desc": "当 HookSentry 向您的目标 URL 发送 webhook 时，会附加使用 Webhook 密钥（HMAC-SHA256）签名的 X-HookSentry-Signature 请求头。在您的服务器上验证此请求头，以确认请求来自 HookSentry。",
+        "nodeLabel": "Node.js",
+        "pythonLabel": "Python"
       }
     }
   },

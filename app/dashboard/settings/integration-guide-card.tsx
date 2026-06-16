@@ -8,6 +8,23 @@ import { Separator } from '@/components/ui/separator';
 import { CopyButton } from '@/components/ui/copy-button';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
+const NODE_SNIPPET = `const crypto = require('crypto');
+const signature = req.headers['x-hooksentry-signature'];
+const expected = 'sha256=' + crypto
+  .createHmac('sha256', WEBHOOK_SECRET)
+  .update(req.body) // raw body Buffer
+  .digest('hex');
+const isValid = crypto.timingSafeEqual(
+  Buffer.from(signature), Buffer.from(expected)
+);`;
+
+const PYTHON_SNIPPET = `import hmac, hashlib
+signature = request.headers.get('X-HookSentry-Signature')
+expected = 'sha256=' + hmac.new(
+  WEBHOOK_SECRET.encode(), request.body, hashlib.sha256
+).hexdigest()
+is_valid = hmac.compare_digest(signature, expected)`;
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 
 interface Props {
@@ -97,6 +114,16 @@ export function IntegrationGuideCard({ tenantId }: Props) {
 
           <Section title={t('signature.title')}>
             <p className="text-xs text-muted-foreground">{t('signature.desc')}</p>
+            <div className="space-y-3 pt-1">
+              <div className="space-y-1">
+                <p className="text-xs font-medium text-muted-foreground">{t('signature.nodeLabel')}</p>
+                <CodeBlock code={NODE_SNIPPET} />
+              </div>
+              <div className="space-y-1">
+                <p className="text-xs font-medium text-muted-foreground">{t('signature.pythonLabel')}</p>
+                <CodeBlock code={PYTHON_SNIPPET} />
+              </div>
+            </div>
           </Section>
 
         </CollapsibleContent>

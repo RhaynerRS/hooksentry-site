@@ -445,10 +445,18 @@
     },
     "webhookSecret": {
       "title": "Webhook Secret",
-      "desc": "Vos clients doivent utiliser ce secret pour vérifier que les webhooks ont été envoyés par HookSentry (header X-HookSentry-Signature).",
-      "codeTitle": "Exemples de code de validation",
+      "desc": "HookSentry signe chaque webhook livré à vos URLs de destination avec ce secret (HMAC-SHA256). Vos serveurs de destination doivent vérifier le header X-HookSentry-Signature pour confirmer l'authenticité.",
+      "codeTitle": "Exemples de code de vérification",
       "nodeLabel": "Node.js",
-      "pythonLabel": "Python"
+      "pythonLabel": "Python",
+      "rotateButton": "Régénérer",
+      "rotateSuccess": "Webhook secret régénéré.",
+      "rotateError": "Échec de la régénération du secret.",
+      "rotateDialog": {
+        "title": "Régénérer le webhook secret ?",
+        "desc": "Tous les serveurs de destination utilisant le secret actuel cesseront de vérifier les signatures jusqu'à la mise à jour avec la nouvelle valeur. Cette action est irréversible.",
+        "confirm": "Régénérer"
+      }
     },
     "resilience": {
       "title": "Paramètres de Résilience",
@@ -481,7 +489,9 @@
       },
       "signature": {
         "title": "Vérifier la signature (sur votre serveur)",
-        "desc": "Utilisez le Webhook Secret pour vérifier le header X-HookSentry-Signature sur les événements livrés à vos endpoints."
+        "desc": "Lorsque HookSentry livre un webhook à votre URL de destination, il ajoute le header X-HookSentry-Signature signé avec votre Webhook Secret (HMAC-SHA256). Vérifiez-le sur votre serveur pour confirmer que la requête provient de HookSentry.",
+        "nodeLabel": "Node.js",
+        "pythonLabel": "Python"
       }
     }
   },

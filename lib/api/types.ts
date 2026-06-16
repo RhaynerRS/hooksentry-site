@@ -157,7 +157,6 @@ export interface InviteToken {
 export interface Tenant {
   id: string;
   name: string;
-  webhookSecret: string;
   maxTrys: number;
   circuitBreakerTimer: number;
   createdAt: string;
