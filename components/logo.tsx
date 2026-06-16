@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { Zap } from "lucide-react";
 
-export function Logo(props: { className?: string, link?: string }) {
+export function Logo(props: { className?: string }) {
   return (
-    <Link href={props.link ?? '/'} className={cn("items-center space-x-2", props.className)}>
-      <span className="font-bold sm:inline-block">HookSentry</span>
-    </Link>
+    <div className={cn("inline-flex items-center gap-2", props.className)}>
+      <Zap className="h-4 w-4 fill-current" />
+      <span className="font-semibold text-sm">HookSentry</span>
+    </div>
   );
 }

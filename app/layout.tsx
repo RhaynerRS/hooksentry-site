@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Onest } from "next/font/google";
 import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -9,7 +9,7 @@ import { AuthProvider } from "@/lib/auth/auth-context";
 import { decodeJwtPayload } from "@/lib/auth/jwt";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const onest = Onest({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "HookSentry",
@@ -29,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={onest.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Provider>
             <AuthProvider initialUser={user}>

@@ -126,7 +126,7 @@ export function DashboardShell({
           </div>
         </header>
 
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto px-48 py-6">
           {children}
         </main>
       </div>
