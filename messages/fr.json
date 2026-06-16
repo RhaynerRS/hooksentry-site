@@ -456,7 +456,14 @@
         "title": "Régénérer le webhook secret ?",
         "desc": "Tous les serveurs de destination utilisant le secret actuel cesseront de vérifier les signatures jusqu'à la mise à jour avec la nouvelle valeur. Cette action est irréversible.",
         "confirm": "Régénérer"
-      }
+      },
+      "verifyTitle": "Tester la vérification de signature",
+      "verifyPayloadLabel": "Payload (chaîne JSON brute)",
+      "verifySignatureLabel": "X-HookSentry-Signature",
+      "verifyButton": "Vérifier",
+      "verifyValid": "Signature valide",
+      "verifyInvalid": "Signature invalide",
+      "verifyError": "Échec de la vérification de la signature."
     },
     "resilience": {
       "title": "Paramètres de Résilience",

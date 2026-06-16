@@ -456,7 +456,14 @@
         "title": "Webhookシークレットを再生成しますか？",
         "desc": "現在のシークレットを使用しているすべての配信先サーバーは、新しい値に更新するまで署名の検証ができなくなります。この操作は取り消せません。",
         "confirm": "再生成"
-      }
+      },
+      "verifyTitle": "署名検証のテスト",
+      "verifyPayloadLabel": "ペイロード（生のJSON文字列）",
+      "verifySignatureLabel": "X-HookSentry-Signature",
+      "verifyButton": "検証",
+      "verifyValid": "署名は有効です",
+      "verifyInvalid": "署名が無効です",
+      "verifyError": "署名の検証に失敗しました。"
     },
     "resilience": {
       "title": "レジリエンスパラメータ",

@@ -11,6 +11,9 @@ export const tenantApi = {
   rotateWebhookSecret: (id: string) =>
     api.post<{ webhookSecret: string }>(`/tenants/${id}/webhook-secret`, {}),
 
+  verifySignature: (id: string, payload: string, signature: string) =>
+    api.post<{ valid: boolean }>(`/tenants/${id}/webhook-secret/verify`, { payload, signature }),
+
   purgeQueue: (destinationId: string) =>
     api.delete(`/queues/${destinationId}`),
 };

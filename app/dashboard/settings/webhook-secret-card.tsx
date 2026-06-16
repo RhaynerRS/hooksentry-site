@@ -8,7 +8,11 @@ import { SecretDisplay } from '@/components/dashboard/secret-display';
 import { ConfirmDialog } from '@/components/dashboard/confirm-dialog';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronRight, RefreshCw } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { ChevronDown, ChevronRight, RefreshCw, CheckCircle2, XCircle } from 'lucide-react';
 
 interface Props {
   tenantId: string;
@@ -35,10 +39,17 @@ is_valid = hmac.compare_digest(signature, expected)`;
 export function WebhookSecretCard({ tenantId, secret: initialSecret }: Props) {
   const t = useTranslations('settings.webhookSecret');
   const { toast } = useToast();
-  const [open, setOpen] = useState(false);
+
   const [secret, setSecret] = useState(initialSecret);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [rotating, setRotating] = useState(false);
+
+  const [codeOpen, setCodeOpen] = useState(false);
+  const [verifyOpen, setVerifyOpen] = useState(false);
+  const [verifyPayload, setVerifyPayload] = useState('');
+  const [verifySignature, setVerifySignature] = useState('');
+  const [verifyResult, setVerifyResult] = useState<boolean | null>(null);
+  const [verifying, setVerifying] = useState(false);
 
   const handleRotate = async () => {
     setRotating(true);
@@ -51,6 +62,20 @@ export function WebhookSecretCard({ tenantId, secret: initialSecret }: Props) {
     } finally {
       setRotating(false);
       setConfirmOpen(false);
+    }
+  };
+
+  const handleVerify = async () => {
+    if (!verifyPayload.trim() || !verifySignature.trim()) return;
+    setVerifying(true);
+    setVerifyResult(null);
+    try {
+      const res = await tenantApi.verifySignature(tenantId, verifyPayload, verifySignature.trim());
+      setVerifyResult(res.valid);
+    } catch {
+      toast({ title: t('verifyError'), variant: 'destructive' });
+    } finally {
+      setVerifying(false);
     }
   };
 
@@ -72,10 +97,66 @@ export function WebhookSecretCard({ tenantId, secret: initialSecret }: Props) {
 
       <SecretDisplay value={secret} />
 
-      <Collapsible open={open} onOpenChange={setOpen}>
+      <Separator />
+
+      <Collapsible open={verifyOpen} onOpenChange={open => { setVerifyOpen(open); setVerifyResult(null); }}>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="sm" className="gap-1 px-0 text-xs text-muted-foreground hover:text-foreground">
-            {open ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+            {verifyOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+            {t('verifyTitle')}
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="space-y-3 pt-2">
+          <div className="space-y-1">
+            <Label className="text-xs">{t('verifyPayloadLabel')}</Label>
+            <Textarea
+              className="font-mono text-xs resize-none"
+              rows={4}
+              placeholder='{"event":"..."}'
+              value={verifyPayload}
+              onChange={e => { setVerifyPayload(e.target.value); setVerifyResult(null); }}
+            />
+          </div>
+          <div className="space-y-1">
+            <Label className="text-xs">{t('verifySignatureLabel')}</Label>
+            <Input
+              className="font-mono text-xs"
+              placeholder="sha256=..."
+              value={verifySignature}
+              onChange={e => { setVerifySignature(e.target.value); setVerifyResult(null); }}
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={verifying || !verifyPayload.trim() || !verifySignature.trim()}
+              onClick={handleVerify}
+            >
+              {t('verifyButton')}
+            </Button>
+            {verifyResult === true && (
+              <span className="flex items-center gap-1.5 text-sm text-green-600 dark:text-green-400">
+                <CheckCircle2 className="h-4 w-4" />
+                {t('verifyValid')}
+              </span>
+            )}
+            {verifyResult === false && (
+              <span className="flex items-center gap-1.5 text-sm text-destructive">
+                <XCircle className="h-4 w-4" />
+                {t('verifyInvalid')}
+              </span>
+            )}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+
+      <Separator />
+
+      <Collapsible open={codeOpen} onOpenChange={setCodeOpen}>
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="sm" className="gap-1 px-0 text-xs text-muted-foreground hover:text-foreground">
+            {codeOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
             {t('codeTitle')}
           </Button>
         </CollapsibleTrigger>

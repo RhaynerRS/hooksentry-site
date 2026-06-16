@@ -456,7 +456,14 @@
         "title": "重新生成 Webhook 密钥？",
         "desc": "使用当前密钥的所有目标服务器将无法验证签名，直到更新为新值。此操作不可撤销。",
         "confirm": "重新生成"
-      }
+      },
+      "verifyTitle": "测试签名验证",
+      "verifyPayloadLabel": "Payload（原始 JSON 字符串）",
+      "verifySignatureLabel": "X-HookSentry-Signature",
+      "verifyButton": "验证",
+      "verifyValid": "签名有效",
+      "verifyInvalid": "签名无效",
+      "verifyError": "验证签名失败。"
     },
     "resilience": {
       "title": "弹性参数",

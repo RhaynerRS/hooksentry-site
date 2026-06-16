@@ -456,7 +456,14 @@
         "title": "¿Regenerar el webhook secret?",
         "desc": "Todos los servidores de destino que usen el secreto actual dejarán de verificar firmas hasta actualizarse con el nuevo valor. Esta acción no se puede deshacer.",
         "confirm": "Regenerar"
-      }
+      },
+      "verifyTitle": "Probar verificación de firma",
+      "verifyPayloadLabel": "Payload (cadena JSON sin procesar)",
+      "verifySignatureLabel": "X-HookSentry-Signature",
+      "verifyButton": "Verificar",
+      "verifyValid": "Firma válida",
+      "verifyInvalid": "Firma inválida",
+      "verifyError": "Error al verificar la firma."
     },
     "resilience": {
       "title": "Parámetros de Resiliencia",
