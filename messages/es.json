@@ -493,7 +493,7 @@
       },
       "idempotency": {
         "title": "Idempotencia (opcional)",
-        "desc": "Los reenvíos con la misma clave devuelven 200 con el evento original sin reprocesar."
+        "desc": "Los reenvíos con la misma clave devuelven 200 con el evento original sin reprocesar. La clave debe tener hasta 255 caracteres sin caracteres de control (\\r, \\n, \\0) — las claves inválidas devuelven 400."
       },
       "signature": {
         "title": "Verificar Firma (en tu servidor)",

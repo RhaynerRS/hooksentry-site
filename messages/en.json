@@ -493,7 +493,7 @@
       },
       "idempotency": {
         "title": "Idempotency (optional)",
-        "desc": "Resends with the same key return 200 with the original event without reprocessing."
+        "desc": "Resends with the same key return 200 with the original event without reprocessing. Keys must be up to 255 characters with no control characters (\\r, \\n, \\0) — invalid keys return 400."
       },
       "signature": {
         "title": "Verify Signature (on your server)",

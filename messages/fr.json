@@ -493,7 +493,7 @@
       },
       "idempotency": {
         "title": "Idempotence (optionnel)",
-        "desc": "Les renvois avec la même clé renvoient 200 avec l'événement original sans retraitement."
+        "desc": "Les renvois avec la même clé renvoient 200 avec l'événement original sans retraitement. La clé doit comporter jusqu'à 255 caractères sans caractères de contrôle (\\r, \\n, \\0) — les clés invalides retournent 400."
       },
       "signature": {
         "title": "Vérifier la signature (sur votre serveur)",

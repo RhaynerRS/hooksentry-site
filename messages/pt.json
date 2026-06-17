@@ -493,7 +493,7 @@
       },
       "idempotency": {
         "title": "Idempotência (opcional)",
-        "desc": "Reenvios com a mesma key retornam 200 com o evento original sem reprocessar."
+        "desc": "Reenvios com a mesma key retornam 200 com o evento original sem reprocessar. A key deve ter até 255 caracteres sem caracteres de controle (\\r, \\n, \\0) — keys inválidas retornam 400."
       },
       "signature": {
         "title": "Verificar Assinatura (no seu servidor)",
