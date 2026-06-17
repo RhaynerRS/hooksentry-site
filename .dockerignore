@@ -1,0 +1,57 @@
+# Dependencies (reinstalled in Docker)
+node_modules
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Build outputs (rebuilt in Docker)
+.next/
+dist/
+build/
+out/
+
+# Tests
+coverage/
+
+# Environment files (secrets - inject via Docker runtime)
+.env
+.env*
+!.env.local.example
+
+# TypeScript cache
+*.tsbuildinfo
+next-env.d.ts
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.pem
+*.key
+*.cert
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Vercel / CI
+.vercel
+.github/
+
+# Docs / assets not needed in the container
+README.md
+LICENSE
+assets/
