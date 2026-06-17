@@ -58,6 +58,7 @@
       "signIn": "Sign in",
       "passwordMismatch": "Passwords do not match.",
       "error": "Error creating account. Please try again.",
+      "conflict": "This tenant name or email is already in use.",
       "successTitle": "Account created!",
       "successSecret": "Save this secret — it will not be shown again.",
       "webhookSecretLabel": "Webhook Secret",
@@ -74,6 +75,7 @@
       "passwordMismatch": "Passwords do not match.",
       "notFound": "Invite not found.",
       "expired": "Invite expired or already used.",
+      "emailInUse": "This email is already registered.",
       "error": "Error registering. Please try again."
     }
   },

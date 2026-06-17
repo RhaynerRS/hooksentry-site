@@ -58,6 +58,7 @@
       "signIn": "登录",
       "passwordMismatch": "密码不匹配。",
       "error": "创建账户失败，请重试。",
+      "conflict": "该租户名称或邮箱已被使用。",
       "successTitle": "账户创建成功！",
       "successSecret": "请保存此密钥——它不会再次显示。",
       "webhookSecretLabel": "Webhook密钥",
@@ -74,6 +75,7 @@
       "passwordMismatch": "密码不匹配。",
       "notFound": "邀请不存在。",
       "expired": "邀请已过期或已使用。",
+      "emailInUse": "该邮箱已被注册。",
       "error": "注册失败，请重试。"
     }
   },

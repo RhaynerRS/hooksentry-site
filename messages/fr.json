@@ -58,6 +58,7 @@
       "signIn": "Se connecter",
       "passwordMismatch": "Les mots de passe ne correspondent pas.",
       "error": "Erreur lors de la création du compte. Veuillez réessayer.",
+      "conflict": "Ce nom de tenant ou cet e-mail est déjà utilisé.",
       "successTitle": "Compte créé avec succès !",
       "successSecret": "Enregistrez ce secret — il ne sera plus affiché.",
       "webhookSecretLabel": "Secret Webhook",
@@ -74,6 +75,7 @@
       "passwordMismatch": "Les mots de passe ne correspondent pas.",
       "notFound": "Invitation introuvable.",
       "expired": "Invitation expirée ou déjà utilisée.",
+      "emailInUse": "Cet e-mail est déjà enregistré.",
       "error": "Erreur lors de l'inscription. Veuillez réessayer."
     }
   },

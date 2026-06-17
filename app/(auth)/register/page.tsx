@@ -38,8 +38,8 @@ export default function RegisterPage() {
     });
 
     if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      setError(data.message ?? t('error'));
+      if (res.status === 409) setError(t('conflict'));
+      else setError(t('error'));
       setLoading(false);
       return;
     }

@@ -58,6 +58,7 @@
       "signIn": "Iniciar sesión",
       "passwordMismatch": "Las contraseñas no coinciden.",
       "error": "Error al crear la cuenta. Inténtalo de nuevo.",
+      "conflict": "Este nombre de tenant o correo ya está en uso.",
       "successTitle": "¡Cuenta creada!",
       "successSecret": "Guarda este secreto — no se mostrará nuevamente.",
       "webhookSecretLabel": "Secreto Webhook",
@@ -74,6 +75,7 @@
       "passwordMismatch": "Las contraseñas no coinciden.",
       "notFound": "Invitación no encontrada.",
       "expired": "Invitación expirada o ya utilizada.",
+      "emailInUse": "Este correo ya está registrado.",
       "error": "Error al registrarse. Inténtalo de nuevo."
     }
   },

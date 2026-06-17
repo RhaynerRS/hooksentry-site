@@ -38,10 +38,11 @@ export default function InvitePage() {
     });
 
     if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
+      const body = await res.json().catch(() => null);
+      const msg = typeof body === 'string' ? body : null;
       if (res.status === 404) setError(t('notFound'));
-      else if (res.status === 409) setError(data.message ?? t('expired'));
-      else setError(data.message ?? t('error'));
+      else if (res.status === 409) setError(msg?.toLowerCase().includes('email') ? t('emailInUse') : t('expired'));
+      else setError(t('error'));
       setLoading(false);
       return;
     }
