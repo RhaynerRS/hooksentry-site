@@ -51,29 +51,26 @@ export default function ApiKeysPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title={t('pageTitle')}
-        description={t('pageDesc')}
-        action={
-          <Button onClick={() => setCreateOpen(true)}>{t('newButton')}</Button>
-        }
-      />
+      <PageHeader title={t('pageTitle')} description={t('pageDesc')} />
 
-      <div className="flex items-center gap-4">
-        <label className="flex items-center gap-2 text-sm cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={showInactive}
-            onChange={e => updateFilter('inactive', e.target.checked ? '1' : null)}
-            className="rounded"
-          />
-          {t('showInactive')}
-        </label>
-        {!loading && (
-          <span className="text-sm text-muted-foreground">
-            {t('count', { count: total })}
-          </span>
-        )}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <label className="flex items-center gap-2 text-sm cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={showInactive}
+              onChange={e => updateFilter('inactive', e.target.checked ? '1' : null)}
+              className="rounded"
+            />
+            {t('showInactive')}
+          </label>
+          {!loading && (
+            <span className="text-sm text-muted-foreground">
+              {t('count', { count: total })}
+            </span>
+          )}
+        </div>
+        <Button size="sm" onClick={() => setCreateOpen(true)}>{t('newButton')}</Button>
       </div>
 
       <ApiKeysTable

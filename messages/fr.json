@@ -43,7 +43,8 @@
       "submitting": "Connexion...",
       "noAccount": "Pas de compte ?",
       "createTenant": "Créer un Tenant",
-      "error": "E-mail ou mot de passe invalide."
+      "error": "E-mail ou mot de passe invalide.",
+      "rateLimited": "Trop de tentatives échouées. Veuillez réessayer dans 5 minutes."
     },
     "register": {
       "title": "Créer un Tenant",

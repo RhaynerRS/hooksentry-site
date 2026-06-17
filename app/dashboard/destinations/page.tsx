@@ -51,16 +51,13 @@ export default function DestinationsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title={t('pageTitle')}
-        description={t('pageDesc')}
-        action={
-          <Button asChild>
-            <Link href="/dashboard/destinations/new">{t('newButton')}</Link>
-          </Button>
-        }
-      />
-      <DestinationsFilters params={params} onFilterChange={updateFilter} />
+      <PageHeader title={t('pageTitle')} description={t('pageDesc')} />
+      <div className="flex items-center justify-between">
+        <DestinationsFilters params={params} onFilterChange={updateFilter} />
+        <Button asChild size="sm">
+          <Link href="/dashboard/destinations/new">{t('newButton')}</Link>
+        </Button>
+      </div>
       <DestinationsTable
         destinations={destinations}
         total={total}

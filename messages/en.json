@@ -43,7 +43,8 @@
       "submitting": "Signing in...",
       "noAccount": "Don't have an account?",
       "createTenant": "Create Tenant",
-      "error": "Invalid email or password."
+      "error": "Invalid email or password.",
+      "rateLimited": "Too many failed login attempts. Please try again in 5 minutes."
     },
     "register": {
       "title": "Create Tenant",

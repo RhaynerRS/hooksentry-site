@@ -43,7 +43,8 @@
       "submitting": "登录中...",
       "noAccount": "没有账户？",
       "createTenant": "创建租户",
-      "error": "邮箱或密码无效。"
+      "error": "邮箱或密码无效。",
+      "rateLimited": "登录失败次数过多，请5分钟后重试。"
     },
     "register": {
       "title": "创建租户",

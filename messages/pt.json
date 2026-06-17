@@ -43,7 +43,8 @@
       "submitting": "Entrando...",
       "noAccount": "Não tem conta?",
       "createTenant": "Criar Tenant",
-      "error": "Email ou senha inválidos."
+      "error": "Email ou senha inválidos.",
+      "rateLimited": "Muitas tentativas de login falhas. Tente novamente em 5 minutos."
     },
     "register": {
       "title": "Criar Tenant",

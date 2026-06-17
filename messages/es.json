@@ -43,7 +43,8 @@
       "submitting": "Iniciando sesión...",
       "noAccount": "¿No tienes cuenta?",
       "createTenant": "Crear Tenant",
-      "error": "Correo o contraseña inválidos."
+      "error": "Correo o contraseña inválidos.",
+      "rateLimited": "Demasiados intentos fallidos. Por favor, inténtalo de nuevo en 5 minutos."
     },
     "register": {
       "title": "Crear Tenant",

@@ -32,8 +32,12 @@ export default function LoginPage() {
     });
 
     if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      setError(data.message ?? t('error'));
+      if (res.status === 429) {
+        setError(t('rateLimited'));
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.message ?? t('error'));
+      }
       setLoading(false);
       return;
     }
