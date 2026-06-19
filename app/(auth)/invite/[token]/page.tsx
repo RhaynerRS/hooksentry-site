@@ -31,9 +31,10 @@ export default function InvitePage() {
 
     setLoading(true);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/invites/${token}/register`, {
+    const res = await fetch(`/api/proxy/invites/${token}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ name, email, password }),
     });
 

@@ -2,11 +2,12 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { AuthUser } from '@/lib/types/auth';
-import { clearTokenCookies, getAccessToken, getRefreshToken } from '@/lib/auth/tokens';
+import { clearTokenCookies, getRefreshToken } from '@/lib/auth/tokens';
 
 interface AuthContextValue {
   user: AuthUser | null;
   isLoading: boolean;
+  login: (user: AuthUser) => void;
   logout: () => Promise<void>;
 }
 
@@ -16,18 +17,17 @@ export function AuthProvider({ children, initialUser }: { children: ReactNode; i
   const [user, setUser] = useState<AuthUser | null>(initialUser);
   const [isLoading, setIsLoading] = useState(false);
 
+  const login = (user: AuthUser) => setUser(user);
+
   const logout = async () => {
     setIsLoading(true);
-    const accessToken = getAccessToken();
     const refreshToken = getRefreshToken();
 
     if (refreshToken) {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`, {
+      await fetch('/api/proxy/auth/logout', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-        },
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ refreshToken }),
       }).catch(() => {});
     }
@@ -38,7 +38,7 @@ export function AuthProvider({ children, initialUser }: { children: ReactNode; i
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

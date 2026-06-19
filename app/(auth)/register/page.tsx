@@ -31,9 +31,10 @@ export default function RegisterPage() {
 
     setLoading(true);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/tenants`, {
+    const res = await fetch('/api/proxy/tenants', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ name: tenantName, adminEmail, adminPassword }),
     });
 

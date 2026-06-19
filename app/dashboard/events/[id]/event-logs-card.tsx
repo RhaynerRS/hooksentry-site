@@ -1,21 +1,29 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 
-const GRAFANA_URL = process.env.NEXT_PUBLIC_GRAFANA_URL;
-
 export function EventLogsCard({ eventId }: { eventId: string }) {
   const t = useTranslations('events.detail');
+  const [grafanaUrl, setGrafanaUrl] = useState<string | null>(null);
 
-  const grafanaUrl = GRAFANA_URL
-    ? `${GRAFANA_URL}/explore?left=${encodeURIComponent(
-        JSON.stringify({
-          queries: [{ expr: `{service_name="hooksentry-worker"} | json | EventId="${eventId}"` }],
-        })
-      )}`
-    : null;
+  useEffect(() => {
+    fetch('/api/config')
+      .then(r => r.json())
+      .then(({ grafanaUrl: base }) => {
+        if (!base) return;
+        setGrafanaUrl(
+          `${base}/explore?left=${encodeURIComponent(
+            JSON.stringify({
+              queries: [{ expr: `{service_name="hooksentry-worker"} | json | EventId="${eventId}"` }],
+            })
+          )}`
+        );
+      })
+      .catch(() => {});
+  }, [eventId]);
 
   return (
     <div className="rounded-lg border p-5 space-y-3">

@@ -8,11 +8,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { setTokenCookies } from '@/lib/auth/tokens';
+import { decodeJwtPayload } from '@/lib/auth/jwt';
+import { useAuth } from '@/lib/auth/auth-context';
 
 export default function LoginPage() {
   const t = useTranslations('auth.login');
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { login } = useAuth();
   const redirect = searchParams.get('redirect') ?? '/dashboard';
 
   const [email, setEmail] = useState('');
@@ -25,9 +28,10 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
+    const res = await fetch('/api/proxy/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
     });
 
@@ -44,6 +48,8 @@ export default function LoginPage() {
 
     const { accessToken, refreshToken } = await res.json();
     setTokenCookies(accessToken, refreshToken);
+    const user = decodeJwtPayload(accessToken);
+    if (user) login(user);
     router.replace(redirect);
   };
 
