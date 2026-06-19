@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import {
+  Line,
+  LineChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { eventsApi } from '@/lib/api/events';
 
@@ -12,6 +20,12 @@ type ChartRow = {
   criticalFailure: number;
   retry: number;
 };
+
+const COLORS = {
+  delivered:       'hsl(var(--foreground))',
+  criticalFailure: 'hsl(var(--destructive))',
+  retry:           '#888888',
+} as const;
 
 export function OverviewChart() {
   const t = useTranslations('overview');
@@ -60,15 +74,15 @@ export function OverviewChart() {
         <CardTitle className="text-sm font-medium">{t('chartTitle')}</CardTitle>
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-foreground" />
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-foreground" />
             {t('delivered')}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm border border-foreground bg-background" />
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-destructive" />
             {t('criticalFailure')}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-[#888888]" />
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#888888]" />
             {t('retry')}
           </span>
         </div>
@@ -80,7 +94,12 @@ export function OverviewChart() {
           <p className="text-sm text-muted-foreground text-center py-12">{t('chartNoData')}</p>
         ) : (
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={data} barGap={3} barCategoryGap="15%">
+            <LineChart data={data} margin={{ top: 8, right: 8, left: -16, bottom: 0 }}>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="hsl(var(--border))"
+                vertical={false}
+              />
               <XAxis
                 dataKey="date"
                 stroke="#888888"
@@ -96,7 +115,7 @@ export function OverviewChart() {
                 allowDecimals={false}
               />
               <Tooltip
-                cursor={{ fill: 'hsl(var(--muted))', opacity: 0.5 }}
+                cursor={{ stroke: 'hsl(var(--border))', strokeWidth: 1 }}
                 contentStyle={{
                   background: 'hsl(var(--background))',
                   border: '1px solid hsl(var(--border))',
@@ -112,24 +131,31 @@ export function OverviewChart() {
                   return [value, labels[name as string] ?? name];
                 }}
               />
-              <Bar
+              <Line
+                type="monotone"
                 dataKey="delivered"
-                fill="hsl(var(--foreground))"
-                radius={[4, 4, 0, 0]}
+                stroke={COLORS.delivered}
+                strokeWidth={2}
+                dot={{ r: 4, fill: COLORS.delivered, strokeWidth: 0 }}
+                activeDot={{ r: 6, fill: COLORS.delivered, stroke: 'hsl(var(--background))', strokeWidth: 2 }}
               />
-              <Bar
+              <Line
+                type="monotone"
                 dataKey="criticalFailure"
-                fill="hsl(var(--background))"
-                stroke="hsl(var(--foreground))"
-                strokeWidth={1}
-                radius={[4, 4, 0, 0]}
+                stroke={COLORS.criticalFailure}
+                strokeWidth={2}
+                dot={{ r: 4, fill: COLORS.criticalFailure, strokeWidth: 0 }}
+                activeDot={{ r: 6, fill: COLORS.criticalFailure, stroke: 'hsl(var(--background))', strokeWidth: 2 }}
               />
-              <Bar
+              <Line
+                type="monotone"
                 dataKey="retry"
-                fill="#888888"
-                radius={[4, 4, 0, 0]}
+                stroke={COLORS.retry}
+                strokeWidth={2}
+                dot={{ r: 4, fill: COLORS.retry, strokeWidth: 0 }}
+                activeDot={{ r: 6, fill: COLORS.retry, stroke: 'hsl(var(--background))', strokeWidth: 2 }}
               />
-            </BarChart>
+            </LineChart>
           </ResponsiveContainer>
         )}
       </CardContent>
