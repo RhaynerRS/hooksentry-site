@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/lib/auth/auth-context';
-import { AuthUser } from '@/lib/types/auth';
 import { Logo } from '@/components/logo';
 import { Breadcrumbs } from '@/components/dashboard/breadcrumbs';
 import { ColorModeSwitcher } from '@/components/color-mode-switcher';
@@ -34,14 +33,12 @@ const NAV_ITEMS: NavItem[] = [
 
 export function DashboardShell({
   children,
-  user,
 }: {
   children: React.ReactNode;
-  user: AuthUser | null;
 }) {
   const t = useTranslations('nav');
   const pathname = usePathname();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const visibleItems = NAV_ITEMS.filter(

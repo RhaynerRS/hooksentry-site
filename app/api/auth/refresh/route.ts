@@ -24,7 +24,7 @@ export async function POST(_req: NextRequest) {
 
   const { accessToken, refreshToken: newRefresh } = await apiRes.json();
 
-  const res = NextResponse.json({ ok: true });
+  const res = NextResponse.json({ ok: true, accessToken });
   res.cookies.set('hs_access_token', accessToken, {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
