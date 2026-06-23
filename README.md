@@ -86,4 +86,4 @@ docker run -p 3000:3000 \
 
 ## License
 
-Licensed under the [Apache License 2.0](../LICENSE).
+Licensed under the [Apache License 2.0](./LICENSE).
