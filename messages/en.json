@@ -444,7 +444,10 @@
       "plan": "Plan",
       "planValue": "MVP",
       "createdAt": "Created at",
-      "adminBadge": "Admin"
+      "adminBadge": "Admin",
+      "editName": "Edit name",
+      "editSuccess": "Tenant name updated.",
+      "editError": "Failed to update tenant name."
     },
     "webhookSecret": {
       "title": "Webhook Secret",
@@ -477,7 +480,10 @@
       "backoffTitle": "Backoff schedule (informational)",
       "attempt": "Attempt",
       "delay": "Delay",
-      "supportNote": "To change these parameters, contact support."
+      "editButton": "Edit",
+      "editSuccess": "Resilience settings updated.",
+      "editError": "Failed to update resilience settings.",
+      "validationError": "Values must be at least 1."
     },
     "integration": {
       "title": "Integration Guide",

@@ -163,6 +163,12 @@ export interface Tenant {
   updatedAt: string;
 }
 
+export interface UpdateTenantRequest {
+  name?: string;
+  maxTrys?: number;
+  circuitBreakerTimer?: number;
+}
+
 // ─── Erros ────────────────────────────────────────────────────────────────────
 export interface ApiError {
   status: number;

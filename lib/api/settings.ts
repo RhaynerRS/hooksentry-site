@@ -1,9 +1,12 @@
 import { api } from './client';
-import type { Tenant } from './types';
+import type { Tenant, UpdateTenantRequest } from './types';
 
 export const tenantApi = {
   get: (id: string) =>
     api.get<Tenant>(`/tenants/${id}`),
+
+  update: (id: string, body: UpdateTenantRequest) =>
+    api.patch<Tenant>(`/tenants/${id}`, body),
 
   getWebhookSecret: (id: string) =>
     api.get<{ webhookSecret: string }>(`/tenants/${id}/webhook-secret`),

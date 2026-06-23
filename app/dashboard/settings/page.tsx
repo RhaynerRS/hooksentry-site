@@ -50,13 +50,20 @@ export default function SettingsPage() {
       <PageHeader title={t('pageTitle')} description={t('pageDesc')} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <TenantInfoCard tenant={tenant} isAdmin={isAdmin} />
+        <TenantInfoCard
+          tenant={tenant}
+          isAdmin={isAdmin}
+          onUpdate={setTenant}
+        />
         <WebhookSecretCard tenantId={tenant?.id ?? ''} secret={webhookSecret} />
       </div>
 
       <ResilienceSettingsCard
+        tenantId={tenant?.id ?? ''}
         maxTrys={tenant?.maxTrys ?? 10}
         circuitBreakerTimer={tenant?.circuitBreakerTimer ?? 300}
+        isAdmin={isAdmin}
+        onUpdate={setTenant}
       />
 
       <IntegrationGuideCard tenantId={tenant?.id ?? ''} />

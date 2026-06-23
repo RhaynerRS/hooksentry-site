@@ -444,7 +444,10 @@
       "plan": "プラン",
       "planValue": "MVP",
       "createdAt": "作成日",
-      "adminBadge": "管理者"
+      "adminBadge": "管理者",
+      "editName": "名前を編集",
+      "editSuccess": "テナント名を更新しました。",
+      "editError": "テナント名の更新に失敗しました。"
     },
     "webhookSecret": {
       "title": "Webhook シークレット",
@@ -477,7 +480,10 @@
       "backoffTitle": "バックオフスケジュール（情報提供）",
       "attempt": "試行",
       "delay": "遅延",
-      "supportNote": "これらのパラメータを変更するには、サポートにお問い合わせください。"
+      "editButton": "編集",
+      "editSuccess": "レジリエンス設定を更新しました。",
+      "editError": "レジリエンス設定の更新に失敗しました。",
+      "validationError": "値は1以上である必要があります。"
     },
     "integration": {
       "title": "インテグレーションガイド",

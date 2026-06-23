@@ -444,7 +444,10 @@
       "plan": "Plano",
       "planValue": "MVP",
       "createdAt": "Criado em",
-      "adminBadge": "Admin"
+      "adminBadge": "Admin",
+      "editName": "Editar nome",
+      "editSuccess": "Nome do tenant atualizado.",
+      "editError": "Falha ao atualizar o nome do tenant."
     },
     "webhookSecret": {
       "title": "Webhook Secret",
@@ -477,7 +480,10 @@
       "backoffTitle": "Tabela de backoff (informativa)",
       "attempt": "Tentativa",
       "delay": "Atraso",
-      "supportNote": "Para alterar estes parâmetros, entre em contato com o suporte."
+      "editButton": "Editar",
+      "editSuccess": "Parâmetros de resiliência atualizados.",
+      "editError": "Falha ao atualizar parâmetros de resiliência.",
+      "validationError": "Os valores devem ser no mínimo 1."
     },
     "integration": {
       "title": "Guia de Integração",
