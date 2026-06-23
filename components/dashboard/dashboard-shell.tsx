@@ -17,8 +17,8 @@ import {
 interface NavItem {
   labelKey: Parameters<ReturnType<typeof useTranslations<'nav'>>>[0];
   href: string;
-  icon: React.ElementType;
   adminOnly?: boolean;
+  icon: React.ElementType;
 }
 
 const NAV_ITEMS: NavItem[] = [
