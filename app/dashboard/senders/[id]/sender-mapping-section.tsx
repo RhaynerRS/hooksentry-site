@@ -109,10 +109,10 @@ export function SenderMappingSection({ senderId, mapping: initialMapping }: Prop
                   </tr>
                 </thead>
                 <tbody className="font-mono">
-                  <tr><td className="pr-4 py-0.5">"field"</td><td className="py-0.5 font-sans text-muted-foreground">Copies root field</td></tr>
-                  <tr><td className="pr-4 py-0.5">"obj:field"</td><td className="py-0.5 font-sans text-muted-foreground">Accesses obj.field</td></tr>
-                  <tr><td className="pr-4 py-0.5">"arr[n]"</td><td className="py-0.5 font-sans text-muted-foreground">Array index n</td></tr>
-                  <tr><td className="pr-4 py-0.5">"a+b"</td><td className="py-0.5 font-sans text-muted-foreground">Sum / concat</td></tr>
+                  <tr><td className="pr-4 py-0.5">&quot;field&quot;</td><td className="py-0.5 font-sans text-muted-foreground">Copies root field</td></tr>
+                  <tr><td className="pr-4 py-0.5">&quot;obj:field&quot;</td><td className="py-0.5 font-sans text-muted-foreground">Accesses obj.field</td></tr>
+                  <tr><td className="pr-4 py-0.5">&quot;arr[n]&quot;</td><td className="py-0.5 font-sans text-muted-foreground">Array index n</td></tr>
+                  <tr><td className="pr-4 py-0.5">&quot;a+b&quot;</td><td className="py-0.5 font-sans text-muted-foreground">Sum / concat</td></tr>
                 </tbody>
               </table>
               <div>
