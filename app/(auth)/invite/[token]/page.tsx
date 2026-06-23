@@ -13,7 +13,6 @@ export default function InvitePage() {
   const router = useRouter();
   const { token } = useParams<{ token: string }>();
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -35,7 +34,7 @@ export default function InvitePage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (!res.ok) {
@@ -59,10 +58,6 @@ export default function InvitePage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-1">
-              <Label htmlFor="name">{t('name')}</Label>
-              <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
-            </div>
             <div className="space-y-1">
               <Label htmlFor="email">{t('email')}</Label>
               <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
