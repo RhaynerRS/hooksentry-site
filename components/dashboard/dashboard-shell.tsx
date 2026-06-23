@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 interface NavItem {
-  labelKey: keyof ReturnType<typeof useTranslations<'nav'>>;
+  labelKey: Parameters<ReturnType<typeof useTranslations<'nav'>>>[0];
   href: string;
   icon: React.ElementType;
   adminOnly?: boolean;
