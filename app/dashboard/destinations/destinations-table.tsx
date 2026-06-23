@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Destination } from '@/lib/api/types';
-import { DestinationStatusBadge, CircuitBreakerBadge } from '@/components/dashboard/status-badge';
+import { DestinationStatusBadge } from '@/components/dashboard/status-badge';
 import { EmptyState } from '@/components/dashboard/empty-state';
 import { Pagination } from '@/components/dashboard/pagination';
 import { Button } from '@/components/ui/button';
@@ -48,7 +48,6 @@ export function DestinationsTable({ destinations, total, page, pageSize, loading
             <tr>
               <th className="px-4 py-3 text-left font-medium">{t('table.url')}</th>
               <th className="px-4 py-3 text-left font-medium">{t('table.status')}</th>
-              <th className="px-4 py-3 text-left font-medium">{t('table.circuitBreaker')}</th>
               <th className="px-4 py-3 text-left font-medium">{t('table.rateLimit')}</th>
               <th className="px-4 py-3 text-left font-medium">{t('table.auth')}</th>
               <th className="px-4 py-3" />
@@ -62,16 +61,6 @@ export function DestinationsTable({ destinations, total, page, pageSize, loading
                 </td>
                 <td className="px-4 py-3">
                   <DestinationStatusBadge status={dest.status} />
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <CircuitBreakerBadge state={dest.circuitBreakerState} />
-                    {(dest.circuitBreakerState === 'Open' || dest.circuitBreakerState === 'HalfOpen') && (
-                      <span className="text-xs text-muted-foreground">
-                        {t('table.failures', { count: dest.circuitBreakerFailures })}
-                      </span>
-                    )}
-                  </div>
                 </td>
                 <td className="px-4 py-3">{dest.serverRateLimit} req/s</td>
                 <td className="px-4 py-3 text-muted-foreground">{dest.authType ?? '—'}</td>

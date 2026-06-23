@@ -9,7 +9,6 @@ import { Destination, Sender } from '@/lib/api/types';
 import { PageHeader } from '@/components/dashboard/page-header';
 import { DestinationInfoCard } from './destination-info-card';
 import { IngestTokenCard } from './ingest-token-card';
-import { CircuitBreakerCard } from './circuit-breaker-card';
 import { SendersSection } from './senders-section';
 import { DangerZoneCard } from './danger-zone-card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -81,7 +80,6 @@ export default function DestinationDetailPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <DestinationInfoCard destination={dest} onUpdated={setDest} />
         <IngestTokenCard destinationId={dest.id} initialToken={newToken ?? undefined} />
-        <CircuitBreakerCard destination={dest} />
       </div>
 
       <SendersSection destinationId={dest.id} initialSenders={senders} />

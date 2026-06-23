@@ -93,52 +93,25 @@ export function ResilienceSettingsCard({ tenantId, maxTrys, circuitBreakerTimer,
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {editing ? (
-          <>
-            <div className="space-y-2">
-              <Label htmlFor="maxTrys" className="text-sm font-medium">{t('maxTrys')}</Label>
-              <Input
-                id="maxTrys"
-                type="number"
-                min={1}
-                value={maxTrysValue}
-                onChange={e => setMaxTrysValue(Number(e.target.value))}
-                className="w-32"
-                disabled={saving}
-              />
-              <p className="text-xs text-muted-foreground">{t('maxTrysDesc')}</p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="cbTimer" className="text-sm font-medium">{t('timer')}</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="cbTimer"
-                  type="number"
-                  min={1}
-                  value={timerValue}
-                  onChange={e => setTimerValue(Number(e.target.value))}
-                  className="w-32"
-                  disabled={saving}
-                />
-                <span className="text-sm text-muted-foreground">s</span>
-              </div>
-              <p className="text-xs text-muted-foreground">{t('timerDesc', { minutes: Math.round(timerValue / 60) })}</p>
-            </div>
-          </>
+          <div className="space-y-2">
+            <Label htmlFor="maxTrys" className="text-sm font-medium">{t('maxTrys')}</Label>
+            <Input
+              id="maxTrys"
+              type="number"
+              min={1}
+              value={maxTrysValue}
+              onChange={e => setMaxTrysValue(Number(e.target.value))}
+              className="w-32"
+              disabled={saving}
+            />
+            <p className="text-xs text-muted-foreground">{t('maxTrysDesc')}</p>
+          </div>
         ) : (
-          <>
-            <div className="space-y-1">
-              <p className="text-sm font-medium">{t('maxTrys')}</p>
-              <p className="text-2xl font-bold tabular-nums">{maxTrys}</p>
-              <p className="text-xs text-muted-foreground">{t('maxTrysDesc')}</p>
-            </div>
-
-            <div className="space-y-1">
-              <p className="text-sm font-medium">{t('timer')}</p>
-              <p className="text-2xl font-bold tabular-nums">{circuitBreakerTimer}<span className="text-base font-normal text-muted-foreground ml-1">s</span></p>
-              <p className="text-xs text-muted-foreground">{t('timerDesc', { minutes })}</p>
-            </div>
-          </>
+          <div className="space-y-1">
+            <p className="text-sm font-medium">{t('maxTrys')}</p>
+            <p className="text-2xl font-bold tabular-nums">{maxTrys}</p>
+            <p className="text-xs text-muted-foreground">{t('maxTrysDesc')}</p>
+          </div>
         )}
       </div>
 
