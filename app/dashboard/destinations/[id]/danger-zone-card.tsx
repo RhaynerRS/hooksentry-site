@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAuth } from '@/lib/auth/auth-context';
 import { destinationsApi } from '@/lib/api/destinations';
+import { ApiClientError } from '@/lib/api/client';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/components/ui/dialog';
@@ -18,19 +19,25 @@ export function DangerZoneCard({ destinationId }: { destinationId: string }) {
   const [input, setInput] = useState('');
   const [purging, setPurging] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState('');
 
   const confirmWord = t('confirmWord');
 
-  if (user?.role !== 'Admin') return null;
+  // Backend RequireAdminRole allows both Admin and Owner — keep the UI in sync.
+  if (user?.role !== 'Admin' && user?.role !== 'Owner') return null;
 
   const handlePurge = async () => {
     if (input !== confirmWord) return;
     setPurging(true);
+    setError('');
     try {
       await destinationsApi.purgeQueue(destinationId);
       setDone(true);
       setOpen(false);
       setInput('');
+    } catch (err) {
+      if (err instanceof ApiClientError) setError(err.message);
+      else throw err;
     } finally {
       setPurging(false);
     }
@@ -52,7 +59,7 @@ export function DangerZoneCard({ destinationId }: { destinationId: string }) {
         </Button>
       </div>
 
-      <Dialog open={open} onOpenChange={o => { setOpen(o); if (!o) setInput(''); }}>
+      <Dialog open={open} onOpenChange={o => { setOpen(o); if (!o) { setInput(''); setError(''); } }}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{t('dialogTitle')}</DialogTitle>
@@ -69,10 +76,11 @@ export function DangerZoneCard({ destinationId }: { destinationId: string }) {
               onChange={e => setInput(e.target.value)}
               placeholder={confirmWord}
             />
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
 
           <DialogFooter>
-            <Button variant="outline" onClick={() => { setOpen(false); setInput(''); }}>
+            <Button variant="outline" onClick={() => { setOpen(false); setInput(''); setError(''); }}>
               {t('cancel')}
             </Button>
             <Button
