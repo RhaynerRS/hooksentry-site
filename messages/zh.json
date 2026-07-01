@@ -67,7 +67,10 @@
       "successTitle": "账户创建成功！",
       "successSecret": "请保存此密钥——它不会再次显示。",
       "webhookSecretLabel": "Webhook密钥",
-      "goToLogin": "前往登录"
+      "goToLogin": "前往登录",
+      "tooManyRequests": "注册尝试次数过多，请稍后再试。",
+      "disposableEmail": "请使用永久电子邮件地址。",
+      "turnstileFailed": "验证码校验失败，请重试。"
     },
     "invite": {
       "title": "创建您的账户",
@@ -535,7 +538,9 @@
     },
     "role": {
       "Developer": "开发者",
-      "Admin": "管理员"
+      "Admin": "管理员",
+      "Owner": "所有者",
+      "Viewer": "查看者"
     },
     "userStatus": {
       "Active": "活跃",
@@ -544,7 +549,8 @@
     "actions": {
       "activate": "激活",
       "deactivate": "停用",
-      "remove": "移除"
+      "remove": "移除",
+      "promoteToOwner": "提升为所有者"
     },
     "removeDialog": {
       "title": "移除用户？",
@@ -554,7 +560,9 @@
     "toast": {
       "roleUpdated": "角色已更新为 {role}",
       "statusUpdated": "状态已更新。",
-      "removed": "用户已移除。"
+      "removed": "用户已移除。",
+      "lastOwnerError": "无法移除租户的最后一位所有者。",
+      "removeError": "移除用户时出错。"
     },
     "invites": {
       "generateButton": "生成邀请",
@@ -588,8 +596,14 @@
         "expiry": "将在 {days} 天后过期。",
         "warning": "请立即复制此链接。关闭此窗口后将不再显示。",
         "linkLabel": "邀请链接",
-        "done": "完成"
+        "done": "完成",
+        "roleLabel": "角色"
       }
+    },
+    "promoteDialog": {
+      "title": "提升为所有者？",
+      "desc": "{email} 将获得完整的所有者权限，包括管理所有者和删除租户。",
+      "confirm": "提升"
     }
   },
   "pagination": {

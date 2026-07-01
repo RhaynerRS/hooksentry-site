@@ -67,7 +67,10 @@
       "successTitle": "Compte créé avec succès !",
       "successSecret": "Enregistrez ce secret — il ne sera plus affiché.",
       "webhookSecretLabel": "Secret Webhook",
-      "goToLogin": "Aller à la connexion"
+      "goToLogin": "Aller à la connexion",
+      "tooManyRequests": "Trop de tentatives d'inscription. Veuillez réessayer plus tard.",
+      "disposableEmail": "Veuillez utiliser une adresse e-mail permanente.",
+      "turnstileFailed": "Échec de la vérification du captcha. Veuillez réessayer."
     },
     "invite": {
       "title": "Créer votre compte",
@@ -535,7 +538,9 @@
     },
     "role": {
       "Developer": "Développeur",
-      "Admin": "Administrateur"
+      "Admin": "Administrateur",
+      "Owner": "Propriétaire",
+      "Viewer": "Observateur"
     },
     "userStatus": {
       "Active": "Actif",
@@ -544,7 +549,8 @@
     "actions": {
       "activate": "Activer",
       "deactivate": "Désactiver",
-      "remove": "Supprimer"
+      "remove": "Supprimer",
+      "promoteToOwner": "Promouvoir propriétaire"
     },
     "removeDialog": {
       "title": "Supprimer l'utilisateur ?",
@@ -554,7 +560,9 @@
     "toast": {
       "roleUpdated": "Rôle mis à jour : {role}",
       "statusUpdated": "Statut mis à jour.",
-      "removed": "Utilisateur supprimé."
+      "removed": "Utilisateur supprimé.",
+      "lastOwnerError": "Impossible de supprimer le dernier propriétaire du tenant.",
+      "removeError": "Erreur lors de la suppression de l'utilisateur."
     },
     "invites": {
       "generateButton": "Générer une invitation",
@@ -588,8 +596,14 @@
         "expiry": "Expire dans {days} jour(s).",
         "warning": "Copiez ce lien maintenant. Il ne sera plus affiché après la fermeture de cette fenêtre.",
         "linkLabel": "Lien d'invitation",
-        "done": "Terminé"
+        "done": "Terminé",
+        "roleLabel": "Rôle"
       }
+    },
+    "promoteDialog": {
+      "title": "Promouvoir en propriétaire ?",
+      "desc": "{email} obtiendra tous les droits de propriétaire, y compris la gestion des propriétaires et la suppression du tenant.",
+      "confirm": "Promouvoir"
     }
   },
   "pagination": {

@@ -67,7 +67,10 @@
       "successTitle": "アカウントが作成されました！",
       "successSecret": "このシークレットを保存してください — 再表示されません。",
       "webhookSecretLabel": "Webhookシークレット",
-      "goToLogin": "ログインへ"
+      "goToLogin": "ログインへ",
+      "tooManyRequests": "登録の試行回数が多すぎます。しばらくしてからもう一度お試しください。",
+      "disposableEmail": "永続的なメールアドレスを使用してください。",
+      "turnstileFailed": "キャプチャの検証に失敗しました。もう一度お試しください。"
     },
     "invite": {
       "title": "アカウントを作成",
@@ -535,7 +538,9 @@
     },
     "role": {
       "Developer": "開発者",
-      "Admin": "管理者"
+      "Admin": "管理者",
+      "Owner": "オーナー",
+      "Viewer": "閲覧者"
     },
     "userStatus": {
       "Active": "有効",
@@ -544,7 +549,8 @@
     "actions": {
       "activate": "有効化",
       "deactivate": "無効化",
-      "remove": "削除"
+      "remove": "削除",
+      "promoteToOwner": "オーナーに昇格"
     },
     "removeDialog": {
       "title": "ユーザーを削除しますか？",
@@ -554,7 +560,9 @@
     "toast": {
       "roleUpdated": "ロールを {role} に更新しました",
       "statusUpdated": "ステータスを更新しました。",
-      "removed": "ユーザーを削除しました。"
+      "removed": "ユーザーを削除しました。",
+      "lastOwnerError": "テナントの最後のオーナーは削除できません。",
+      "removeError": "ユーザーの削除中にエラーが発生しました。"
     },
     "invites": {
       "generateButton": "招待を生成",
@@ -588,8 +596,14 @@
         "expiry": "{days}日後に期限切れになります。",
         "warning": "このリンクを今すぐコピーしてください。ウィンドウを閉じると再表示されません。",
         "linkLabel": "招待リンク",
-        "done": "完了"
+        "done": "完了",
+        "roleLabel": "ロール"
       }
+    },
+    "promoteDialog": {
+      "title": "オーナーに昇格しますか？",
+      "desc": "{email} は、オーナーの管理やテナントの削除を含む、完全なオーナー権限を取得します。",
+      "confirm": "昇格"
     }
   },
   "pagination": {

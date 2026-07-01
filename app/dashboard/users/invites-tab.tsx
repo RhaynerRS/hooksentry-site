@@ -14,9 +14,10 @@ const PAGE_SIZE = 20;
 interface Props {
   createOpen: boolean;
   onCreateOpenChange: (open: boolean) => void;
+  isCloud: boolean;
 }
 
-export function InvitesTab({ createOpen, onCreateOpenChange }: Props) {
+export function InvitesTab({ createOpen, onCreateOpenChange, isCloud }: Props) {
   const t = useTranslations('users.invites');
   const [invites, setInvites] = useState<InviteToken[]>([]);
   const [total, setTotal] = useState(0);
@@ -77,6 +78,7 @@ export function InvitesTab({ createOpen, onCreateOpenChange }: Props) {
         open={createOpen}
         onOpenChange={onCreateOpenChange}
         onSuccess={handleCreated}
+        isCloud={isCloud}
       />
     </div>
   );

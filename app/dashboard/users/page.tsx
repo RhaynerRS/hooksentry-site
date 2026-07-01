@@ -5,11 +5,13 @@ import { useTranslations } from 'next-intl';
 import { PageHeader } from '@/components/dashboard/page-header';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
+import { useDeploymentMode } from '@/hooks/use-deployment-mode';
 import { UsersTab } from './users-tab';
 import { InvitesTab } from './invites-tab';
 
 export default function UsersPage() {
   const t = useTranslations('users');
+  const { isCloud } = useDeploymentMode();
   const [activeTab, setActiveTab] = useState('members');
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
@@ -29,10 +31,10 @@ export default function UsersPage() {
           )}
         </div>
         <TabsContent value="members" className="mt-4">
-          <UsersTab />
+          <UsersTab isCloud={isCloud} />
         </TabsContent>
         <TabsContent value="invites" className="mt-4">
-          <InvitesTab createOpen={inviteDialogOpen} onCreateOpenChange={setInviteDialogOpen} />
+          <InvitesTab createOpen={inviteDialogOpen} onCreateOpenChange={setInviteDialogOpen} isCloud={isCloud} />
         </TabsContent>
       </Tabs>
     </div>

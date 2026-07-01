@@ -1,30 +1,58 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { registrationApi, type RegistrationCapabilities } from '@/lib/api/registration';
+
+// Coleta o fingerprint do browser. Fail-open: qualquer erro retorna null e o cadastro segue.
+async function collectFingerprint(): Promise<string | null> {
+  try {
+    const FingerprintJS = (await import('@fingerprintjs/fingerprintjs')).default;
+    const fp = await FingerprintJS.load();
+    const result = await fp.get();
+    return result.visitorId;
+  } catch {
+    return null;
+  }
+}
 
 export default function RegisterPage() {
   const t = useTranslations('auth.register');
   const router = useRouter();
 
   const [tenantName, setTenantName] = useState('');
-  const [adminEmail, setAdminEmail] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
+  const [ownerEmail, setOwnerEmail] = useState('');
+  const [ownerPassword, setOwnerPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [webhookSecret, setWebhookSecret] = useState<string | null>(null);
 
+  const [caps, setCaps] = useState<RegistrationCapabilities | null>(null);
+  const [deviceFingerprint, setDeviceFingerprint] = useState<string | null>(null);
+  const [cfToken, setCfToken] = useState<string | null>(null);
+
+  // Descobre quais proteções o backend exige (só existem no cloud; self-hosted → tudo false).
+  useEffect(() => {
+    registrationApi.getCapabilities().then(async c => {
+      setCaps(c);
+      if (c.fingerprintEnabled) setDeviceFingerprint(await collectFingerprint());
+    });
+  }, []);
+
+  const turnstileBlocking = caps?.turnstileEnabled && !cfToken;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (adminPassword !== confirmPassword) {
+    if (ownerPassword !== confirmPassword) {
       setError(t('passwordMismatch'));
       return;
     }
@@ -35,12 +63,23 @@ export default function RegisterPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ name: tenantName, adminEmail, adminPassword }),
+      body: JSON.stringify({
+        name: tenantName,
+        ownerEmail,
+        ownerPassword,
+        ...(deviceFingerprint ? { deviceFingerprint } : {}),
+        ...(cfToken ? { cfTurnstileToken: cfToken } : {}),
+      }),
     });
 
     if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
       if (res.status === 409) setError(t('conflict'));
+      else if (res.status === 422 && body?.error === 'disposable_email') setError(t('disposableEmail'));
+      else if (res.status === 429) setError(t('tooManyRequests'));
+      else if (res.status === 400 && body?.error === 'invalid_turnstile') setError(t('turnstileFailed'));
       else setError(t('error'));
+      setCfToken(null); // token Turnstile é de uso único — força novo desafio
       setLoading(false);
       return;
     }
@@ -94,19 +133,27 @@ export default function RegisterPage() {
               <Input id="tenantName" value={tenantName} onChange={e => setTenantName(e.target.value)} required />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="adminEmail">{t('adminEmail')}</Label>
-              <Input id="adminEmail" type="email" value={adminEmail} onChange={e => setAdminEmail(e.target.value)} required />
+              <Label htmlFor="ownerEmail">{t('adminEmail')}</Label>
+              <Input id="ownerEmail" type="email" value={ownerEmail} onChange={e => setOwnerEmail(e.target.value)} required />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="adminPassword">{t('adminPassword')}</Label>
-              <Input id="adminPassword" type="password" value={adminPassword} onChange={e => setAdminPassword(e.target.value)} required />
+              <Label htmlFor="ownerPassword">{t('adminPassword')}</Label>
+              <Input id="ownerPassword" type="password" value={ownerPassword} onChange={e => setOwnerPassword(e.target.value)} required />
             </div>
             <div className="space-y-1">
               <Label htmlFor="confirmPassword">{t('confirmPassword')}</Label>
               <Input id="confirmPassword" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
             </div>
+            {caps?.turnstileEnabled && caps.turnstileSiteKey && (
+              <Turnstile
+                siteKey={caps.turnstileSiteKey}
+                onSuccess={setCfToken}
+                onError={() => setCfToken(null)}
+                onExpire={() => setCfToken(null)}
+              />
+            )}
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full" disabled={loading || turnstileBlocking}>
               {loading ? t('submitting') : t('submit')}
             </Button>
           </form>

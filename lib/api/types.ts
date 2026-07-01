@@ -129,7 +129,8 @@ export interface CreateApiKeyResponse {
 }
 
 // ─── Usuários ─────────────────────────────────────────────────────────────────
-export type UserRole = 'Developer' | 'Admin';
+// Developer/Admin são as roles OSS; Owner/Viewer só existem no cloud (spec-rbac-cloud-06).
+export type UserRole = 'Developer' | 'Admin' | 'Owner' | 'Viewer';
 export type UserStatus = 'Active' | 'Inactive';
 
 export interface User {

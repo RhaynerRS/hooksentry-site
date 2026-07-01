@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { invitesApi } from '@/lib/api/users';
-import { InviteToken } from '@/lib/api/types';
+import { InviteToken, UserRole } from '@/lib/api/types';
 import { ApiClientError } from '@/lib/api/client';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter,
@@ -16,17 +16,22 @@ import { AlertTriangle } from 'lucide-react';
 type Step = 'form' | 'reveal';
 
 const VALIDITY_OPTIONS = [1, 3, 7, 14, 30] as const;
+// Convite só permite Developer/Viewer (Admin/Owner não convidáveis — spec-rbac-cloud-06).
+const INVITE_ROLES: UserRole[] = ['Developer', 'Viewer'];
 
 interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSuccess: () => void;
+  isCloud: boolean;
 }
 
-export function CreateInviteDialog({ open, onOpenChange, onSuccess }: Props) {
+export function CreateInviteDialog({ open, onOpenChange, onSuccess, isCloud }: Props) {
   const t = useTranslations('users.invites.createDialog');
+  const tr = useTranslations('users');
   const [step, setStep] = useState<Step>('form');
   const [days, setDays] = useState(7);
+  const [role, setRole] = useState<UserRole>('Developer');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [created, setCreated] = useState<InviteToken | null>(null);
@@ -35,7 +40,8 @@ export function CreateInviteDialog({ open, onOpenChange, onSuccess }: Props) {
     setLoading(true);
     setError('');
     try {
-      const res = await invitesApi.create(days);
+      // Self-hosted não envia role — mantém o comportamento OSS (Developer).
+      const res = await invitesApi.create(days, isCloud ? role : undefined);
       setCreated(res);
       setStep('reveal');
       onSuccess();
@@ -49,6 +55,7 @@ export function CreateInviteDialog({ open, onOpenChange, onSuccess }: Props) {
   const handleClose = () => {
     setStep('form');
     setDays(7);
+    setRole('Developer');
     setCreated(null);
     setError('');
     onOpenChange(false);
@@ -80,6 +87,21 @@ export function CreateInviteDialog({ open, onOpenChange, onSuccess }: Props) {
                 ))}
               </select>
             </div>
+            {isCloud && (
+              <div className="space-y-2">
+                <Label htmlFor="invite-role">{t('roleLabel')}</Label>
+                <select
+                  id="invite-role"
+                  value={role}
+                  onChange={e => setRole(e.target.value as UserRole)}
+                  className="w-full rounded-md border bg-background px-3 py-2 text-sm"
+                >
+                  {INVITE_ROLES.map(r => (
+                    <option key={r} value={r}>{tr(`role.${r}`)}</option>
+                  ))}
+                </select>
+              </div>
+            )}
             {error && <p className="text-sm text-destructive">{error}</p>}
             <DialogFooter>
               <Button variant="outline" onClick={handleClose}>{t('cancel')}</Button>

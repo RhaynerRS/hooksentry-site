@@ -67,7 +67,10 @@
       "successTitle": "Account created!",
       "successSecret": "Save this secret — it will not be shown again.",
       "webhookSecretLabel": "Webhook Secret",
-      "goToLogin": "Go to login"
+      "goToLogin": "Go to login",
+      "tooManyRequests": "Too many registration attempts. Please try again later.",
+      "disposableEmail": "Please use a permanent email address.",
+      "turnstileFailed": "Captcha verification failed. Please try again."
     },
     "invite": {
       "title": "Create your account",
@@ -535,7 +538,9 @@
     },
     "role": {
       "Developer": "Developer",
-      "Admin": "Admin"
+      "Admin": "Admin",
+      "Owner": "Owner",
+      "Viewer": "Viewer"
     },
     "userStatus": {
       "Active": "Active",
@@ -544,7 +549,8 @@
     "actions": {
       "activate": "Activate",
       "deactivate": "Deactivate",
-      "remove": "Remove"
+      "remove": "Remove",
+      "promoteToOwner": "Promote to Owner"
     },
     "removeDialog": {
       "title": "Remove user?",
@@ -554,7 +560,9 @@
     "toast": {
       "roleUpdated": "Role updated to {role}",
       "statusUpdated": "Status updated.",
-      "removed": "User removed."
+      "removed": "User removed.",
+      "lastOwnerError": "Cannot remove the last owner of the tenant.",
+      "removeError": "Error removing user."
     },
     "invites": {
       "generateButton": "Generate Invite",
@@ -588,8 +596,14 @@
         "expiry": "Expires in {days} day(s).",
         "warning": "Copy this link now. It will not be shown again after closing this window.",
         "linkLabel": "Invite Link",
-        "done": "Done"
+        "done": "Done",
+        "roleLabel": "Role"
       }
+    },
+    "promoteDialog": {
+      "title": "Promote to Owner?",
+      "desc": "{email} will gain full owner permissions, including managing owners and deleting the tenant.",
+      "confirm": "Promote"
     }
   },
   "pagination": {

@@ -67,7 +67,10 @@
       "successTitle": "Conta criada com sucesso!",
       "successSecret": "Guarde este segredo — não será exibido novamente.",
       "webhookSecretLabel": "Webhook Secret",
-      "goToLogin": "Ir para o login"
+      "goToLogin": "Ir para o login",
+      "tooManyRequests": "Muitas tentativas de cadastro. Tente novamente mais tarde.",
+      "disposableEmail": "Use um endereço de e-mail permanente.",
+      "turnstileFailed": "Falha na verificação do captcha. Tente novamente."
     },
     "invite": {
       "title": "Criar sua conta",
@@ -535,7 +538,9 @@
     },
     "role": {
       "Developer": "Desenvolvedor",
-      "Admin": "Administrador"
+      "Admin": "Administrador",
+      "Owner": "Proprietário",
+      "Viewer": "Visualizador"
     },
     "userStatus": {
       "Active": "Ativo",
@@ -544,7 +549,8 @@
     "actions": {
       "activate": "Ativar",
       "deactivate": "Desativar",
-      "remove": "Remover"
+      "remove": "Remover",
+      "promoteToOwner": "Promover a proprietário"
     },
     "removeDialog": {
       "title": "Remover usuário?",
@@ -554,7 +560,9 @@
     "toast": {
       "roleUpdated": "Função atualizada para {role}",
       "statusUpdated": "Status atualizado.",
-      "removed": "Usuário removido."
+      "removed": "Usuário removido.",
+      "lastOwnerError": "Não é possível remover o último proprietário do tenant.",
+      "removeError": "Erro ao remover o usuário."
     },
     "invites": {
       "generateButton": "Gerar Convite",
@@ -588,8 +596,14 @@
         "expiry": "Expira em {days} dia(s).",
         "warning": "Copie este link agora. Ele não será exibido novamente após fechar esta janela.",
         "linkLabel": "Link de Convite",
-        "done": "Concluído"
+        "done": "Concluído",
+        "roleLabel": "Função"
       }
+    },
+    "promoteDialog": {
+      "title": "Promover a proprietário?",
+      "desc": "{email} terá permissões completas de proprietário, incluindo gerenciar proprietários e excluir o tenant.",
+      "confirm": "Promover"
     }
   },
   "pagination": {

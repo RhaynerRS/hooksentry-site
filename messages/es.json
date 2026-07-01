@@ -67,7 +67,10 @@
       "successTitle": "¡Cuenta creada!",
       "successSecret": "Guarda este secreto — no se mostrará nuevamente.",
       "webhookSecretLabel": "Secreto Webhook",
-      "goToLogin": "Ir al inicio de sesión"
+      "goToLogin": "Ir al inicio de sesión",
+      "tooManyRequests": "Demasiados intentos de registro. Inténtalo de nuevo más tarde.",
+      "disposableEmail": "Usa una dirección de correo permanente.",
+      "turnstileFailed": "La verificación del captcha falló. Inténtalo de nuevo."
     },
     "invite": {
       "title": "Crear tu cuenta",
@@ -535,7 +538,9 @@
     },
     "role": {
       "Developer": "Desarrollador",
-      "Admin": "Administrador"
+      "Admin": "Administrador",
+      "Owner": "Propietario",
+      "Viewer": "Observador"
     },
     "userStatus": {
       "Active": "Activo",
@@ -544,7 +549,8 @@
     "actions": {
       "activate": "Activar",
       "deactivate": "Desactivar",
-      "remove": "Eliminar"
+      "remove": "Eliminar",
+      "promoteToOwner": "Promover a propietario"
     },
     "removeDialog": {
       "title": "¿Eliminar usuario?",
@@ -554,7 +560,9 @@
     "toast": {
       "roleUpdated": "Rol actualizado a {role}",
       "statusUpdated": "Estado actualizado.",
-      "removed": "Usuario eliminado."
+      "removed": "Usuario eliminado.",
+      "lastOwnerError": "No se puede eliminar al último propietario del tenant.",
+      "removeError": "Error al eliminar el usuario."
     },
     "invites": {
       "generateButton": "Generar Invitación",
@@ -588,8 +596,14 @@
         "expiry": "Expira en {days} día(s).",
         "warning": "Copia este enlace ahora. No se mostrará de nuevo al cerrar esta ventana.",
         "linkLabel": "Enlace de Invitación",
-        "done": "Listo"
+        "done": "Listo",
+        "roleLabel": "Rol"
       }
+    },
+    "promoteDialog": {
+      "title": "¿Promover a propietario?",
+      "desc": "{email} obtendrá permisos completos de propietario, incluida la gestión de propietarios y la eliminación del tenant.",
+      "confirm": "Promover"
     }
   },
   "pagination": {

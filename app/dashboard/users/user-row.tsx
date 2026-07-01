@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { usersApi } from '@/lib/api/users';
 import { User, UserRole } from '@/lib/api/types';
+import { ApiClientError } from '@/lib/api/client';
 import { ConfirmDialog } from '@/components/dashboard/confirm-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -11,16 +12,22 @@ import { Button } from '@/components/ui/button';
 interface Props {
   user: User;
   isSelf: boolean;
+  isCloud: boolean;
+  canPromoteToOwner: boolean;
   onChange: () => void;
 }
 
-export function UserRow({ user, isSelf, onChange }: Props) {
+export function UserRow({ user, isSelf, isCloud, canPromoteToOwner, onChange }: Props) {
   const t = useTranslations('users');
   const { toast } = useToast();
   const [updatingRole, setUpdatingRole] = useState(false);
   const [updatingStatus, setUpdatingStatus] = useState(false);
   const [removeOpen, setRemoveOpen] = useState(false);
   const [removing, setRemoving] = useState(false);
+  const [promoteOpen, setPromoteOpen] = useState(false);
+  const [promoting, setPromoting] = useState(false);
+
+  const isOwner = user.role === 'Owner';
 
   const handleRoleChange = async (role: UserRole) => {
     setUpdatingRole(true);
@@ -30,6 +37,18 @@ export function UserRow({ user, isSelf, onChange }: Props) {
       onChange();
     } finally {
       setUpdatingRole(false);
+    }
+  };
+
+  const handlePromote = async () => {
+    setPromoting(true);
+    try {
+      await usersApi.update(user.id, { role: 'Owner' });
+      toast({ title: t('toast.roleUpdated', { role: t('role.Owner') }) });
+      setPromoteOpen(false);
+      onChange();
+    } finally {
+      setPromoting(false);
     }
   };
 
@@ -52,6 +71,13 @@ export function UserRow({ user, isSelf, onChange }: Props) {
       toast({ title: t('toast.removed') });
       setRemoveOpen(false);
       onChange();
+    } catch (err) {
+      // O backend responde 409 { error: "last_owner" } ao remover o único Owner.
+      const isLastOwner = err instanceof ApiClientError && err.status === 409;
+      toast({
+        title: isLastOwner ? t('toast.lastOwnerError') : t('toast.removeError'),
+        variant: 'destructive',
+      });
     } finally {
       setRemoving(false);
     }
@@ -62,15 +88,22 @@ export function UserRow({ user, isSelf, onChange }: Props) {
       <tr className="border-b last:border-0 hover:bg-muted/30">
         <td className="px-4 py-3">{user.email}</td>
         <td className="px-4 py-3">
-          <select
-            value={user.role}
-            disabled={isSelf || updatingRole}
-            onChange={e => handleRoleChange(e.target.value as UserRole)}
-            className="rounded-md border bg-background px-2 py-1 text-xs disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <option value="Developer">{t('role.Developer')}</option>
-            <option value="Admin">{t('role.Admin')}</option>
-          </select>
+          {isOwner ? (
+            <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+              {t('role.Owner')}
+            </span>
+          ) : (
+            <select
+              value={user.role}
+              disabled={isSelf || updatingRole}
+              onChange={e => handleRoleChange(e.target.value as UserRole)}
+              className="rounded-md border bg-background px-2 py-1 text-xs disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="Developer">{t('role.Developer')}</option>
+              <option value="Admin">{t('role.Admin')}</option>
+              {isCloud && <option value="Viewer">{t('role.Viewer')}</option>}
+            </select>
+          )}
         </td>
         <td className="px-4 py-3">
           {user.status === 'Active' ? (
@@ -88,6 +121,16 @@ export function UserRow({ user, isSelf, onChange }: Props) {
         </td>
         <td className="px-4 py-3 text-right">
           <div className="flex items-center justify-end gap-2">
+            {canPromoteToOwner && !isSelf && !isOwner && (
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={promoting}
+                onClick={() => setPromoteOpen(true)}
+              >
+                {t('actions.promoteToOwner')}
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
@@ -118,6 +161,16 @@ export function UserRow({ user, isSelf, onChange }: Props) {
         destructive
         loading={removing}
         onConfirm={handleRemove}
+      />
+
+      <ConfirmDialog
+        open={promoteOpen}
+        onOpenChange={open => { if (!open) setPromoteOpen(false); }}
+        title={t('promoteDialog.title')}
+        description={t('promoteDialog.desc', { email: user.email })}
+        confirmLabel={t('promoteDialog.confirm')}
+        loading={promoting}
+        onConfirm={handlePromote}
       />
     </>
   );

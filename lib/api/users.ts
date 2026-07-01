@@ -1,8 +1,8 @@
 import { api } from './client';
-import type { User, InviteToken, PaginatedResponse, PaginationParams } from './types';
+import type { User, UserRole, InviteToken, PaginatedResponse, PaginationParams } from './types';
 
 export const usersApi = {
-  list: (params?: PaginationParams & { status?: 'Active' | 'Inactive'; role?: 'Developer' | 'Admin' }) => {
+  list: (params?: PaginationParams & { status?: 'Active' | 'Inactive'; role?: UserRole }) => {
     const qs = new URLSearchParams();
     qs.set('Qt', String(params?.pageSize ?? 20));
     qs.set('Pg', String(params?.page ?? 1));
@@ -34,6 +34,10 @@ export const invitesApi = {
     return api.get<PaginatedResponse<InviteToken>>(`/invites?${qs}`);
   },
 
-  create: (validityDays?: number) =>
-    api.post<InviteToken>('/invites', { validityDays: validityDays ?? 7 }),
+  // role só é aceito no cloud (Developer|Viewer via convite). Omitido → backend usa Developer.
+  create: (validityDays?: number, role?: UserRole) =>
+    api.post<InviteToken>('/invites', {
+      validityDays: validityDays ?? 7,
+      ...(role ? { role } : {}),
+    }),
 };

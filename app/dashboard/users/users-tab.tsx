@@ -11,7 +11,11 @@ import { UserRow } from './user-row';
 
 const PAGE_SIZE = 20;
 
-export function UsersTab() {
+interface Props {
+  isCloud: boolean;
+}
+
+export function UsersTab({ isCloud }: Props) {
   const t = useTranslations('users');
   const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
@@ -60,6 +64,8 @@ export function UsersTab() {
                 key={user.id}
                 user={user}
                 isSelf={user.id === currentUser?.userId}
+                isCloud={isCloud}
+                canPromoteToOwner={isCloud && currentUser?.role === 'Owner'}
                 onChange={load}
               />
             ))}
