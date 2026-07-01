@@ -4,19 +4,22 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAuth } from '@/lib/auth/auth-context';
 import { tenantApi } from '@/lib/api/settings';
-import { Tenant } from '@/lib/api/types';
+import { usageApi } from '@/lib/api/cloud';
+import { Tenant, UsageResponse } from '@/lib/api/types';
 import { PageHeader } from '@/components/dashboard/page-header';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TenantInfoCard } from './tenant-info-card';
 import { WebhookSecretCard } from './webhook-secret-card';
 import { ResilienceSettingsCard } from './resilience-settings-card';
 import { IntegrationGuideCard } from './integration-guide-card';
+import { UsageCard } from './usage-card';
 
 export default function SettingsPage() {
   const t = useTranslations('settings');
   const { user } = useAuth();
   const [tenant, setTenant] = useState<Tenant | null>(null);
   const [webhookSecret, setWebhookSecret] = useState('');
+  const [usage, setUsage] = useState<UsageResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,6 +32,16 @@ export default function SettingsPage() {
       setWebhookSecret(s.webhookSecret);
     }).finally(() => setLoading(false));
   }, [user?.tenantId]);
+
+  useEffect(() => {
+    fetch('/api/config')
+      .then(r => r.json())
+      .then(({ deploymentMode }) => {
+        if (deploymentMode !== 'cloud') return;
+        return usageApi.get().then(setUsage);
+      })
+      .catch(() => {});
+  }, []);
 
   if (loading) {
     return (
@@ -57,6 +70,8 @@ export default function SettingsPage() {
         />
         <WebhookSecretCard tenantId={tenant?.id ?? ''} secret={webhookSecret} />
       </div>
+
+      {usage && <UsageCard usage={usage} />}
 
       <ResilienceSettingsCard
         tenantId={tenant?.id ?? ''}

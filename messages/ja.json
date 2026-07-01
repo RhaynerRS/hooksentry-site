@@ -34,6 +34,11 @@
     "noData": "データなし",
     "back": "戻る"
   },
+  "blocked": {
+    "title": "アカウントは停止されています",
+    "message": "このテナントは停止されました。誤りだと思われる場合はサポートにお問い合わせください。",
+    "backToLogin": "ログインに戻る"
+  },
   "auth": {
     "login": {
       "title": "HookSentryにサインイン",
@@ -447,6 +452,11 @@
       "editName": "名前を編集",
       "editSuccess": "テナント名を更新しました。",
       "editError": "テナント名の更新に失敗しました。"
+    },
+    "usage": {
+      "title": "使用状況",
+      "events": "今月のイベント数",
+      "warning": "月間イベント上限に近づいています。"
     },
     "webhookSecret": {
       "title": "Webhook シークレット",

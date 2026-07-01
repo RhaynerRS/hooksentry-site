@@ -169,6 +169,29 @@ export interface UpdateTenantRequest {
   circuitBreakerTimer?: number;
 }
 
+// ─── Cloud (plans & usage) ──────────────────────────────────────────────────────
+export interface Plan {
+  name: string;
+  priceMonthly: number;
+  alwaysFree: boolean;
+  limits: {
+    maxEventsPerMonth: number;
+    retentionDays: number;
+  };
+}
+
+export interface UsageResponse {
+  period: string;
+  usage: {
+    events: {
+      current: number;
+      limit: number;
+      percentage: number;
+      warning: boolean;
+    };
+  };
+}
+
 // ─── Erros ────────────────────────────────────────────────────────────────────
 export interface ApiError {
   status: number;

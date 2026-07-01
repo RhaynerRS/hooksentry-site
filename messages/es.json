@@ -34,6 +34,11 @@
     "noData": "Sin datos",
     "back": "Volver"
   },
+  "blocked": {
+    "title": "Cuenta suspendida",
+    "message": "Este tenant ha sido suspendido. Contacta con soporte si crees que se trata de un error.",
+    "backToLogin": "Volver a iniciar sesión"
+  },
   "auth": {
     "login": {
       "title": "Iniciar sesión en HookSentry",
@@ -447,6 +452,11 @@
       "editName": "Editar nombre",
       "editSuccess": "Nombre del tenant actualizado.",
       "editError": "Error al actualizar el nombre del tenant."
+    },
+    "usage": {
+      "title": "Uso",
+      "events": "Eventos este mes",
+      "warning": "Estás cerca del límite mensual de eventos."
     },
     "webhookSecret": {
       "title": "Webhook Secret",

@@ -29,8 +29,9 @@ async function refreshTokens(): Promise<boolean> {
 async function apiFetch<T>(
   path: string,
   options: RequestInit = {},
+  base: string = '/api/proxy',
 ): Promise<T> {
-  const url = `/api/proxy${path}`;
+  const url = `${base}${path}`;
 
   const doFetch = () =>
     fetch(url, {
@@ -65,6 +66,12 @@ async function apiFetch<T>(
 
   if (!res.ok) {
     const body = await res.json().catch(() => ({ message: 'Erro desconhecido' }));
+
+    if (res.status === 403 && body.error === 'tenant_blocked') {
+      window.location.href = '/blocked';
+      throw new ApiClientError(403, 'Tenant bloqueado');
+    }
+
     throw new ApiClientError(res.status, body.message ?? 'Erro', body.errors);
   }
 
@@ -93,4 +100,12 @@ export const api = {
 
   delete: <T = void>(path: string, options?: RequestInit) =>
     apiFetch<T>(path, { method: 'DELETE', ...options }),
+};
+
+// Cloud-only endpoints (GET /cloud/plans, GET /cloud/usage) live outside /api/v1 —
+// routed through /api/cloud-proxy instead of /api/proxy. Only used when
+// deploymentMode === 'cloud'; self-hosted backends 404 on these paths.
+export const cloudApi = {
+  get: <T>(path: string, options?: RequestInit) =>
+    apiFetch<T>(path, { method: 'GET', ...options }, '/api/cloud-proxy'),
 };

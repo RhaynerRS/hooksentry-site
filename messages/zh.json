@@ -34,6 +34,11 @@
     "noData": "无数据",
     "back": "返回"
   },
+  "blocked": {
+    "title": "账户已被暂停",
+    "message": "该租户已被暂停使用。如果您认为这是误判,请联系支持团队。",
+    "backToLogin": "返回登录"
+  },
   "auth": {
     "login": {
       "title": "登录 HookSentry",
@@ -447,6 +452,11 @@
       "editName": "编辑名称",
       "editSuccess": "租户名称已更新。",
       "editError": "更新租户名称失败。"
+    },
+    "usage": {
+      "title": "用量",
+      "events": "本月事件数",
+      "warning": "您已接近本月事件配额上限。"
     },
     "webhookSecret": {
       "title": "Webhook 密钥",

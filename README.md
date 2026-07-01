@@ -21,7 +21,8 @@ Open [http://localhost:3000](http://localhost:3000). The API must be running at 
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `HOOKSENTRY_API_URL` | `http://localhost:5000` | HookSentry API base URL (server-side proxy) |
+| `HOOKSENTRY_API_URL` | `http://localhost:5000` | Backend base URL (server-side proxy). Point it at a `hooksentry-api` (self-hosted) or `hooksentry-cloud` instance — both expose the same `/api/v1/*` surface. |
+| `HOOKSENTRY_DEPLOYMENT_MODE` | `selfhosted` | `selfhosted` or `cloud`. Only gates cloud-exclusive UI (the Usage card on Settings, backed by `hooksentry-cloud`'s `/cloud/*` endpoints) — every other page works identically against either backend regardless of this value. |
 | `GRAFANA_URL` | `http://localhost:3001` | Grafana URL linked from the dashboard |
 
 All API calls are proxied through Next.js server components — the API URL is never exposed to the browser.
@@ -30,10 +31,10 @@ All API calls are proxied through Next.js server components — the API URL is n
 
 | Route | Description |
 |-------|-------------|
-| `/` | Landing page |
 | `/login` | Email + password login |
 | `/register` | Self-registration |
 | `/invite/[token]` | Accept an invite link and create account |
+| `/blocked` | Shown when the tenant has been suspended (cloud only — self-hosted backends never trigger it) |
 | `/dashboard` | Overview: stats, delivery chart, open circuit breakers, recent critical events |
 | `/dashboard/events` | Event list with filters; detail and replay |
 | `/dashboard/destinations` | Destination list; create, edit, rotate ingest token |
@@ -80,6 +81,7 @@ Authentication uses regular HTTP cookies managed by the Next.js server layer. Th
 docker build -t hooksentry-site .
 docker run -p 3000:3000 \
   -e HOOKSENTRY_API_URL=http://api:8080 \
+  -e HOOKSENTRY_DEPLOYMENT_MODE=selfhosted \
   -e GRAFANA_URL=http://grafana:3001 \
   hooksentry-site
 ```

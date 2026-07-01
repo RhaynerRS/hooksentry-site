@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const PUBLIC_ROUTES = ['/login', '/register', '/invite'];
+const PUBLIC_ROUTES = ['/login', '/register', '/invite', '/blocked'];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -24,7 +24,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isPublic && hasSession && !pathname.startsWith('/invite/')) {
+  if (isPublic && hasSession && !pathname.startsWith('/invite/') && pathname !== '/blocked') {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 

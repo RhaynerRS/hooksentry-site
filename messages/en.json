@@ -34,6 +34,11 @@
     "noData": "No data",
     "back": "Back"
   },
+  "blocked": {
+    "title": "Account suspended",
+    "message": "This tenant has been suspended. Contact support if you believe this is a mistake.",
+    "backToLogin": "Back to sign in"
+  },
   "auth": {
     "login": {
       "title": "Sign in to HookSentry",
@@ -447,6 +452,11 @@
       "editName": "Edit name",
       "editSuccess": "Tenant name updated.",
       "editError": "Failed to update tenant name."
+    },
+    "usage": {
+      "title": "Usage",
+      "events": "Events this month",
+      "warning": "You're close to your monthly event limit."
     },
     "webhookSecret": {
       "title": "Webhook Secret",
