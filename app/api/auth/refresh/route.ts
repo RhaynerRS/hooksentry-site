@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { decodeJwtPayload } from '@/lib/auth/jwt';
+import { setSessionCookies, clearSessionCookies } from '@/lib/auth/session-cookies';
 
 export async function POST(_req: NextRequest) {
   const cookieStore = await cookies();
@@ -17,26 +19,15 @@ export async function POST(_req: NextRequest) {
 
   if (!apiRes.ok) {
     const res = NextResponse.json({ message: 'Session expired' }, { status: 401 });
-    res.cookies.delete('hs_access_token');
-    res.cookies.delete('hs_refresh_token');
+    clearSessionCookies(res);
     return res;
   }
 
   const { accessToken, refreshToken: newRefresh } = await apiRes.json();
+  const user = decodeJwtPayload(accessToken);
 
-  const res = NextResponse.json({ ok: true, accessToken });
-  res.cookies.set('hs_access_token', accessToken, {
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 900,
-    path: '/',
-  });
-  res.cookies.set('hs_refresh_token', newRefresh, {
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 604800,
-    path: '/',
-  });
-
+  // Return only the decoded user claims — the rotated tokens stay in httpOnly cookies.
+  const res = NextResponse.json({ ok: true, user });
+  setSessionCookies(res, accessToken, newRefresh);
   return res;
 }

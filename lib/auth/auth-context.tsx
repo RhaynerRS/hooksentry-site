@@ -2,8 +2,6 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { AuthUser } from '@/lib/types/auth';
-import { clearTokenCookies, getRefreshToken } from '@/lib/auth/tokens';
-import { decodeJwtPayload } from '@/lib/auth/jwt';
 
 interface AuthContextValue {
   user: AuthUser | null;
@@ -27,19 +25,17 @@ export function AuthProvider({ children, initialUser }: { children: ReactNode; i
     return () => window.removeEventListener('auth:token-refreshed', handler);
   }, []);
 
-  // When access token cookie is gone but refresh token exists, restore session silently
+  // When the access token cookie has expired but the (httpOnly) refresh cookie is
+  // still valid, restore the session silently. The server route reads the refresh
+  // cookie and returns only the decoded user — no token is exposed to JS.
   useEffect(() => {
     if (initialUser !== null) return;
-    if (!getRefreshToken()) return;
 
     setIsLoading(true);
     fetch('/api/auth/refresh', { method: 'POST' })
       .then(r => r.ok ? r.json() : null)
       .then(data => {
-        if (data?.accessToken) {
-          const decoded = decodeJwtPayload(data.accessToken);
-          if (decoded) setUser(decoded);
-        }
+        if (data?.user) setUser(data.user);
       })
       .catch(() => {})
       .finally(() => setIsLoading(false));
@@ -50,18 +46,9 @@ export function AuthProvider({ children, initialUser }: { children: ReactNode; i
 
   const logout = async () => {
     setIsLoading(true);
-    const refreshToken = getRefreshToken();
-
-    if (refreshToken) {
-      await fetch('/api/proxy/auth/logout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ refreshToken }),
-      }).catch(() => {});
-    }
-
-    clearTokenCookies();
+    // The server route reads the httpOnly tokens, revokes them on the API and
+    // clears the cookies — the client never touches the token values.
+    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
     setUser(null);
     window.location.href = '/login';
   };

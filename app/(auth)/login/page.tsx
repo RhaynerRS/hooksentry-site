@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { setTokenCookies } from '@/lib/auth/tokens';
-import { decodeJwtPayload } from '@/lib/auth/jwt';
 import { useAuth } from '@/lib/auth/auth-context';
 
 export default function LoginPage() {
@@ -28,7 +26,7 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
 
-    const res = await fetch('/api/proxy/auth/login', {
+    const res = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -46,9 +44,7 @@ export default function LoginPage() {
       return;
     }
 
-    const { accessToken, refreshToken } = await res.json();
-    setTokenCookies(accessToken, refreshToken);
-    const user = decodeJwtPayload(accessToken);
+    const { user } = await res.json();
     if (user) login(user);
     router.replace(redirect);
   };

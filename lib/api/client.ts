@@ -1,5 +1,3 @@
-import { decodeJwtPayload } from '@/lib/auth/jwt';
-
 export class ApiClientError extends Error {
   constructor(
     public readonly status: number,
@@ -19,11 +17,8 @@ async function refreshTokens(): Promise<boolean> {
     const res = await fetch('/api/auth/refresh', { method: 'POST' });
     if (!res.ok) return false;
 
-    const { accessToken } = await res.json();
-    if (accessToken) {
-      const user = decodeJwtPayload(accessToken);
-      if (user) window.dispatchEvent(new CustomEvent('auth:token-refreshed', { detail: user }));
-    }
+    const { user } = await res.json();
+    if (user) window.dispatchEvent(new CustomEvent('auth:token-refreshed', { detail: user }));
 
     return true;
   } catch {
