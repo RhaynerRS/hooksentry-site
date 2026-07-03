@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   description: "Webhook monitoring and management",
 };
 
+const VALID_THEMES = ['light', 'dark', 'system'];
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -26,12 +28,14 @@ export default async function RootLayout({
   const user = token ? decodeJwtPayload(token) : null;
   const locale = await getLocale();
   const messages = await getMessages();
+  const cookieTheme = cookieStore.get('hs_theme')?.value;
+  const defaultTheme = cookieTheme && VALID_THEMES.includes(cookieTheme) ? cookieTheme : 'system';
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={onest.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Provider>
+          <Provider defaultTheme={defaultTheme}>
             <AuthProvider initialUser={user}>
               {children}
               <Toaster />

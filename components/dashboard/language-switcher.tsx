@@ -2,6 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { LOCALE_COOKIE, ONE_YEAR_SECONDS, setSharedCookie } from '@/lib/shared-cookie';
 
 const LOCALES = [
   { code: 'en', label: 'EN' },
@@ -17,7 +18,7 @@ export function LanguageSwitcher() {
   const router = useRouter();
 
   const handleChange = (value: string) => {
-    document.cookie = `hs_locale=${value}; path=/; max-age=${365 * 24 * 60 * 60}; SameSite=Lax`;
+    setSharedCookie(LOCALE_COOKIE, value, ONE_YEAR_SECONDS);
     router.refresh();
   };
 
