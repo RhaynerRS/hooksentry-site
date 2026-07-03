@@ -444,6 +444,7 @@
   "settings": {
     "pageTitle": "Configuración",
     "pageDesc": "Parámetros del tenant y guía de integración.",
+    "viewDocs": "Ver documentación",
     "tenantInfo": {
       "title": "Información del Tenant",
       "name": "Nombre",

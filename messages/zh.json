@@ -444,6 +444,7 @@
   "settings": {
     "pageTitle": "设置",
     "pageDesc": "租户参数与集成指南。",
+    "viewDocs": "查看文档",
     "tenantInfo": {
       "title": "租户信息",
       "name": "名称",

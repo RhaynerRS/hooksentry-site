@@ -444,6 +444,7 @@
   "settings": {
     "pageTitle": "設定",
     "pageDesc": "テナントのパラメータとインテグレーションガイド。",
+    "viewDocs": "ドキュメントを見る",
     "tenantInfo": {
       "title": "テナント情報",
       "name": "名前",

@@ -7,7 +7,9 @@ import { tenantApi } from '@/lib/api/settings';
 import { usageApi } from '@/lib/api/cloud';
 import { Tenant, UsageResponse } from '@/lib/api/types';
 import { PageHeader } from '@/components/dashboard/page-header';
+import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ExternalLink } from 'lucide-react';
 import { TenantInfoCard } from './tenant-info-card';
 import { WebhookSecretCard } from './webhook-secret-card';
 import { ResilienceSettingsCard } from './resilience-settings-card';
@@ -20,6 +22,7 @@ export default function SettingsPage() {
   const [tenant, setTenant] = useState<Tenant | null>(null);
   const [webhookSecret, setWebhookSecret] = useState('');
   const [usage, setUsage] = useState<UsageResponse | null>(null);
+  const [docsUrl, setDocsUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,7 +39,8 @@ export default function SettingsPage() {
   useEffect(() => {
     fetch('/api/config')
       .then(r => r.json())
-      .then(({ deploymentMode }) => {
+      .then(({ deploymentMode, docsUrl }) => {
+        setDocsUrl(docsUrl ?? null);
         if (deploymentMode !== 'cloud') return;
         return usageApi.get().then(setUsage);
       })
@@ -60,7 +64,20 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title={t('pageTitle')} description={t('pageDesc')} />
+      <PageHeader
+        title={t('pageTitle')}
+        description={t('pageDesc')}
+        action={
+          docsUrl && (
+            <Button variant="outline" size="sm" asChild>
+              <a href={docsUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                {t('viewDocs')}
+              </a>
+            </Button>
+          )
+        }
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <TenantInfoCard
