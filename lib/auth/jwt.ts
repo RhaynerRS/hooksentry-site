@@ -10,10 +10,15 @@ const ROLE_BY_CLAIM: Record<string, AuthUser['role']> = {
   '20': 'Viewer',
 };
 
+// .NET's inbound claim type mapping can remap the short "role" claim to this long
+// URI depending on which assembly touches JwtSecurityTokenHandler first in the
+// process — mirrors the API's own ClaimsPrincipalExtensions.TryFindRole fallback.
+const ROLE_CLAIM_URI = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
+
 export function decodeJwtPayload(token: string): AuthUser | null {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
-    const rawRole = String(payload.role);
+    const rawRole = String(payload.role ?? payload[ROLE_CLAIM_URI]);
     return {
       userId: payload.sub,
       tenantId: payload.tenant_id,
